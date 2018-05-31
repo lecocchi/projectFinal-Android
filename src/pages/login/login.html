@@ -1,0 +1,45 @@
+
+<ion-content>
+
+  <div class="container">
+    <header class="login">
+      <h1 class="login-title">Iniciar Sesión</h1>
+      <div class="login-body">
+        <section class="login-net">
+          <div class="login-net-title">Iniciar sesión con</div>
+          <div class="login-net-body">
+            <div class="social-btns">
+              <a class="btn facebook login-net-btn"><i class="fa fa-facebook fa-lg"></i></a>
+              <a class="btn twitter login-net-btn"><i class="fa fa-twitter"></i></a>
+              <a class="btn google login-net-btn"><i class="fa fa-google"></i></a>
+            </div>
+          </div>
+        </section>
+
+        <section class="login-email">
+          <div class="login-email-title">O con una cuenta de Email</div>
+          <div class="login-email-body">
+            <ion-list>
+
+              <ion-item>
+                <ion-label floating>Username</ion-label>
+                <ion-input type="text"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label floating>Password</ion-label>
+                <ion-input type="password"></ion-input>
+              </ion-item>
+
+            </ion-list>
+          </div>
+        </section>
+
+        <div class="login-submit">
+          <button ion-button large (click)="goToOtherPage()">Iniciar Sesión</button>
+        </div>
+
+      </div>
+    </header>
+  </div>
+</ion-content>

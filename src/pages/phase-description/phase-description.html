@@ -1,0 +1,25 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title> {{title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-item>
+    <ion-label floating>Nombre <span *ngIf="readonly">(solo lectura)</span></ion-label>
+    <ion-input type="text" [(ngModel)]="name" [readonly]="readonly"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Descripción</ion-label>
+    <ion-input type="text" [(ngModel)]="description" ></ion-input>
+  </ion-item>
+
+  <button ion-button color="secondary" block class="btn-aceptar" (click)="accept()">Aceptar</button>
+  <button ion-button color="danger" block class="btn-cancelar" navPop>Cancelar</button>
+
+</ion-content>

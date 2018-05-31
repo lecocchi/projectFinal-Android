@@ -1,0 +1,17 @@
+<ion-content padding>
+
+  <ion-item>
+    <ion-label color="primary" stacked>Yesterday</ion-label>
+    <ion-textarea type="text" placeholder="What did you do yesterday?" [(ngModel)]="yesterday"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" stacked>Today</ion-label>
+    <ion-textarea type="text" placeholder="What do you doing today?" [(ngModel)]="today"></ion-textarea>
+  </ion-item>
+
+  <div class="footer">
+    <button ion-button color="secondary" class="footer-button-accept" (click)='accept()'>Aceptar</button>
+    <button ion-button color="danger" navPop>Cancelar</button>
+  </div>
+
+</ion-content>

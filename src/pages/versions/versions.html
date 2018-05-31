@@ -1,0 +1,22 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Versiones</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let version of versions" (click)="itemSelected(version)">
+      <h2 class="name">{{ version.name }}</h2>
+      <p>{{ version.description }}</p>
+    </ion-item>
+  </ion-list>
+
+  <!-- this fab is placed at top right -->
+  <ion-fab bottom right>
+    <button ion-fab (click)="goToPage(versionDescriptionPage)"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

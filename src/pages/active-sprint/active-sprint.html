@@ -1,0 +1,37 @@
+<ion-header>
+
+  <ion-navbar color='primary'>
+    <ion-title>Active Sprint</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item-sliding *ngFor="let item of items, let i = index">
+            <ion-item (click)="openDetail(item)">
+                <ion-avatar item-start>
+                    <img src="../../../../projectFinal-Android/src/assets/imgs/avatar.png">
+                </ion-avatar>
+                <div class="issue-code">SID-{{i}}</div>
+                <div class="issue-summary">
+                    Requerimiento para visualizar
+                </div>
+            </ion-item>
+            <ion-item-options side="rigth">
+                <button ion-button color="primary">
+                    <ion-icon name="text"></ion-icon>
+                    Item1
+                </button>
+                <button ion-button color="secondary">
+                    <ion-icon name="call"></ion-icon>
+                    Item2
+                </button>
+                <button ion-button color="secondary">
+                    <ion-icon name="call"></ion-icon>
+                    Item3
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+</ion-content>

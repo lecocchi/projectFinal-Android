@@ -1,0 +1,21 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Etiquetas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let label of labels" (click)="itemSelected(label)">
+      <h2 class="name">{{ label.name }}</h2>
+      <p>{{ label.description }}</p>
+    </ion-item>
+  </ion-list>
+
+  <!-- this fab is placed at top right -->
+  <ion-fab bottom right>
+    <button ion-fab (click)="goToPage(labelDescriptionPage)"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

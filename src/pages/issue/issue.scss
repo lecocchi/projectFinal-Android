@@ -1,0 +1,26 @@
+page-issue {
+
+  textarea{
+    height: 50px !important;
+  }
+
+  .btn-aceptar, .btn-cancelar{
+    margin: 2rem 0;
+    height: 48px;
+    font-size: 1.6rem;
+  }
+
+  .btn-aceptar{
+    margin-top: 5rem;
+  }
+
+  .card-header{
+    background-color: map-get($colors, primary);
+    color: #ffffff;
+  }
+
+  .card-content{
+    padding: 0px 16px;
+    max-height: 0px;
+  }
+}

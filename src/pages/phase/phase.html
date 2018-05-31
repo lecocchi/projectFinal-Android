@@ -1,0 +1,21 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Fases</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let phase of phases" (click)="itemSelected(phase)">
+      <h2 class="name">{{ phase.name }}</h2>
+      <p>{{ phase.description }}</p>
+    </ion-item>
+  </ion-list>
+
+  <!-- this fab is placed at top right -->
+  <ion-fab bottom right>
+    <button ion-fab (click)="goToPage(phaseDescriptionPage)"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

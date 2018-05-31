@@ -1,14 +1,65 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color='primary' hideBackButton="true" #content>
     <ion-title>
-      Ionic Blank
+      {{ navTitle}}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content class="background">
+
+  <div class="option-group">
+
+    <div class="content" (click)="goToPage(backlogPage)">
+      <div class="avatar backlog">BK</div>
+      <div class="avatar-text">
+        Backlog
+      </div>
+    </div>
+
+    <div class="content" (click)="goToPage(activeSprintPage)">
+      <div class="avatar active-sprint">SP</div>
+      <div class="avatar-text">
+        Sprints
+      </div>
+    </div>
+
+    <div class="content" (click)="goToPage(dailyPage)">
+      <div class="avatar daily">DY</div>
+      <div class="avatar-text">
+        Daily
+      </div>
+    </div>
+
+    <div class="content" (click)="goToPage(reportsPage)">
+      <div class="avatar report">RE</div>
+      <div class="avatar-text">
+        Reportes
+      </div>
+    </div>
+
+    <div class="content" (click)="goToPage(issuePage)">
+      <div class="avatar report">IS</div>
+      <div class="avatar-text">
+        Issues
+      </div>
+    </div>
+
+
+    <div class="content" (click)="goToPage(usersPage)">
+      <div class="avatar report">US</div>
+      <div class="avatar-text">
+        Usuarios
+      </div>
+    </div>
+
+    <div class="content" (click)="goToPage(configPage)">
+      <div class="avatar config">CF</div>
+      <div class="avatar-text">
+        Configuración
+      </div>
+    </div>
+
+  </div>
+
 </ion-content>

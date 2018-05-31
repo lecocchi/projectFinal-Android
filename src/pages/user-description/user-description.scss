@@ -1,0 +1,14 @@
+page-user-description {
+
+  ion-avatar, ion-thumbnail{
+    display: flex;
+    justify-content: center;
+  }
+
+  ion-avatar img, ion-thumbnail img{
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+  }
+
+}

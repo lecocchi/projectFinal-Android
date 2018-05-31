@@ -1,0 +1,18 @@
+page-daily-description {
+    .footer{
+        display: flex;
+        justify-content: center;
+        padding-top: 1em;
+
+        &-button{
+            &-accept{
+                margin-right: 1em;
+            }
+        }
+      }
+
+      textarea{
+        height: 150px !important;
+    }
+
+}

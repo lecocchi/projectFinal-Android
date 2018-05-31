@@ -1,0 +1,21 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Etiquetas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let priority of priorities" (click)="itemSelected(priority)">
+      <h2 class="name">{{ priority.name }}</h2>
+      <p>{{ priority.description }}</p>
+    </ion-item>
+  </ion-list>
+
+  <!-- this fab is placed at top right -->
+  <ion-fab bottom right>
+    <button ion-fab (click)="goToPage(priorityDescriptionPage)"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>
