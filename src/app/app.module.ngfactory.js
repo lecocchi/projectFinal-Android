@@ -29,7 +29,7 @@ import * as i21 from "../pages/users/users.ngfactory";
 import * as i22 from "../pages/issue/issue.ngfactory";
 import * as i23 from "../components/accordion/accordion-detail/accordion-detail.ngfactory";
 import * as i24 from "../components/accordion/accordion-people/accordion-people.ngfactory";
-import * as i25 from "../components/accordion/accordion-date/accordion-date.ngfactory";
+import * as i25 from "../components/accordion/accordion-created/accordion-created.ngfactory";
 import * as i26 from "../components/accordion/accordion-comment/accordion-comment.ngfactory";
 import * as i27 from "@angular/common";
 import * as i28 from "@angular/platform-browser";

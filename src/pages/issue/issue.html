@@ -17,7 +17,7 @@
 
   <ion-item>
     <ion-label stacked>Título</ion-label>
-    <ion-input type="text" [(ngModel)]="title"></ion-input>
+    <ion-input type="text" [(ngModel)]="title" #titleInput></ion-input>
   </ion-item>
 
   <ion-item>
@@ -78,10 +78,8 @@
     </ion-card-header>
     <ion-card-content #ccp>
       <ion-item>
-        <ion-label>Creado por</ion-label>
-        <ion-select okText="Aceptar" cancelText="Cancelar" [(ngModel)]="reporterModel">
-          <ion-option *ngFor="let reporter of reporters" value={{reporter}}>{{reporter}}</ion-option>
-        </ion-select>
+        <ion-label stacked>Creado por</ion-label>
+        <ion-input type="text" [(ngModel)]="reporterModel" [readonly]="true"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -101,7 +99,7 @@
     </ion-card-content>
   </ion-card>
 
-  <!--<accordion-date></accordion-date>-->
+  <!--<accordion-created></accordion-created>-->
 
   <ion-card>
     <ion-card-header (click)="toggleAccordionDate()" color="primary">
@@ -110,17 +108,17 @@
     <ion-card-content #ccd>
       <ion-item>
         <ion-label>Creado</ion-label>
-        <ion-datetime displayFormat="MM/DD/YYYY" ></ion-datetime>
+        <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="createdModel" disabled></ion-datetime>
       </ion-item>
 
       <ion-item>
         <ion-label>Modificado</ion-label>
-        <ion-datetime displayFormat="MM/DD/YYYY" ></ion-datetime>
+        <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="updatedModel" disabled></ion-datetime>
       </ion-item>
 
       <ion-item>
         <ion-label>Resuelto</ion-label>
-        <ion-datetime displayFormat="MM/DD/YYYY" ></ion-datetime>
+        <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="resolvedModel"></ion-datetime>
       </ion-item>
 
     </ion-card-content>
@@ -136,10 +134,10 @@
       <ion-list>
         <ion-item *ngFor="let comment of comments">
           <ion-avatar item-start>
-            <img src="../../../../projectFinal-Android/src/assets/imgs/avatar.png">
+            <img src="../assets/imgs/avatar.png">
           </ion-avatar>
           <h2>{{ comment.author}}</h2>
-          <p class="comment-date">({{ comment.date}})</p>
+          <p class="comment-date">({{ comment.created}})</p>
           <p>{{ comment.comment }}</p>
         </ion-item>
       </ion-list>
@@ -154,8 +152,8 @@
   </ion-card>
 
   <div class="footer">
-    <button ion-button color="secondary" block  class="btn-aceptar" (click)='accept()' >Aceptar</button>
-    <button ion-button color="danger" class="btn-cancelar" navPop block>Cancelar</button>
+    <button ion-button color="secondary" block  class="btn-aceptar" (click)='accept()' round>Aceptar</button>
+    <button ion-button color="danger" class="btn-cancelar" navPop block round>Cancelar</button>
   </div>
 
 </ion-content>
