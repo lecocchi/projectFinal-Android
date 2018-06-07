@@ -127,6 +127,7 @@ export class IssuePage implements OnInit{
       this.titleNavBar = 'Crear un nuevo Issue';
       this.reporterModel = "Leandro Cocchi";
       this.createdModel = new Date().toISOString();
+      this.updatedModel = new Date().toISOString();
     }
   }
 
