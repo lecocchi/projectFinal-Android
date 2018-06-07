@@ -11,5 +11,20 @@ page-active-sprint-tab {
     color: #5a5959;
   }
 
+  ion-spinner * {
+    stroke: #000;
+    fill: #8b0000;
+    position: fixed;
+    z-index: 999;
+    height: 5rem !important;
+    width: 5rem !important;
+    overflow: auto;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+
 }
 

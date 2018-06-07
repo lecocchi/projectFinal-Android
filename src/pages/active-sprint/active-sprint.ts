@@ -12,6 +12,7 @@ export class ActiveSprintPage {
   issues:any = [];
   avatar:string = 'https://picsum.photos/300/300?image=0';
   issuePage:any;
+  loading:boolean = true;
 
   constructor(public navCtrl: NavController, public issueProvider: IssueProvider) {
     this.issuePage = IssuePage;
@@ -21,6 +22,7 @@ export class ActiveSprintPage {
     this.issueProvider.getAllIssueActiveSprint()
       .subscribe(data =>{
         this.issues = data;
+        this.loading = false;
       });
   }
 
@@ -28,6 +30,7 @@ export class ActiveSprintPage {
     this.issueProvider.getAllIssueActiveSprint()
       .subscribe(data =>{
         this.issues = data;
+        this.loading = false;
       });
   }
 
