@@ -13,8 +13,12 @@ export class IssueProvider {
 
     constructor(public http: HttpClient) { }
 
-    getAllIssue(){
-        return this.http.get(URL_BASE + "/issue/");
+    getAllIssueActiveSprint(){
+        return this.http.get(URL_BASE + "/issue/active-sprint");
+    }
+
+    getAllIssueBacklog(){
+      return this.http.get(URL_BASE + "/issue/backlog")
     }
 
     getIssueById(id:number){

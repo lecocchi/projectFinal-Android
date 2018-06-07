@@ -19,25 +19,25 @@ export class BacklogPage {
     }
 
     ionViewDidLoad(){
-        this.issueProvider.getAllIssue()
+        this.issueProvider.getAllIssueBacklog()
             .subscribe(data =>{
                 this.issues = data;
             });
     }
 
     ionViewDidEnter(){
-        this.issueProvider.getAllIssue()
+        this.issueProvider.getAllIssueBacklog()
             .subscribe(data =>{
                 this.issues = data;
             });
     }
 
-    openDetail(issue:any){
-        this.navCtrl.push(IssuePage,{"issue":issue, "update":true});
-    }
+  openDetail(issue:any){
+    this.navCtrl.push(IssuePage,{"issue":issue, "update":true, "backlog": true});
+  }
 
-    createNewIssue(){
-        this.navCtrl.push(IssuePage, {"issue":null, "update": false});
-    }
+  createNewIssue(){
+    this.navCtrl.push(IssuePage, {"issue":null, "update": false, "backlog": true});
+  }
 
 }

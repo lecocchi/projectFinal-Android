@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController} from 'ionic-angular';
+import {IssueProvider} from "../../providers/issue/issue";
 import {IssuePage} from "../issue/issue";
 
 @Component({
@@ -7,36 +8,34 @@ import {IssuePage} from "../issue/issue";
   templateUrl: 'active-sprint.html',
 })
 export class ActiveSprintPage {
-  items:any = [
-    {
-      "issueId":"SID-0",
-      "title":"Requerimiento SID-0",
-      "avatar":"http://www.uni-regensburg.de/Fakultaeten/phil_Fak_II/Psychologie/Psy_II/beautycheck/english/durchschnittsgesichter/m(01-32)_gr.jpg"
-    },
-    {
-      "issueId":"SID-1",
-      "title":"Requerimiento SID-1",
-      "avatar":"http://www.uni-regensburg.de/Fakultaeten/phil_Fak_II/Psychologie/Psy_II/beautycheck/english/durchschnittsgesichter/m(01-32)_gr.jpg"
-    },
-    {
-      "issueId":"SID-2",
-      "title":"Requerimiento SID-2",
-      "avatar":"http://www.uni-regensburg.de/Fakultaeten/phil_Fak_II/Psychologie/Psy_II/beautycheck/english/durchschnittsgesichter/m(01-32)_gr.jpg"
-    },{
-      "issueId":"SID-3",
-      "title":"Requerimiento SID-3",
-      "avatar":"http://www.uni-regensburg.de/Fakultaeten/phil_Fak_II/Psychologie/Psy_II/beautycheck/english/durchschnittsgesichter/m(01-32)_gr.jpg"
-    }
-  ];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  issues:any = [];
+  avatar:string = 'https://picsum.photos/300/300?image=0';
+  issuePage:any;
+
+  constructor(public navCtrl: NavController, public issueProvider: IssueProvider) {
+    this.issuePage = IssuePage;
   }
 
-
-  openDetail(item:any){
-    //this.presentToast(message);
-    this.navCtrl.push(IssuePage,{"issueId":item.issueId, "title":item.title});
-
+  ionViewDidLoad(){
+    this.issueProvider.getAllIssueActiveSprint()
+      .subscribe(data =>{
+        this.issues = data;
+      });
   }
 
+  ionViewDidEnter(){
+    this.issueProvider.getAllIssueActiveSprint()
+      .subscribe(data =>{
+        this.issues = data;
+      });
+  }
+
+  openDetail(issue:any){
+    this.navCtrl.push(IssuePage,{"issue":issue, "update":true, "backlog": false});
+  }
+
+  createNewIssue(){
+    this.navCtrl.push(IssuePage, {"issue":null, "update": false, "backlog": false});
+  }
 }

@@ -28,7 +28,7 @@ export class IssuePage implements OnInit{
 
 
   priorityModel:any; labelModel:any;phaseModel:any;stateModel:any;versionModel:any;reporterModel:any;assigneeModel:any;watcherModel:any;issue:any;
-  update:boolean;
+  update:boolean; backlog:boolean;
   priorities:any = [];labels:any = [];phases:any = [];states:any = [];versions: any = [];  reporters: string[] = [];assignees:string[] = [];watchers:string [] = [];
   createdModel:any; updatedModel:string; resolvedModel:string;
   users:string[] = [
@@ -70,6 +70,7 @@ export class IssuePage implements OnInit{
 
 
     this.update = this.navParams.get('update');
+    this.backlog = this.navParams.get('backlog');
 
     this.priorityProvider.getAllPriority()
       .subscribe(data => {
@@ -216,7 +217,7 @@ export class IssuePage implements OnInit{
       estimated:null,
       remaining:null,
       sprint:null,
-      backlog:true,
+      backlog:this.backlog,
       enabled:true
     };
 
