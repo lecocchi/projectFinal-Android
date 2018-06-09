@@ -39,6 +39,7 @@ import {StateProvider} from "../providers/state/state";
 import {StatePage} from "../pages/state/state";
 import {StateDescriptionPage} from "../pages/state-description/state-description";
 import { IssueProvider } from '../providers/issue/issue';
+import {DailyItemPage} from "../pages/daily-item/daily-item";
 
 @NgModule({
     declarations: [
@@ -67,7 +68,8 @@ import { IssueProvider } from '../providers/issue/issue';
         RolPage,
         RolDescriptionPage,
         StatePage,
-        StateDescriptionPage
+        StateDescriptionPage,
+        DailyItemPage
     ],
     imports: [
         BrowserModule,
@@ -101,7 +103,8 @@ import { IssueProvider } from '../providers/issue/issue';
         RolPage,
         RolDescriptionPage,
         StatePage,
-        StateDescriptionPage
+        StateDescriptionPage,
+        DailyItemPage
     ],
     providers: [
         StatusBar,
