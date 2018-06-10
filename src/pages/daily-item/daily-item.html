@@ -9,12 +9,12 @@
 <ion-content padding>
     <ion-item>
         <ion-label color="primary" stacked>ScrumMaster</ion-label>
-        <ion-input type="text" [ngModel]="scrummaster"></ion-input>
+        <ion-input type="text" [ngModel]="scrummaster" disabled></ion-input>
     </ion-item>
 
     <ion-item>
         <ion-label color="primary" stacked>Fecha</ion-label>
-        <ion-input type="text" [ngModel]="createAt | date:'dd-MM-yyyy'"></ion-input>
+        <ion-input type="text" [ngModel]="createAt | date:'dd-MM-yyyy'" disabled></ion-input>
     </ion-item>
 
 
