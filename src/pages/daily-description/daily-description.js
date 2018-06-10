@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { DailyDescriptionProvider } from '../../providers/daily-description/daily-description';
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
+import {DailyDescriptionProvider} from '../../providers/daily-description/daily-description';
+
 /**
  * Generated class for the DailyDescriptionPage page.
  *

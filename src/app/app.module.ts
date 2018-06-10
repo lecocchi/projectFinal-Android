@@ -11,7 +11,6 @@ import {LoginPage} from "../pages/login/login";
 import {ActiveSprintPage} from "../pages/active-sprint/active-sprint";
 import {DailyPage} from "../pages/daily/daily";
 import {DailyDescriptionPage} from '../pages/daily-description/daily-description';
-import {DailyDescriptionProvider} from '../providers/daily-description/daily-description';
 import {BacklogPage} from '../pages/backlog/backlog';
 import {AvatarComponent} from '../components/avatar/avatar';
 import {ReportsPage} from "../pages/reports/reports";
@@ -112,7 +111,6 @@ import { DailyProvider } from '../providers/daily/daily';
     providers: [
         StatusBar,
         SplashScreen,
-        DailyDescriptionProvider,
         {provide: ErrorHandler, useClass: IonicErrorHandler},
         VersionsProvider,
         UtilsProvider,

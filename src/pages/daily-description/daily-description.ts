@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { DailyDescriptionProvider } from '../../providers/daily-description/daily-description';
 
 /**
  * Generated class for the DailyDescriptionPage page.
@@ -10,24 +9,25 @@ import { DailyDescriptionProvider } from '../../providers/daily-description/dail
  */
 
 @Component({
-  selector: 'page-daily-description',
-  templateUrl: 'daily-description.html',
+    selector: 'page-daily-description',
+    templateUrl: 'daily-description.html',
 })
 export class DailyDescriptionPage {
 
-  yesterday: string;
-  today: string;
+    yesterday: string;
+    today: string;
+    member: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private dailyDescriptionProvider: DailyDescriptionProvider) {
+    constructor(public navCtrl: NavController, public navParams: NavParams) {
+        this.member  = this.navParams.get('member');
+        this.today = this.member.today;
+        this.yesterday = this.member.yesterday;
+    }
 
-    this.today = this.dailyDescriptionProvider.items[this.navParams.get('index')].today;
-    this.yesterday = this.dailyDescriptionProvider.items[this.navParams.get('index')].yesterday;
-  }
-
-  accept(){
-    this.dailyDescriptionProvider.items[this.navParams.get('index')].today = this.today;
-    this.dailyDescriptionProvider.items[this.navParams.get('index')].yesterday = this.yesterday;
-    this.navCtrl.pop();
-  }
+    accept(){
+        // this.dailyDescriptionProvider.items[this.navParams.get('index')].today = this.today;
+        // this.dailyDescriptionProvider.items[this.navParams.get('index')].yesterday = this.yesterday;
+        this.navCtrl.pop();
+    }
 
 }

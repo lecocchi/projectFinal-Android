@@ -54,10 +54,28 @@ export class DailyProvider {
             "create": "Leandro Cocchi"
         }];
 
+
+    dailyDetails:any[] = [
+        {
+            "id": 1,
+            "daily_id": 1,
+            "avatar":"http://www.uni-regensburg.de/Fakultaeten/phil_Fak_II/Psychologie/Psy_II/beautycheck/english/durchschnittsgesichter/m(01-32)_gr.jpg",
+            "first_name": "Leandro",
+            "last_name": "Cocchi",
+            "rol": "Scrummaster",
+            "today": "Lo que va a hacer en el dia de hoy",
+            "yesterday": "Lo que hizo ayer"
+        }
+    ];
+
   constructor(public http: HttpClient) {  }
 
   getAllDailies(){
       return this.dailies;
+  }
+
+  getDetailDailyByDailyId(daily_id: number){
+      return this.dailyDetails;
   }
 
 }
