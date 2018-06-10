@@ -38,8 +38,9 @@ import {RolDescriptionPage} from "../pages/rol-description/rol-description";
 import {StateProvider} from "../providers/state/state";
 import {StatePage} from "../pages/state/state";
 import {StateDescriptionPage} from "../pages/state-description/state-description";
-import { IssueProvider } from '../providers/issue/issue';
+import {IssueProvider} from '../providers/issue/issue';
 import {DailyItemPage} from "../pages/daily-item/daily-item";
+import {FormatDatePipe} from "../pipes/format-date/format-date";
 
 @NgModule({
     declarations: [
@@ -69,7 +70,8 @@ import {DailyItemPage} from "../pages/daily-item/daily-item";
         RolDescriptionPage,
         StatePage,
         StateDescriptionPage,
-        DailyItemPage
+        DailyItemPage,
+        FormatDatePipe
     ],
     imports: [
         BrowserModule,

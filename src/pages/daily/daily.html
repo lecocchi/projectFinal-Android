@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color='primary'>
-    <ion-title>Dailies</ion-title>
+    <ion-title>Daily</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -14,7 +14,8 @@
             <ion-avatar item-start>
                 <img [src]="daily.avatar">
             </ion-avatar>
-            <h2>{{daily.date}}</h2>
+            <!--<h2>{{daily.date}}</h2>-->
+            <h2>{{daily.date | formatDate}}</h2>
         </ion-item>
     </ion-list>
 

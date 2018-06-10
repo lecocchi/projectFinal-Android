@@ -18,4 +18,16 @@ export class UtilsProvider {
         toast.present();
     }
 
+    traslatorLenguajeSpanish(date:Date){
+
+      let days = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
+      let months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+      return {
+          "day":date.getDate(),
+          "month": months[date.getMonth()],
+          "year": date.getFullYear(),
+          "dayWeek": days[date.getDay()]
+      }
+    }
+
 }
