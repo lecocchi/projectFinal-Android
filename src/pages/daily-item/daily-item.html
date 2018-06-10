@@ -1,23 +1,12 @@
 <ion-header>
 
   <ion-navbar color='primary'>
-    <ion-title>daily-item</ion-title>
+    <ion-title>Daily {{createAt | date:'dd-MM-yyyy'}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-<ion-content padding>
-    <ion-item>
-        <ion-label color="primary" stacked>ScrumMaster</ion-label>
-        <ion-input type="text" [ngModel]="scrummaster" disabled></ion-input>
-    </ion-item>
-
-    <ion-item>
-        <ion-label color="primary" stacked>Fecha</ion-label>
-        <ion-input type="text" [ngModel]="createAt | date:'dd-MM-yyyy'" disabled></ion-input>
-    </ion-item>
-
-
+<ion-content >
     <ion-list>
         <ion-item *ngFor="let item of items, let i = index" (click)='push(i)' class="items">
 
@@ -39,5 +28,13 @@
             </div>
         </ion-item>
     </ion-list>
+
+    <ion-fab right bottom>
+        <button ion-fab color="light"><ion-icon name="add"></ion-icon></button>
+        <ion-fab-list side="top">
+            <button ion-fab><ion-icon ios="ios-person" md="md-person"></ion-icon></button>
+            <button ion-fab><ion-icon ios="ios-people" md="md-people"></ion-icon></button>
+        </ion-fab-list>
+    </ion-fab>
 
 </ion-content>

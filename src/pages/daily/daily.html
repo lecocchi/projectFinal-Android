@@ -1,11 +1,8 @@
 <ion-header>
-
   <ion-navbar color='primary'>
     <ion-title>Daily</ion-title>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content>
 
@@ -24,53 +21,3 @@
     <button ion-fab><ion-icon name="add"></ion-icon></button>
   </ion-fab>
 </ion-content>
-
-
-
-
-
-<!--<ion-header>
-
-  <ion-navbar color='primary'>
-    <ion-title>Daily</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
-  <ion-item>
-    <ion-label color="primary" stacked>ScrumMaster</ion-label>
-    <ion-input type="text" [ngModel]="scrummaster"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label color="primary" stacked>Fecha</ion-label>
-    <ion-input type="text" [ngModel]="createAt | date:'dd-MM-yyyy'"></ion-input>
-  </ion-item>
-
-
-  <ion-list>
-    <ion-item *ngFor="let item of items, let i = index" (click)='push(i)' class="items">
-
-      <ion-avatar item-start class="avatar">
-        <img [src]="item.avatar">
-      </ion-avatar>
-
-      <div class="name">Leandro Cocchi</div>
-
-      <div class="content">
-        <div class="day">
-          <span class="active" *ngIf="item.yesterday.length > 0">Ayer</span>
-          <span class="inactive" *ngIf="item.yesterday.length == 0">Ayer</span>
-        </div>
-        <div class="day">
-          <span class="active" *ngIf="item.today.length > 0">Hoy</span>
-          <span class="inactive" *ngIf="item.today.length == 0">Hoy</span>
-        </div>
-      </div>
-    </ion-item>
-  </ion-list>
-</ion-content>
--->
