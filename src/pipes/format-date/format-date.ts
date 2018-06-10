@@ -17,7 +17,7 @@ export class FormatDatePipe implements PipeTransform {
     transform(value: Date, ...args) {
 
         this.now = this.utils.traslatorLenguajeSpanish(value);
-        this.createAt = `${this.now.dayWeek}, ${this.now.day} de ${this.now.month} de ${this.now.year}`;
+        this.createAt = `${this.now.dayWeek}, ${this.now.day} de ${this.now.month}`;
 
         return this.createAt;
     }

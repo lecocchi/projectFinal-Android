@@ -1,17 +1,16 @@
 <ion-header>
   <ion-navbar color='primary'>
-    <ion-title>Daily</ion-title>
+    <ion-title>Dailies</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
 
     <ion-list>
-        <ion-item *ngFor="let daily of dailies, let i = index" (click)="openDetail(daily)">
+        <ion-item *ngFor="let daily of dailies" (click)="openDetail(daily)">
             <ion-avatar item-start>
                 <img [src]="daily.avatar">
             </ion-avatar>
-            <!--<h2>{{daily.date}}</h2>-->
             <h2>{{daily.date | formatDate}}</h2>
         </ion-item>
     </ion-list>

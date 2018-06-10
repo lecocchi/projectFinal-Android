@@ -41,6 +41,7 @@ import {StateDescriptionPage} from "../pages/state-description/state-description
 import {IssueProvider} from '../providers/issue/issue';
 import {DailyItemPage} from "../pages/daily-item/daily-item";
 import {FormatDatePipe} from "../pipes/format-date/format-date";
+import { DailyProvider } from '../providers/daily/daily';
 
 @NgModule({
     declarations: [
@@ -120,7 +121,9 @@ import {FormatDatePipe} from "../pipes/format-date/format-date";
         PrioritiesProvider,
         RolProvider,
         StateProvider,
-        IssueProvider
+        IssueProvider,
+        DailyProvider,
+        DailyProvider
     ]
 })
 export class AppModule {}
