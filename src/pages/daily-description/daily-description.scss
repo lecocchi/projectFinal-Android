@@ -1,18 +1,17 @@
 page-daily-description {
-    .footer{
-        display: flex;
-        justify-content: center;
-        padding-top: 1em;
 
-        &-button{
-            &-accept{
-                margin-right: 1em;
-            }
-        }
-      }
+  textarea {
+    height: 150px !important;
+  }
 
-      textarea{
-        height: 150px !important;
-    }
+  .btn-aceptar, .btn-cancelar{
+    margin: 1rem 0;
+    height: 48px;
+    font-size: 1.6rem;
+  }
+
+  .btn-aceptar{
+    margin-top: 3rem;
+  }
 
 }
