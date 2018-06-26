@@ -19,7 +19,7 @@ export class DailyItemPage {
 
         if (this.daily != undefined){
             this.dailyCreated = this.daily.date;
-            this.members = this.dailyProvider.getDetailDailyByDailyId(1);
+            this.members = this.dailyProvider.getDetailDailyByDailyId(this.daily.id);
         }
         else
             this.members = null;
