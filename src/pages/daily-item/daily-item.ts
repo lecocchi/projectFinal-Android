@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {DailyDescriptionPage} from "../daily-description/daily-description";
 import {DailyProvider} from "../../providers/daily/daily";
+import {FilterPersonPage} from "../filter-person/filter-person";
 
 @Component({
     selector: 'page-daily-item',
@@ -12,6 +13,7 @@ export class DailyItemPage {
     members: any[] = [];
     daily:any;
     dailyCreated: Date = new Date();
+    filterPerson: any = FilterPersonPage;
 
     constructor(public navCtrl: NavController, public navParams: NavParams,
                 public dailyProvider: DailyProvider) {
@@ -27,5 +29,9 @@ export class DailyItemPage {
 
     push(member: any) {
         this.navCtrl.push(DailyDescriptionPage, { "member": member })
+    }
+
+    pushFilter(){
+        this.navCtrl.push(FilterPersonPage);
     }
 }

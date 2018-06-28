@@ -41,6 +41,8 @@ import {IssueProvider} from '../providers/issue/issue';
 import {DailyItemPage} from "../pages/daily-item/daily-item";
 import {FormatDatePipe} from "../pipes/format-date/format-date";
 import { DailyProvider } from '../providers/daily/daily';
+import { UserProvider } from '../providers/user/user';
+import {FilterPersonPage} from "../pages/filter-person/filter-person";
 
 @NgModule({
     declarations: [
@@ -71,7 +73,8 @@ import { DailyProvider } from '../providers/daily/daily';
         StatePage,
         StateDescriptionPage,
         DailyItemPage,
-        FormatDatePipe
+        FormatDatePipe,
+        FilterPersonPage
     ],
     imports: [
         BrowserModule,
@@ -106,7 +109,8 @@ import { DailyProvider } from '../providers/daily/daily';
         RolDescriptionPage,
         StatePage,
         StateDescriptionPage,
-        DailyItemPage
+        DailyItemPage,
+        FilterPersonPage
     ],
     providers: [
         StatusBar,
@@ -121,7 +125,8 @@ import { DailyProvider } from '../providers/daily/daily';
         StateProvider,
         IssueProvider,
         DailyProvider,
-        DailyProvider
+        DailyProvider,
+        UserProvider
     ]
 })
 export class AppModule {}

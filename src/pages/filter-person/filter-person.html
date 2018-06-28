@@ -1,0 +1,22 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            Buscar personas
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-searchbar  [(ngModel)]="persona" (ionInput)="filterItems()"></ion-searchbar>
+    <ion-list>
+        <ion-item *ngFor="let person of persons">
+            <ion-avatar item-start>
+                <img src="http://www.uni-regensburg.de/Fakultaeten/phil_Fak_II/Psychologie/Psy_II/beautycheck/english/durchschnittsgesichter/m(01-32)_gr.jpg">
+            </ion-avatar>
+            <!--<div class="issue-code">SID-{{ issue.id }}</div>-->
+            <div class="issue-summary">
+                {{ person.firstName }} {{ person.lastName}}
+            </div>
+        </ion-item>
+
+    </ion-list>
+</ion-content>

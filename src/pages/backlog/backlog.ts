@@ -1,9 +1,8 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController} from 'ionic-angular';
+import {NavController} from 'ionic-angular';
 import {IssuePage} from "../issue/issue";
 import {IssueProvider} from "../../providers/issue/issue";
 
-@IonicPage()
 @Component({
   selector: 'page-backlog',
   templateUrl: 'backlog.html',
