@@ -1,8 +1,19 @@
 <ion-header>
 
     <ion-navbar color='primary'>
-        <ion-title>Daily</ion-title>
-        <div class="daily-date">{{dailyCreated | formatDate}}</div>
+      <ion-title>Daily</ion-title>
+      <div class="daily-date">{{dailyCreated | formatDate}}</div>
+      <ion-buttons end>
+        <button ion-button icon-only>
+          <ion-icon name="checkmark" class="accept"></ion-icon>
+        </button>
+      </ion-buttons>
+
+      <ion-buttons end>
+        <button ion-button icon-only>
+          <ion-icon name="close" class="cancel"></ion-icon>
+        </button>
+      </ion-buttons>
     </ion-navbar>
 
 </ion-header>
@@ -15,7 +26,7 @@
                 <img [src]="member.avatar">
             </ion-avatar>
 
-            <div class="name">Leandro Cocchi</div>
+            <div class="name">{{member.first_name}} {{member.last_name}}  </div>
 
             <div class="content">
                 <div class="day">

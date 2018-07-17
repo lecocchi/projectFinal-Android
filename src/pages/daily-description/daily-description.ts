@@ -10,26 +10,30 @@ export class DailyDescriptionPage {
 
   yesterday: string;
   today: string;
-  member: any;
+  member:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public dailyProvider:DailyProvider) {
-    this.member  = this.navParams.get('member');
-    this.today = this.member.today;
-    this.yesterday = this.member.yesterday;
+
+    this.member = this.navParams.get("member");
+
+    this.dailyProvider.daily.daily_items.filter( m => {
+      if (m.user_name == this.member.user_name ) {
+        this.today = m.today;
+        this.yesterday = m.yesterday;
+      }
+    });
   }
 
   accept(){
-    this.getDailyById(this.member.id).yesterday = this.yesterday;
-    this.getDailyById(this.member.id).today = this.today;
-    this.navCtrl.pop();
-  }
 
-  private getDailyById(id: number): any{
-    for (let detail of this.dailyProvider.dailyDetails){
-      if (detail.id == id){
-        return detail;
+    this.dailyProvider.daily.daily_items.filter(m => {
+      if (m.user_name == this.member.user_name){
+        m.today = this.today;
+        m.yesterday  = this.yesterday;
       }
-    }
+    })
+
+    this.navCtrl.pop();
   }
 
 }

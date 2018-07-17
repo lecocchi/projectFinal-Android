@@ -34,7 +34,6 @@ page-daily-item {
   }
 
   .name{
-    //font-size: 1.5rem;
     font-weight: 500;
   }
 
@@ -65,4 +64,22 @@ page-daily-item {
     padding-top: 5px;
     font-size: 1.5rem;
   }
+
+  ion-buttons{
+    margin-right: 18px !important;
+  }
+
+  .cancel{
+    color: #b8696e;
+    font-weight: bold;
+    font-size: 30px !important;
+  }
+
+  .accept{
+    color: #4db69d;
+    font-weight: bold;
+    font-size: 30px !important;
+  }
+
+
 }
