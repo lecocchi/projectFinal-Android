@@ -6,16 +6,16 @@
 
 <ion-content>
 
-    <ion-list>
-        <ion-item *ngFor="let daily of dailies" (click)="openDetail(daily)">
-            <ion-avatar item-start>
-                <img [src]="daily.avatar">
-            </ion-avatar>
-            <h2 class="date">{{daily.date | formatDate}}</h2>
-        </ion-item>
-    </ion-list>
+  <ion-list>
+    <ion-item *ngFor="let daily of dailies" (click)="openDetail(daily)">
+      <ion-avatar item-start>
+        <img [src]="daily.avatar">
+      </ion-avatar>
+      <h2 class="date">{{daily.created_at | formatDate}}</h2>
+    </ion-item>
+  </ion-list>
 
-      <!-- this fab is placed at top right -->
+  <!-- this fab is placed at top right -->
   <ion-fab bottom right (click)="createNewDaily()">
     <button ion-fab><ion-icon name="add"></ion-icon></button>
   </ion-fab>

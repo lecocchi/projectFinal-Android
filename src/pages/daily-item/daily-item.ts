@@ -12,12 +12,13 @@ export class DailyItemPage {
 
   members: any[] = [];
   daily:any;
-  dailyCreated: Date = new Date();
+  dailyCreated: any ;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public dailyProvider: DailyProvider) {
-    this.members = this.dailyProvider.daily.daily_items;
 
+    this.members = this.dailyProvider.daily.daily_items;
+    this.dailyCreated = dailyProvider.daily.created_at;
   }
 
   ionViewWillEnter(){
@@ -30,5 +31,16 @@ export class DailyItemPage {
 
   pushFilter(){
     this.navCtrl.push(FilterPersonPage);
+  }
+
+  createDaily(){
+    this.dailyProvider.createDaily()
+      .subscribe( data => {
+        this.navCtrl.pop();
+      });
+  }
+
+  cancel(){
+    this.navCtrl.pop();
   }
 }

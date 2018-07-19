@@ -4,13 +4,13 @@
       <ion-title>Daily</ion-title>
       <div class="daily-date">{{dailyCreated | formatDate}}</div>
       <ion-buttons end>
-        <button ion-button icon-only>
+        <button ion-button icon-only (click)="createDaily()">
           <ion-icon name="checkmark" class="accept"></ion-icon>
         </button>
       </ion-buttons>
 
       <ion-buttons end>
-        <button ion-button icon-only>
+        <button ion-button icon-only (click)="cancel()">
           <ion-icon name="close" class="cancel"></ion-icon>
         </button>
       </ion-buttons>

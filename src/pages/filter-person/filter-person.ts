@@ -22,7 +22,6 @@ export class FilterPersonPage {
         for( let person of this.persons){
 
           let personToShow:any = {
-            "id":person.id,
             "first_name":person.firstName,
             "last_name":person.lastName,
             "user_name":person.userName,
@@ -56,7 +55,7 @@ export class FilterPersonPage {
 
   changeStatusChecked(person:any){
     this.personsToShow
-      .filter(item => person.id == item.id)
+      .filter(item => person.user_name == item.user_name)
       .map(item => {
         item.checked = !item.checked;
       });
