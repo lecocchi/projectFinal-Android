@@ -31,6 +31,7 @@ export class DailyPage {
 
 
     this.dailyProvider.daily = daily;
+    console.log(this.dailyProvider.daily);
     this.navCtrl.push(this.dailyItemPage);
   }
 

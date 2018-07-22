@@ -3,17 +3,19 @@ import {UtilsProvider} from "../../providers/utils/utils";
 
 
 @Pipe({
-    name: 'formatDate',
+  name: 'formatDate',
 })
 export class FormatDatePipe implements PipeTransform {
-    now:any;
-    createAt:string;
-    constructor(public utils:UtilsProvider){}
+  now:any;
+  createAt:string;
+  constructor(public utils:UtilsProvider){}
 
-    transform(value: Date, ...args) {
-        this.now = this.utils.traslatorLenguajeSpanish(value);
-        this.createAt = `${this.now.dayWeek}, ${this.now.day} de ${this.now.month}`;
+  transform(value: any, ...args) {
+    if (value != undefined){
+      this.now = this.utils.traslatorLenguajeSpanish(value);
+      this.createAt = `${this.now.dayWeek}, ${this.now.day} de ${this.now.month}`;
 
-        return this.createAt;
+      return this.createAt;
     }
+  }
 }
