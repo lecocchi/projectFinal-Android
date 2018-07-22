@@ -31,37 +31,11 @@ export class DailyPage {
 
 
     this.dailyProvider.daily = daily;
-    console.log(this.dailyProvider.daily);
     this.navCtrl.push(this.dailyItemPage);
   }
 
   openDetail(daily:any){
-
     this.dailyProvider.daily = daily;
-
-    // let dailyCreate:any = {
-    //   "first_name":daily.first_name,
-    //   "last_name":daily.last_name,
-    //   "user_name":daily.user_name,
-    //   "avatar": daily.avatar,
-    //   "daily_items":[]
-    // }
-    //
-    // this.dailyProvider.daily = dailyCreate;
-    //
-    // daily.daily_items.forEach( item =>{
-    //   let dailyItems = {
-    //     "first_name": item.first_name,
-    //     "last_name": item.last_name,
-    //     "user_name": item.user_name,
-    //     "avatar": item.avatar,
-    //     "yesterday": item.yesterday,
-    //     "today": item.today
-    //   }
-    //
-    //   this.dailyProvider.daily.daily_items.push(dailyItems);
-    // });
-
     this.navCtrl.push(this.dailyItemPage);
   }
 

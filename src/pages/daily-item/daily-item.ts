@@ -22,7 +22,6 @@ export class DailyItemPage {
     this.dailyCreated = dailyProvider.daily.created_at;
     this.dateProvider.now()
       .subscribe( date => {
-        console.log(date);
         this.dailyCreated = date;
       })
   }

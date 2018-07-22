@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormatDatePipe } from './format-date/format-local-date-time';
+import { FormatDatePipe } from './format-date/format-date';
 @NgModule({
 	declarations: [FormatDatePipe],
 	imports: [],
