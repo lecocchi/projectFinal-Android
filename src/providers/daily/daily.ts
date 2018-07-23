@@ -14,12 +14,17 @@ export class DailyProvider {
     return this.http.get(URL_BASE + "/daily/");
   }
 
-  getDetailDailyByDate(date: Date): any{
+  createDaily(): any{
+    delete this.daily.created_at;
+    this.daily.daily_items.forEach(item =>{
+      delete item.created_at;
+    });
 
+    return this.http.post(URL_BASE + "/daily/", this.daily);
   }
 
-  createDaily(): any{
-    return this.http.post(URL_BASE + "/daily/", this.daily);
+  isThereDailyToday():any{
+    return this.http.get(URL_BASE + "/daily/today");
   }
 
 }

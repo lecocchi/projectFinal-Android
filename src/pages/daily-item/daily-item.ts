@@ -19,7 +19,7 @@ export class DailyItemPage {
               public dailyProvider: DailyProvider, public dateProvider:DateProvider) {
 
     this.members = this.dailyProvider.daily.daily_items;
-    this.dailyCreated = dailyProvider.daily.created_at;
+    // this.dailyCreated = dailyProvider.daily.created_at;
     this.dateProvider.now()
       .subscribe( date => {
         this.dailyCreated = date;
