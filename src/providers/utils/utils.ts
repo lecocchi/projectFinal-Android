@@ -24,7 +24,7 @@ export class UtilsProvider {
   traslatorLenguajeSpanish(date:any){
     return {
       "day":date.dayOfMonth,
-      "month": this.months[date.monthValue],
+      "month": this.months[date.monthValue - 1],
       "year": date.year,
       "dayWeek": this.getDayInSpanish(date.dayOfWeek)
     }

@@ -12,22 +12,36 @@ import {DateProvider} from "../../providers/date/date";
 export class DailyItemPage {
 
   members: any[] = [];
-  daily:any;
-  dailyCreated: any ;
+  dailyCreated: any;
+  dailyActive:boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public dailyProvider: DailyProvider, public dateProvider:DateProvider) {
 
     this.members = this.dailyProvider.daily.daily_items;
-    // this.dailyCreated = dailyProvider.daily.created_at;
-    this.dateProvider.now()
-      .subscribe( date => {
-        this.dailyCreated = date;
-      })
+
+    if ( this.dailyProvider.daily.created_at == undefined){
+      this.dateProvider.now()
+        .subscribe( date => {
+          this.dailyCreated  = date
+        })
+    }else{
+      this.dailyCreated = this.dailyProvider.daily.created_at;
+    }
   }
 
   ionViewWillEnter(){
     this.members = this.dailyProvider.daily.daily_items;
+
+    if ( this.dailyProvider.daily.created_at != undefined){
+      this.dateProvider.now()
+        .subscribe(date =>{
+          this.dailyActive = (this.dailyProvider.daily.created_at.dayOfMonth === date.dayOfMonth && this.dailyProvider.daily.created_at.monthValues === date.monthValues && this.dailyProvider.daily.created_at.year === date.year);
+        })
+    }else{
+      this.dailyActive = true;
+    }
+
   }
 
   push(member: any) {

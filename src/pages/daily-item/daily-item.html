@@ -4,7 +4,7 @@
       <ion-title>Daily</ion-title>
       <div class="daily-date">{{dailyCreated | formatDate}}</div>
       <ion-buttons end>
-        <button ion-button icon-only (click)="createDaily()">
+        <button ion-button icon-only (click)="createDaily()" *ngIf="dailyActive">
           <ion-icon name="checkmark" class="accept"></ion-icon>
         </button>
       </ion-buttons>
@@ -41,7 +41,7 @@
         </ion-item>
     </ion-list>
 
-    <ion-fab right bottom>
+    <ion-fab right bottom *ngIf="dailyActive">
         <button ion-fab color="light"><ion-icon name="add"></ion-icon></button>
         <ion-fab-list side="top">
             <button ion-fab><ion-icon ios="ios-person" md="md-person" (click)="pushFilter()"></ion-icon></button>
