@@ -14,4 +14,28 @@ page-daily-description {
     margin-top: 3rem;
   }
 
+  .member{
+    padding: 0 12px;
+    color: #FFF;
+    font-weight: 500;
+    padding-top: 5px;
+    font-size: 1.5rem;
+  }
+
+  ion-buttons{
+    margin-right: 18px !important;
+  }
+
+  .cancel{
+    color: #b8696e;
+    font-weight: bold;
+    font-size: 30px !important;
+  }
+
+  .accept{
+    color: #4db69d;
+    font-weight: bold;
+    font-size: 30px !important;
+  }
+
 }

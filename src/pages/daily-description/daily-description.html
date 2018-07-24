@@ -1,17 +1,30 @@
-<ion-content padding>
+<ion-header>
 
+  <ion-navbar color='primary'>
+    <ion-title>Descripción</ion-title>
+    <div class="member">{{member.first_name}} {{member.last_name}}</div>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="accept()" *ngIf="dailyActive">
+        <ion-icon name="checkmark" class="accept"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="cancel()">
+        <ion-icon name="close" class="cancel"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
   <ion-item>
     <ion-label color="primary" stacked>Yesterday</ion-label>
-    <ion-textarea type="text" placeholder="What did you do yesterday?" [(ngModel)]="yesterday"></ion-textarea>
+    <ion-textarea type="text" placeholder="What did you do yesterday?" [(ngModel)]="yesterday" [readonly]="!dailyActive"></ion-textarea>
   </ion-item>
   <ion-item>
     <ion-label color="primary" stacked>Today</ion-label>
-    <ion-textarea type="text" placeholder="What do you doing today?" [(ngModel)]="today"></ion-textarea>
+    <ion-textarea type="text" placeholder="What do you doing today?" [(ngModel)]="today" [readonly]="!dailyActive"></ion-textarea>
   </ion-item>
-
-  <div class="footer">
-    <button ion-button color="secondary" block  class="btn-aceptar" (click)='accept()' round>Aceptar</button>
-    <button ion-button color="danger" class="btn-cancelar" navPop block round>Cancelar</button>
-  </div>
-
 </ion-content>

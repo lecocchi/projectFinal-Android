@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {DailyProvider} from "../../providers/daily/daily";
+import {DateProvider} from "../../providers/date/date";
 
 @Component({
   selector: 'page-daily-description',
@@ -11,8 +12,11 @@ export class DailyDescriptionPage {
   yesterday: string;
   today: string;
   member:any;
+  dailyActive:boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public dailyProvider:DailyProvider) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public dailyProvider:DailyProvider,
+              public dateProvider:DateProvider) {
 
     this.member = this.navParams.get("member");
 
@@ -24,8 +28,21 @@ export class DailyDescriptionPage {
     });
   }
 
-  accept(){
 
+  ionViewWillEnter(){
+
+    if ( this.dailyProvider.daily.created_at != undefined){
+      this.dateProvider.now()
+        .subscribe(date =>{
+          this.dailyActive = (this.dailyProvider.daily.created_at.dayOfMonth === date.dayOfMonth && this.dailyProvider.daily.created_at.monthValues === date.monthValues && this.dailyProvider.daily.created_at.year === date.year);
+        })
+    }else{
+      this.dailyActive = true;
+    }
+
+  }
+
+  accept(){
     this.dailyProvider.daily.daily_items.filter(m => {
       if (m.user_name == this.member.user_name){
         m.today = this.today;
@@ -33,6 +50,10 @@ export class DailyDescriptionPage {
       }
     })
 
+    this.navCtrl.pop();
+  }
+
+  cancel(){
     this.navCtrl.pop();
   }
 
