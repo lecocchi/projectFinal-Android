@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
-import {NavController, MenuController, Platform, AlertController} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {AlertController, MenuController, NavController, Platform} from 'ionic-angular';
 
-import { BacklogPage } from '../backlog/backlog';
+import {BacklogPage} from '../backlog/backlog';
 import {ActiveSprintPage} from "../active-sprint/active-sprint";
 import {DailyPage} from "../daily/daily";
 import {ReportsPage} from "../reports/reports";
 import {UsersPage} from "../users/users";
-import {IssuePage} from "../issue/issue";
 import {ConfigPage} from "../config/config";
+import {SprintsPage} from "../sprints/sprints";
 
 @Component({
   selector: 'page-home',
@@ -22,7 +22,7 @@ export class HomePage {
   dailyPage: any = DailyPage;
   reportsPage: any = ReportsPage;
   usersPage: any = UsersPage;
-  issuePage: any = IssuePage;
+  SprintsPage: any = SprintsPage;
   configPage:any = ConfigPage;
 
   public alertShown:boolean = false;

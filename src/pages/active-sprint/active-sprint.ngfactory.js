@@ -3,7 +3,7 @@
 * Do not edit.
 * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
 * tslint:disable
-*/ 
+*/
 import * as i0 from "@angular/core";
 import * as i1 from "../../../node_modules/ionic-angular/components/item/item-sliding.ngfactory";
 import * as i2 from "ionic-angular/components/item/item-sliding";
@@ -45,4 +45,4 @@ export function View_ActiveSprintPage_0(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵ
 export function View_ActiveSprintPage_Host_0(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 1, "page-active-sprint-tab", [], null, null, null, View_ActiveSprintPage_0, RenderType_ActiveSprintPage)), i0.ɵdid(1, 49152, null, 0, i31.ActiveSprintPage, [i21.NavController, i32.NavParams], null, null)], null, null); }
 var ActiveSprintPageNgFactory = i0.ɵccf("page-active-sprint-tab", i31.ActiveSprintPage, View_ActiveSprintPage_Host_0, {}, {}, []);
 export { ActiveSprintPageNgFactory as ActiveSprintPageNgFactory };
-//# sourceMappingURL=active-sprint.ngfactory.js.map
+//# sourceMappingURL=active-sprints.ngfactory.js.map

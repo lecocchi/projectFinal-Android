@@ -14,7 +14,7 @@ export class IssueProvider {
     constructor(public http: HttpClient) { }
 
     getAllIssueActiveSprint(){
-        return this.http.get(URL_BASE + "/issue/active-sprint");
+        return this.http.get(URL_BASE + "/issue/active-sprints");
     }
 
     getAllIssueBacklog(){

@@ -44,6 +44,7 @@ import { UserProvider } from '../providers/user/user';
 import {FilterPersonPage} from "../pages/filter-person/filter-person";
 import {FormatDatePipe} from "../pipes/format-date/format-date";
 import { DateProvider } from '../providers/date/date';
+import {SprintsPage} from "../pages/sprints/sprints";
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { DateProvider } from '../providers/date/date';
     StateDescriptionPage,
     DailyItemPage,
     FormatDatePipe,
-    FilterPersonPage
+    FilterPersonPage,
+    SprintsPage
   ],
   imports: [
     BrowserModule,
@@ -111,7 +113,8 @@ import { DateProvider } from '../providers/date/date';
     StatePage,
     StateDescriptionPage,
     DailyItemPage,
-    FilterPersonPage
+    FilterPersonPage,
+    SprintsPage
   ],
   providers: [
     StatusBar,
