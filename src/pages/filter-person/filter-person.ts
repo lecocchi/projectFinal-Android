@@ -61,17 +61,24 @@ export class FilterPersonPage {
       });
   }
 
-  accept(){
+    accept(){
+        this.personsToShow.map( itemShow => {
+            if (itemShow.checked){
+                if (!this.dailyProvider.daily.daily_items.some(itemOrigin => itemShow.user_name === itemOrigin.user_name)) {
+                    this.dailyProvider.daily.daily_items.push(itemShow);
+                }
+            }
+        });
 
-    this.dailyProvider.daily.daily_items = [];
-    this.personsToShow
-      .map( item => {
-        if (item.checked)
-          this.dailyProvider.daily.daily_items.push(item);
-      })
-    this.navCtrl.pop();
-
-  }
+        this.dailyProvider.daily.daily_items.map(itemOrigin =>{
+            this.personsToShow.filter( itemShow => itemShow.user_name === itemOrigin.user_name)
+                .map(item =>{
+                    if (!item.checked)
+                        this.dailyProvider.daily.daily_items.splice(this.dailyProvider.daily.daily_items.indexOf(itemOrigin), 1);
+                })
+        });
+        this.navCtrl.pop();
+    }
 
   cancel(){
     this.navCtrl.pop();
