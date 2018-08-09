@@ -18,7 +18,8 @@ export class SprintsPage {
   ionViewWillEnter() {
     this.sprintProvider.getAllSprints()
       .subscribe( s =>{
-        this.sprints = s.reverse();
+        this.sprints = s;
+        this.sprints.reverse();
       })
   }
 

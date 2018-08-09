@@ -42,7 +42,7 @@ export class SprintPage {
 
       this.sprintProvider.createSprint(sprint)
         .subscribe( s =>{
-          this.utilsProvider.presentToast("Se ha generado el " + s.name + " con éxito");
+          this.utilsProvider.presentToast("Se ha generado el sprint  con éxito");
           this.cancel();
         })
 
