@@ -45,6 +45,9 @@ import {FilterPersonPage} from "../pages/filter-person/filter-person";
 import {FormatDatePipe} from "../pipes/format-date/format-date";
 import { DateProvider } from '../providers/date/date';
 import {SprintsPage} from "../pages/sprints/sprints";
+import { SprintProvider } from '../providers/sprint/sprint';
+import {FormatDateMillisecondPipe} from "../pipes/format-date-millisecond/format-date-millisecond";
+import {SprintPage} from "../pages/sprint/sprint";
 
 @NgModule({
   declarations: [
@@ -77,7 +80,9 @@ import {SprintsPage} from "../pages/sprints/sprints";
     DailyItemPage,
     FormatDatePipe,
     FilterPersonPage,
-    SprintsPage
+    SprintsPage,
+    FormatDateMillisecondPipe,
+    SprintPage
   ],
   imports: [
     BrowserModule,
@@ -114,7 +119,8 @@ import {SprintsPage} from "../pages/sprints/sprints";
     StateDescriptionPage,
     DailyItemPage,
     FilterPersonPage,
-    SprintsPage
+    SprintsPage,
+    SprintPage
   ],
   providers: [
     StatusBar,
@@ -131,7 +137,8 @@ import {SprintsPage} from "../pages/sprints/sprints";
     DailyProvider,
     DailyProvider,
     UserProvider,
-    DateProvider
+    DateProvider,
+    SprintProvider
   ]
 })
 export class AppModule {}

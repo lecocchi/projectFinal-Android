@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Nuevo Sprint</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="accept()">
+        <ion-icon name="checkmark" class="accept"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="cancel()">
+        <ion-icon name="close" class="cancel"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-item>
+    <ion-label floating>Nombre</ion-label>
+    <ion-input type="text" [(ngModel)]="name" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Descripción</ion-label>
+    <ion-input type="text" [(ngModel)]="description" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Desde</ion-label>
+    <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" [(ngModel)]="from"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Hasta</ion-label>
+    <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="to"></ion-datetime>
+  </ion-item>
+
+
+
+</ion-content>

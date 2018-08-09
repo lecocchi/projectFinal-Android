@@ -1,3 +1,22 @@
 page-sprint {
 
+  .sprint{
+    &-name{
+      font-weight: bolder;
+      font-size: 1.8rem;
+    }
+
+    &-range{
+      &-from{
+        margin-right: 3rem;
+
+        &-label{
+          color: #3b5998;
+          font-weight: bolder;
+        }
+      }
+    }
+  }
+
 }
+

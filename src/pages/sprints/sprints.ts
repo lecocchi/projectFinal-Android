@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {SprintProvider} from "../../providers/sprint/sprint";
+import {SprintPage} from "../sprint/sprint";
 
 @Component({
   selector: 'page-sprint',
@@ -7,10 +9,21 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class SprintsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  sprints:any = [];
+  sprintPage:any = SprintPage;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public sprintProvider:SprintProvider ) {
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
+    this.sprintProvider.getAllSprints()
+      .subscribe( s =>{
+        this.sprints = s.reverse();
+      })
+  }
+
+  createSprint(){
+    this.navCtrl.push(this.sprintPage);
   }
 
 }

@@ -1,5 +1,5 @@
 import {Component, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {IonicPage, NavController, NavParams, TextInput} from 'ionic-angular';
+import {NavController, NavParams, TextInput} from 'ionic-angular';
 import {StateProvider} from "../../providers/state/state";
 import {VersionsProvider} from "../../providers/versions/versions";
 import {PhaseProvider} from "../../providers/phase/phase";
@@ -9,7 +9,6 @@ import {IssueProvider} from "../../providers/issue/issue";
 import {UtilsProvider} from "../../providers/utils/utils";
 
 
-@IonicPage()
 @Component({
   selector: 'page-issue',
   templateUrl: 'issue.html',

@@ -6,6 +6,16 @@
 
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+  <ion-list inset>
+    <h2 ion-item *ngFor="let sprint of sprints">
+      <h3 class="sprint-name">{{ sprint.name }}</h3>
+      <h4 class="sprint-range"> <span class="sprint-range-from"><span class="sprint-range-from-label">Desde:</span> {{ sprint.dateFrom | formatDateMillisecond}}</span><span class="sprint-range-to"><span class="sprint-range-from-label">Hasta:</span> {{ sprint.dateTo | formatDateMillisecond}}</span></h4>
+    </h2>
+  </ion-list>
+
+  <ion-fab bottom right (click)="createSprint()">
+    <button ion-fab><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 
 </ion-content>
