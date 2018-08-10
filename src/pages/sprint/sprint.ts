@@ -11,6 +11,7 @@ export class SprintPage {
   from:Date;
   to:Date;
   name:string;
+  description:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public  sprintProvider:SprintProvider, public utilsProvider:UtilsProvider) {
   }
@@ -34,10 +35,9 @@ export class SprintPage {
 
       let sprint = {
         "name":this.name,
+        "description":this.description,
         "date_from": new Date(fromDate[1] + "/" + fromDate[2] +  "/" + fromDate[0]).getTime(),
         "date_to": new Date(toDate[1] + "/" + toDate[2] +  "/" + toDate[0]).getTime(),
-        "created_at": new Date().getTime(),
-        "enabled":true
       }
 
       this.sprintProvider.createSprint(sprint)
