@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {LoadingController, NavController} from 'ionic-angular';
 import {IssuePage} from "../issue/issue";
 import {IssueProvider} from "../../providers/issue/issue";
 
@@ -12,26 +12,28 @@ export class BacklogPage {
   issues:any = [];
   avatar:string = 'https://picsum.photos/300/300?image=0';
   issuePage:any;
-  loading:boolean = true;
 
-  constructor(public navCtrl: NavController, public issueProvider: IssueProvider) {
+  constructor(public navCtrl: NavController, public issueProvider: IssueProvider, public loadingCtrl:LoadingController) {
     this.issuePage = IssuePage;
   }
 
-  ionViewDidLoad(){
-    this.issueProvider.getAllIssueBacklog()
-      .subscribe(data =>{
-        this.issues = data;
-        this.loading = false;
-      });
-  }
 
   ionViewDidEnter(){
-    this.issueProvider.getAllIssueBacklog()
-      .subscribe(data =>{
-        this.issues = data;
-        this.loading = false;
+
+    let loading = this.loadingCtrl.create(
+      { spinner: 'ios',
+        content:'Cargando...'
       });
+    loading.present();
+
+    setTimeout(()=>{
+      this.issueProvider.getAllIssueBacklog()
+        .subscribe(data =>{
+          this.issues = data;
+          loading.dismiss();
+        })
+    }, 1000)
+
   }
 
   openDetail(issue:any){

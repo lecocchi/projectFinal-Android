@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {LoadingController, NavController, NavParams} from 'ionic-angular';
 import {SprintProvider} from "../../providers/sprint/sprint";
 import {SprintPage} from "../sprint/sprint";
 
@@ -12,15 +12,31 @@ export class SprintsPage {
   sprints:any = [];
   sprintPage:any = SprintPage;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public sprintProvider:SprintProvider ) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public sprintProvider:SprintProvider,
+              public loadingCtrl: LoadingController) {
   }
 
   ionViewWillEnter() {
-    this.sprintProvider.getAllSprints()
-      .subscribe( s =>{
-        this.sprints = s;
-        this.sprints.reverse();
-      })
+
+    let loading = this.loadingCtrl.create({
+      spinner: 'ios',
+      content: 'Cargando...'
+    });
+
+    loading.present();
+
+
+    setTimeout(()=>{
+      this.sprintProvider.getAllSprints()
+        .subscribe( s =>{
+          this.sprints = s;
+          this.sprints.reverse();
+          loading.dismiss();
+        })
+    }, 1000);
+
+
   }
 
   createSprint(){

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {LoadingController, NavController, NavParams} from 'ionic-angular';
 import {DailyItemPage} from "../daily-item/daily-item";
 import {DailyProvider} from "../../providers/daily/daily";
 import {UtilsProvider} from "../../providers/utils/utils";
@@ -14,14 +14,26 @@ export class DailyPage {
   dailies:any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public dailyProvider: DailyProvider, public utils:UtilsProvider) {
+              public dailyProvider: DailyProvider, public utils:UtilsProvider,
+              public loadingCtrl:LoadingController) {
   }
 
   ionViewWillEnter(){
-    this.dailyProvider.getAllDailies()
-      .subscribe( data => {
-        this.dailies = data.reverse();
-      });
+
+    let loading = this.loadingCtrl.create({
+      spinner: 'ios',
+      content: 'Cargando...'
+    });
+
+    loading.present();
+
+    setTimeout(() =>{
+      this.dailyProvider.getAllDailies()
+        .subscribe( data => {
+          this.dailies = data.reverse();
+          loading.dismiss();
+        })
+    }, 1000)
   }
 
   createNewDaily(){
