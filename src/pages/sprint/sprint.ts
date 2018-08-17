@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {AlertController, NavController, NavParams} from 'ionic-angular';
 import {SprintProvider} from "../../providers/sprint/sprint";
 import {UtilsProvider} from "../../providers/utils/utils";
 
@@ -13,7 +13,11 @@ export class SprintPage {
   name:string;
   description:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public  sprintProvider:SprintProvider, public utilsProvider:UtilsProvider) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public  sprintProvider:SprintProvider,
+              public utilsProvider:UtilsProvider,
+              public alertCtrl:AlertController) {
   }
 
   ionViewDidLoad() {
@@ -41,10 +45,22 @@ export class SprintPage {
       }
 
       this.sprintProvider.createSprint(sprint)
-        .subscribe( s =>{
-          this.utilsProvider.presentToast("Se ha generado el sprint  con éxito");
-          this.cancel();
-        })
+        .subscribe(
+          s =>{
+            console.log(s);
+            this.utilsProvider.presentToast("Se ha generado el sprint  con éxito");
+            this.cancel();
+          },
+          error =>{
+            this.alertCtrl.create({
+              title:"Error",
+              subTitle:"No es posible procesar la solicitud",
+              buttons:[{
+                text:"Aceptar",
+                role: "cancel"
+              }]
+            }).present();
+          })
 
     }
 

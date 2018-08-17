@@ -27,13 +27,11 @@ export class DailyPage {
 
     loading.present();
 
-    setTimeout(() =>{
-      this.dailyProvider.getAllDailies()
-        .subscribe( data => {
-          this.dailies = data.reverse();
-          loading.dismiss();
-        })
-    }, 1000)
+    this.dailyProvider.getAllDailies()
+      .subscribe( data => {
+        this.dailies = data.reverse();
+        loading.dismiss();
+      });
   }
 
   createNewDaily(){

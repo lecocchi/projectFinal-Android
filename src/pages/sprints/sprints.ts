@@ -27,14 +27,12 @@ export class SprintsPage {
     loading.present();
 
 
-    setTimeout(()=>{
-      this.sprintProvider.getAllSprints()
-        .subscribe( s =>{
-          this.sprints = s;
-          this.sprints.reverse();
-          loading.dismiss();
-        })
-    }, 1000);
+    this.sprintProvider.getAllSprints()
+      .subscribe( s =>{
+        this.sprints = s;
+        this.sprints.reverse();
+        loading.dismiss();
+      });
 
 
   }

@@ -26,14 +26,11 @@ export class BacklogPage {
       });
     loading.present();
 
-    setTimeout(()=>{
-      this.issueProvider.getAllIssueBacklog()
-        .subscribe(data =>{
-          this.issues = data;
-          loading.dismiss();
-        })
-    }, 1000)
-
+    this.issueProvider.getAllIssueBacklog()
+      .subscribe(data =>{
+        this.issues = data;
+        loading.dismiss();
+      });
   }
 
   openDetail(issue:any){
