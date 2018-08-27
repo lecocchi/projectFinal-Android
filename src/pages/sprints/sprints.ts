@@ -42,4 +42,11 @@ export class SprintsPage {
     this.navCtrl.push(this.sprintPage);
   }
 
+  openSprint(id:string){
+    this.sprintProvider.getSprintById(id)
+      .subscribe( s =>{
+        this.navCtrl.push(this.sprintPage, {'sprint': s, 'readonly': true});
+      });
+  }
+
 }

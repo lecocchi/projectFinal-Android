@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>Nuevo Sprint</ion-title>
-    <ion-buttons end>
+    <ion-buttons end *ngIf="!readonly">
       <button ion-button icon-only (click)="createSprint()">
         <ion-icon name="checkmark" class="accept"></ion-icon>
       </button>
@@ -20,25 +20,23 @@
 <ion-content padding>
 
   <ion-item>
-    <ion-label floating>Nombre</ion-label>
-    <ion-input type="text" [(ngModel)]="name" ></ion-input>
+    <ion-label floating>Nombre <span *ngIf="readonly">(solo lectura)</span></ion-label>
+    <ion-input type="text" [(ngModel)]="name" [readonly]="readonly"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label floating>Descripción</ion-label>
-    <ion-input type="text" [(ngModel)]="description" ></ion-input>
+    <ion-label floating>Descripción <span *ngIf="readonly">(solo lectura)</span></ion-label>
+    <ion-input type="text" [(ngModel)]="description" [readonly]="readonly"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label>Desde</ion-label>
-    <ion-datetime (ionChange)="validateDateFrom(from)" displayFormat="DD/MM/YYYY" [(ngModel)]="from"></ion-datetime>
+    <ion-datetime (ionChange)="validateDateFrom(from)" displayFormat="DD/MM/YYYY" [(ngModel)]="from" [disabled]="readonly"></ion-datetime>
   </ion-item>
 
   <ion-item>
     <ion-label>Hasta</ion-label>
-    <ion-datetime (ionChange)="validateDateTo(to)" displayFormat="DD/MM/YYYY" [(ngModel)]="to"></ion-datetime>
+    <ion-datetime (ionChange)="validateDateTo(to)" displayFormat="DD/MM/YYYY" [(ngModel)]="to" [disabled]="readonly"></ion-datetime>
   </ion-item>
-
-
 
 </ion-content>

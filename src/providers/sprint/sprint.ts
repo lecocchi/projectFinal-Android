@@ -20,4 +20,8 @@ export class SprintProvider {
     return this.http.post(URL_BASE + "/sprint/", sprint);
   }
 
+  getSprintById(id:string){
+    return this.http.get(URL_BASE + "/sprint/" + id);
+  }
+
 }

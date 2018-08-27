@@ -12,14 +12,26 @@ export class SprintPage {
   to:Date;
   name:string;
   description:string;
-  isValidFrom:boolean = false;
-  isValidTo:boolean = false;
+  readonly:boolean = false;
+  sprint:Sprint;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public  sprintProvider:SprintProvider,
               public utilsProvider:UtilsProvider,
-              public alertCtrl:AlertController) {}
+              public alertCtrl:AlertController) {
+
+    this.sprint = this.navParams.get('sprint');
+    this.readonly = this.navParams.get('readonly');
+
+    if (this.readonly){
+      this.name = this.sprint.name;
+      this.description = this.sprint.description;
+      this.from = new Date(this.sprint.dateFrom).toISOString();
+      this.to = new Date(this.sprint.dateTo).toISOString();
+    }
+
+  }
 
 
   createSprint(){
