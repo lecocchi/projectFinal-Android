@@ -31,6 +31,7 @@ export class SprintsPage {
       .subscribe( s =>{
         this.sprints = s;
         this.sprints.reverse();
+        this.sprintProvider.sprints = s;
         loading.dismiss();
       });
 

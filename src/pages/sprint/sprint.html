@@ -2,7 +2,7 @@
   <ion-navbar color="primary">
     <ion-title>Nuevo Sprint</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="accept()">
+      <button ion-button icon-only (click)="createSprint()">
         <ion-icon name="checkmark" class="accept"></ion-icon>
       </button>
     </ion-buttons>
@@ -31,12 +31,12 @@
 
   <ion-item>
     <ion-label>Desde</ion-label>
-    <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" [(ngModel)]="from"></ion-datetime>
+    <ion-datetime (ionChange)="validateDateFrom(from)" displayFormat="DD/MM/YYYY" [(ngModel)]="from"></ion-datetime>
   </ion-item>
 
   <ion-item>
     <ion-label>Hasta</ion-label>
-    <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="to"></ion-datetime>
+    <ion-datetime (ionChange)="validateDateTo(to)" displayFormat="DD/MM/YYYY" [(ngModel)]="to"></ion-datetime>
   </ion-item>
 
 

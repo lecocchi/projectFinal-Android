@@ -8,6 +8,8 @@ import {Observable} from "rxjs";
 @Injectable()
 export class SprintProvider {
 
+  public sprints:any = [];
+
   constructor(public http: HttpClient) { }
 
   getAllSprints(){
