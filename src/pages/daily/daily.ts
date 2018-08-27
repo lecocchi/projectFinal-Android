@@ -42,9 +42,9 @@ export class DailyPage {
           this.utils.presentToast("Ya existe una daily activa para el día de hoy");
         } else{
           let daily:any = {
-            "first_name":"Leandro",
-            "last_name":"Cocchi",
-            "user_name":"lecocchi",
+            "firstName":"Leandro",
+            "lastName":"Cocchi",
+            "userName":"lecocchi",
             "daily_items":[]
           }
 

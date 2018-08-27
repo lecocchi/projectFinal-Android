@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {AlertController, NavController, NavParams} from 'ionic-angular';
 import {SprintProvider} from "../../providers/sprint/sprint";
 import {UtilsProvider} from "../../providers/utils/utils";
-import {text} from "../../../node_modules/@angular/core/src/render3/instructions";
 
 @Component({
   selector: 'page-sprint',
@@ -51,13 +50,12 @@ export class SprintPage {
 
       // this.sprintProvider.createSprint(sprint)
       //   .subscribe(
-      //     s =>{
+      //     (s:Sprint) =>{
       //       console.log(s);
       //       this.utilsProvider.presentToast("Se ha generado el sprint  con éxito");
       //       this.cancel();
       //     },
       //     error =>{
-      //
       //       this.alertCtrl.create({
       //         title:"Error",
       //         subTitle: error.error.message,
@@ -67,9 +65,7 @@ export class SprintPage {
       //         }]
       //       }).present();
       //     })
-
     }
-
   }
 
 

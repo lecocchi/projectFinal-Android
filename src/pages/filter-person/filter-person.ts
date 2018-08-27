@@ -22,9 +22,9 @@ export class FilterPersonPage {
         for( let person of this.persons){
 
           let personToShow:any = {
-            "first_name":person.firstName,
-            "last_name":person.lastName,
-            "user_name":person.userName,
+            "firstName":person.firstName,
+            "lastName":person.lastName,
+            "userName":person.userName,
             "avatar":person.avatar,
             "yesterday":"",
             "today":"",
@@ -37,7 +37,6 @@ export class FilterPersonPage {
 
         this.dailyProvider.daily.daily_items
           .forEach( itemProvider =>{
-
             this.personsToShow.forEach( itemShow =>{
               if (itemProvider.user_name == itemShow.user_name)
                 itemShow.checked = true;
