@@ -8,8 +8,8 @@ import {UtilsProvider} from "../../providers/utils/utils";
   templateUrl: 'sprint.html',
 })
 export class SprintPage {
-  from:Date;
-  to:Date;
+  from:any;
+  to:any;
   name:string;
   description:string;
   readonly:boolean = false;
