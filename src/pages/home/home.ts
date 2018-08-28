@@ -32,10 +32,10 @@ export class HomePage {
 
     this.platform.registerBackButtonAction(()=>{
 
-      if (this.navCtrl.getActive().component.name == 'HomePage'){
+      if (this.navCtrl.getActive().id == 'n4-1'){
         this.alertCtrl.create({
-          title: 'Atras',
-          subTitle:'Desea  salir de la app?',
+          title: 'Salir',
+          subTitle:'¿Desea  salir de la app?',
           buttons:[{
             text:'Si',
             handler: data=>{
@@ -49,8 +49,6 @@ export class HomePage {
         this.navCtrl.pop();
       }
     })
-
-
   }
 
   goToPage(page){
