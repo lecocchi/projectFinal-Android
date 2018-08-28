@@ -30,6 +30,21 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, public menuCtrl: MenuController,public platform: Platform,public alertCtrl: AlertController) {
 
+    this.platform.registerBackButtonAction(()=>{
+      this.alertCtrl.create({
+        title: 'Atras',
+        subTitle:'Desea  salir de la app?',
+        buttons:[{
+          text:'Si',
+          handler: data=>{
+            this.platform.exitApp();
+          }
+        },{
+          text:'No'
+        }]
+      }).present();
+    })
+
 
   }
 
