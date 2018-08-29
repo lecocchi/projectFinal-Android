@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
-import {LoadingController, NavController} from 'ionic-angular';
+import {LoadingController, NavController, PopoverController} from 'ionic-angular';
 import {IssuePage} from "../issue/issue";
 import {IssueProvider} from "../../providers/issue/issue";
+import {PopoverPage} from "../popover/popover";
 
 @Component({
   selector: 'page-backlog',
@@ -13,7 +14,7 @@ export class BacklogPage {
   avatar:string = 'https://picsum.photos/300/300?image=0';
   issuePage:any;
 
-  constructor(public navCtrl: NavController, public issueProvider: IssueProvider, public loadingCtrl:LoadingController) {
+  constructor(public navCtrl: NavController, public issueProvider: IssueProvider, public loadingCtrl:LoadingController, public popoverCtrl: PopoverController) {
     this.issuePage = IssuePage;
   }
 
@@ -39,6 +40,13 @@ export class BacklogPage {
 
   createNewIssue(){
     this.navCtrl.push(IssuePage, {"issue":null, "update": false, "backlog": true});
+  }
+
+  presentPopover(myEvent) {
+    let popover = this.popoverCtrl.create(PopoverPage,{ cssClass: 'custom-popover'});
+    popover.present({
+      ev: myEvent
+    });
   }
 
 }

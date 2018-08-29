@@ -48,6 +48,7 @@ import {SprintsPage} from "../pages/sprints/sprints";
 import { SprintProvider } from '../providers/sprint/sprint';
 import {FormatDateMillisecondPipe} from "../pipes/format-date-millisecond/format-date-millisecond";
 import {SprintPage} from "../pages/sprint/sprint";
+import {PopoverPage} from "../pages/popover/popover";
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import {SprintPage} from "../pages/sprint/sprint";
     FilterPersonPage,
     SprintsPage,
     FormatDateMillisecondPipe,
-    SprintPage
+    SprintPage,
+    PopoverPage
   ],
   imports: [
     BrowserModule,
@@ -120,7 +122,8 @@ import {SprintPage} from "../pages/sprint/sprint";
     DailyItemPage,
     FilterPersonPage,
     SprintsPage,
-    SprintPage
+    SprintPage,
+    PopoverPage
   ],
   providers: [
     StatusBar,

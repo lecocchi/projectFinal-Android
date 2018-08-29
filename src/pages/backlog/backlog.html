@@ -10,31 +10,20 @@
 <ion-content>
 
   <ion-list>
-    <ion-item-sliding *ngFor="let issue of issues, let i = index">
-      <ion-item (click)="openDetail(issue)">
-        <ion-avatar item-start>
-          <img [src]="issue.avatar">
-        </ion-avatar>
+    <ion-item  *ngFor="let issue of issues, let i = index">
+      <ion-avatar item-start>
+        <img [src]="issue.avatar">
+      </ion-avatar>
+      <div (click)="openDetail(issue)">
         <div class="issue-code">SID-{{ issue.id }}</div>
         <div class="issue-summary">
           {{ issue.title }}
         </div>
-      </ion-item>
-      <ion-item-options side="rigth">
-        <button ion-button color="primary">
-          <ion-icon name="text"></ion-icon>
-          Item1
-        </button>
-        <button ion-button color="secondary">
-          <ion-icon name="call"></ion-icon>
-          Item2
-        </button>
-        <button ion-button color="secondary">
-          <ion-icon name="call"></ion-icon>
-          Item3
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
+      </div>
+      <button  icon-only (click)="presentPopover($event)" item-end class="more">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-item>
   </ion-list>
 
   <!-- this fab is placed at top right -->
