@@ -20,7 +20,7 @@
           {{ issue.title }}
         </div>
       </div>
-      <button  icon-only (click)="presentPopover($event)" item-end class="more">
+      <button  icon-only (click)="presentPopover($event, issue.id)" item-end class="more">
         <ion-icon name="more"></ion-icon>
       </button>
     </ion-item>

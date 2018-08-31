@@ -42,8 +42,24 @@ export class BacklogPage {
     this.navCtrl.push(IssuePage, {"issue":null, "update": false, "backlog": true});
   }
 
-  presentPopover(myEvent) {
-    let popover = this.popoverCtrl.create(PopoverPage,{ cssClass: 'custom-popover'});
+  presentPopover(myEvent, id:string) {
+    let popover = this.popoverCtrl.create(PopoverPage, {'id':id});
+
+
+    popover.onDidDismiss(() => {
+      let loading = this.loadingCtrl.create(
+        { spinner: 'ios',
+          content:'Cargando...'
+        });
+      loading.present();
+
+      this.issueProvider.getAllIssueBacklog()
+        .subscribe(data =>{
+          this.issues = data;
+          loading.dismiss();
+        });
+    });
+
     popover.present({
       ev: myEvent
     });
