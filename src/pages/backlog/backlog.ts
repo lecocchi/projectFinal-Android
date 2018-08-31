@@ -45,7 +45,6 @@ export class BacklogPage {
   presentPopover(myEvent, id:string) {
     let popover = this.popoverCtrl.create(PopoverPage, {'id':id});
 
-
     popover.onDidDismiss(() => {
       let loading = this.loadingCtrl.create(
         { spinner: 'ios',
