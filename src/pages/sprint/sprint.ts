@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {AlertController, NavController, NavParams} from 'ionic-angular';
 import {SprintProvider} from "../../providers/sprint/sprint";
 import {UtilsProvider} from "../../providers/utils/utils";
+import {IssuePage} from "../issue/issue";
 
 @Component({
   selector: 'page-sprint',
@@ -14,6 +15,7 @@ export class SprintPage {
   description:string;
   readonly:boolean = false;
   sprint:Sprint;
+  issues:any = [];
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -23,6 +25,12 @@ export class SprintPage {
 
     this.sprint = this.navParams.get('sprint');
     this.readonly = this.navParams.get('readonly');
+
+    this.sprintProvider.getIssueBySprintId(this.sprint.id)
+      .subscribe( i =>{
+        this.issues = i;
+      })
+
 
     if (this.readonly){
       this.name = this.sprint.name;
@@ -143,9 +151,14 @@ export class SprintPage {
   cancel(){
     this.navCtrl.pop();
   }
+
+  openDetail(issue:any){
+    this.navCtrl.push(IssuePage,{"issue":issue, "update":true, "backlog": true});
+  }
 }
 
 interface Sprint{
+  id:number;
   name:string;
   created:number;
   dateFrom:number;

@@ -42,9 +42,20 @@
   <div class="issues">Issues</div>
 
   <ion-list>
-    <ion-item>Terminator II</ion-item>
-    <ion-item>The Empire Strikes Back</ion-item>
-    <ion-item>Blade Runner</ion-item>
+    <ion-item  *ngFor="let issue of issues, let i = index">
+      <ion-avatar item-start>
+        <img [src]="issue.avatar">
+      </ion-avatar>
+      <div (click)="openDetail(issue)">
+        <div class="issue-code">SID-{{ issue.id }}</div>
+        <div class="issue-summary">
+          {{ issue.title }}
+        </div>
+      </div>
+      <button  icon-only (click)="presentPopover($event, issue.id)" item-end class="more">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-item>
   </ion-list>
 
 </ion-content>

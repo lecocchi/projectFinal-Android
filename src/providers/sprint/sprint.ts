@@ -24,4 +24,8 @@ export class SprintProvider {
     return this.http.get(URL_BASE + "/sprint/" + id);
   }
 
+  getIssueBySprintId(id:number){
+    return this.http.get(URL_BASE + "/issue/sprint/issues/" + id);
+  }
+
 }
