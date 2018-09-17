@@ -1,0 +1,18 @@
+<ion-content padding>
+
+  <ion-item>
+    <ion-label stacked>Prioridad</ion-label>
+    <ion-input type="text" [(ngModel)]="priority" (click)="selectPriority()" [readonly]="true"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>Estado</ion-label>
+    <ion-input type="text" [(ngModel)]="state" (click)="selectState()" [readonly]="true"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>Versión</ion-label>
+    <ion-input type="text" [(ngModel)]="version" (click)="selectVersion()" [readonly]="true"></ion-input>
+  </ion-item>
+
+</ion-content>

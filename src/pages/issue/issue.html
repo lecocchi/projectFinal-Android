@@ -1,160 +1,25 @@
-<!--
-  Generated template for the IssuePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<script src="issue.ts"></script>
 <ion-header>
 
   <ion-navbar color="primary">
     <ion-title>{{ titleNavBar }}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="accept()" *ngIf="issueActive">
+        <ion-icon name="checkmark" class="accept"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="cancel()">
+        <ion-icon name="close" class="cancel"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
-
-<ion-content padding>
-
-  <ion-item>
-    <ion-label stacked>Título</ion-label>
-    <ion-input type="text" [(ngModel)]="title" #titleInput></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label stacked>Descripción</ion-label>
-    <ion-textarea type="text" [(ngModel)]="description"></ion-textarea>
-  </ion-item>
-
-  <!--<accordion-detail></accordion-detail>-->
-  <ion-card>
-    <ion-card-header (click)="toggleAccordionDetail()" color="primary">
-      Detalles
-    </ion-card-header>
-    <ion-card-content #cc>
-
-      <ion-item>
-        <ion-label>Prioridad</ion-label>
-        <ion-select okText="Aceptar" cancelText="Cancelar" [(ngModel)]="priorityModel">
-          <ion-option *ngFor="let priority of priorities" value={{priority.name}}>{{priority.name}}</ion-option>
-        </ion-select>
-      </ion-item>
-
-      <!--<ion-item>-->
-        <!--<ion-label>Etiquetas</ion-label>-->
-        <!--<ion-select okText="Aceptar" cancelText="Cancelar" multiple="true" [(ngModel)]="labelModel">-->
-          <!--<ion-option *ngFor="let label of labels" value={{label.name}}>{{label.name}}</ion-option>-->
-        <!--</ion-select>-->
-      <!--</ion-item>-->
-
-      <!--<ion-item>-->
-        <!--<ion-label>Fase</ion-label>-->
-        <!--<ion-select okText="Aceptar" cancelText="Cancelar" [(ngModel)]="phaseModel">-->
-          <!--<ion-option *ngFor="let phase of phases" value={{phase.name}}>{{phase.name}}</ion-option>-->
-        <!--</ion-select>-->
-      <!--</ion-item>-->
-
-      <ion-item>
-        <ion-label>Estado</ion-label>
-        <ion-select  okText="Aceptar" cancelText="Cancelar" [(ngModel)]="stateModel">
-          <ion-option *ngFor="let state of states" value={{state.name}}>{{state.name}}</ion-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Versión</ion-label>
-        <ion-select okText="Aceptar" cancelText="Cancelar" [(ngModel)]="versionModel">
-          <ion-option *ngFor="let version of versions" value={{version.name}}>{{version.name}}</ion-option>
-        </ion-select>
-      </ion-item>
-
-    </ion-card-content>
-  </ion-card>
-
-  <!--<accordion-people></accordion-people>-->
-
-  <ion-card>
-    <ion-card-header (click)="toggleAccordionPeople()">
-      Personas
-    </ion-card-header>
-    <ion-card-content #ccp>
-      <ion-item>
-        <ion-label stacked>Creado por</ion-label>
-        <ion-input type="text" [(ngModel)]="reporterModel" [readonly]="true"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Asignado a</ion-label>
-        <ion-select okText="Aceptar" cancelText="Cancelar" [(ngModel)]="assigneeModel">
-          <ion-option *ngFor="let assignee of assignees" value={{assignee}}>{{assignee}}</ion-option>
-        </ion-select>
-      </ion-item>
-
-      <!--<ion-item>-->
-        <!--<ion-label>Observadores</ion-label>-->
-        <!--<ion-select okText="Aceptar" cancelText="Cancelar" multiple="true" [(ngModel)]="watcherModel">-->
-          <!--<ion-option *ngFor="let watcher of watchers">{{watcher}}</ion-option>-->
-        <!--</ion-select>-->
-      <!--</ion-item>-->
-
-    </ion-card-content>
-  </ion-card>
-
-  <!--<accordion-created></accordion-created>-->
-
-  <ion-card>
-    <ion-card-header (click)="toggleAccordionDate()" color="primary">
-      Fechas
-    </ion-card-header>
-    <ion-card-content #ccd>
-      <ion-item>
-        <ion-label>Creado</ion-label>
-        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="createdModel" disabled></ion-datetime>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Modificado</ion-label>
-        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="updatedModel" disabled></ion-datetime>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Resuelto</ion-label>
-        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="resolvedModel"></ion-datetime>
-      </ion-item>
-
-    </ion-card-content>
-  </ion-card>
-
-  <!--<accordion-comment></accordion-comment>-->
-  <ion-card>
-    <ion-card-header (click)="toggleAccordionComment()" color="primary">
-      Comentarios
-    </ion-card-header>
-    <ion-card-content #ccc>
-
-      <ion-list>
-        <ion-item *ngFor="let comment of comments">
-          <ion-avatar item-start>
-            <img src="../assets/imgs/avatar.png">
-          </ion-avatar>
-          <h2>{{ comment.author}}</h2>
-          <p class="comment-date">({{ comment.created}})</p>
-          <p>{{ comment.comment }}</p>
-        </ion-item>
-      </ion-list>
-
-      <!-- this fab is placed at top right -->
-      <ion-content>
-        <ion-fab bottom right>
-          <button ion-fab mini><ion-icon name="add"></ion-icon></button>
-        </ion-fab>
-      </ion-content>
-    </ion-card-content>
-  </ion-card>
-
-  <div class="footer">
-    <button ion-button color="secondary" block  class="btn-aceptar" (click)='accept()' round>Aceptar</button>
-    <button ion-button color="danger" class="btn-cancelar" navPop block round>Cancelar</button>
-  </div>
-
-</ion-content>
+<ion-tabs class="tabs">
+  <ion-tab [root]="tab1" tabTitle="Detalles"></ion-tab>
+  <ion-tab [root]="tab2" tabTitle="Personas"></ion-tab>
+  <ion-tab [root]="tab3" tabTitle="Fechas"></ion-tab>
+  <!--<ion-tab [root]="tab4" tabTitle="Comentarios"></ion-tab>-->
+</ion-tabs>

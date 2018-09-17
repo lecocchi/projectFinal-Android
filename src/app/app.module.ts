@@ -39,16 +39,37 @@ import {StatePage} from "../pages/state/state";
 import {StateDescriptionPage} from "../pages/state-description/state-description";
 import {IssueProvider} from '../providers/issue/issue';
 import {DailyItemPage} from "../pages/daily-item/daily-item";
-import { DailyProvider } from '../providers/daily/daily';
-import { UserProvider } from '../providers/user/user';
+import {DailyProvider} from '../providers/daily/daily';
+import {UserProvider} from '../providers/user/user';
 import {FilterPersonPage} from "../pages/filter-person/filter-person";
 import {FormatDatePipe} from "../pipes/format-date/format-date";
-import { DateProvider } from '../providers/date/date';
+import {DateProvider} from '../providers/date/date';
 import {SprintsPage} from "../pages/sprints/sprints";
-import { SprintProvider } from '../providers/sprint/sprint';
+import {SprintProvider} from '../providers/sprint/sprint';
 import {FormatDateMillisecondPipe} from "../pipes/format-date-millisecond/format-date-millisecond";
 import {SprintPage} from "../pages/sprint/sprint";
 import {PopoverPage} from "../pages/popover/popover";
+import {ModalPage} from "../pages/modal/modal";
+import {DetallePage} from "../pages/detalle/detalle";
+import {FechasPage} from "../pages/fechas/fechas";
+import {PersonaPage} from "../pages/persona/persona";
+import {ComentariosPage} from "../pages/comentarios/comentarios";
+
+//firebase
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import {AngularFireStorageModule} from "@angular/fire/storage";
+import {firebaseConfig} from "../config/firebase.config";
+import {AngularFireAuthModule} from "@angular/fire/auth";
+
+// export const firebaseConfig = {
+//   apiKey: "AIzaSyBISstmrwBdzWK0anjsnMw_sLX9hBPD5-U",
+//   authDomain: "iunimotos-96606.firebaseapp.com",
+//   databaseURL: "https://iunimotos-96606.firebaseio.com",
+//   projectId: "iunimotos-96606",
+//   storageBucket: "iunimotos-96606.appspot.com",
+//   messagingSenderId: "1080373447006"
+// };
 
 @NgModule({
   declarations: [
@@ -84,12 +105,20 @@ import {PopoverPage} from "../pages/popover/popover";
     SprintsPage,
     FormatDateMillisecondPipe,
     SprintPage,
-    PopoverPage
+    PopoverPage,
+    ModalPage,
+    DetallePage,
+    FechasPage,
+    PersonaPage,
+    ComentariosPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -123,7 +152,12 @@ import {PopoverPage} from "../pages/popover/popover";
     FilterPersonPage,
     SprintsPage,
     SprintPage,
-    PopoverPage
+    PopoverPage,
+    ModalPage,
+    DetallePage,
+    FechasPage,
+    PersonaPage,
+    ComentariosPage
   ],
   providers: [
     StatusBar,

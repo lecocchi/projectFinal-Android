@@ -1,0 +1,13 @@
+<ion-content padding>
+
+  <ion-item>
+    <ion-label stacked>Creado por</ion-label>
+    <ion-input type="text" [(ngModel)]="reporter" [readonly]="true" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>Asignado a</ion-label>
+    <ion-input type="text" [(ngModel)]="assignee" [readonly]="true" (click)="selectAssignee()"></ion-input>
+  </ion-item>
+
+</ion-content>

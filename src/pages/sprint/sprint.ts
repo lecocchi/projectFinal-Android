@@ -153,7 +153,7 @@ export class SprintPage {
   }
 
   openDetail(issue:any){
-    this.navCtrl.push(IssuePage,{"issue":issue, "update":true, "backlog": true});
+    this.navCtrl.push(IssuePage,{"issue":issue, "update":true});
   }
 }
 

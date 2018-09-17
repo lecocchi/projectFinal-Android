@@ -14,7 +14,7 @@ import * as i6 from "../../node_modules/ionic-angular/components/loading/loading
 import * as i7 from "../../node_modules/ionic-angular/components/modal/modal-component.ngfactory";
 import * as i8 from "../../node_modules/ionic-angular/components/picker/picker-component.ngfactory";
 import * as i9 from "../../node_modules/ionic-angular/components/popover/popover-component.ngfactory";
-import * as i10 from "../../node_modules/ionic-angular/components/select/select-popover-component.ngfactory";
+import * as i10 from "../../node_modules/ionic-angular/components/select/selectState-popover-component.ngfactory";
 import * as i11 from "../../node_modules/ionic-angular/components/toast/toast-component.ngfactory";
 import * as i12 from "./app.component.ngfactory";
 import * as i13 from "../pages/home/home.ngfactory";

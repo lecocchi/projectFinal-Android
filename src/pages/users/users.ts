@@ -1,6 +1,9 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {UserDescriptionPage} from "../user-description/user-description";
+import {UserProvider} from "../../providers/user/user";
+import { AngularFireDatabase } from '@angular/fire/database';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'page-users',
@@ -9,6 +12,7 @@ import {UserDescriptionPage} from "../user-description/user-description";
 export class UsersPage {
 
   userDescriptionPage:any = UserDescriptionPage;
+  items: Observable<any[]>;
 
   users:any = [
     {
@@ -67,7 +71,8 @@ export class UsersPage {
     }
   ];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private _user:UserProvider) {
+    this._user.verificaUsuario("hola").then();
   }
 
   openDetail(user:any){
@@ -78,8 +83,14 @@ export class UsersPage {
       'email':user.email,
       'userName': user.userName,
       'rol':user.rol,
-      "avatar":user.avatar
+      'avatar':user.avatar,
+      'mode': 'detail'
     } );
+  }
+
+
+  createUser(){
+    this.navCtrl.push(this.userDescriptionPage,{mode: 'create'});
   }
 
 }

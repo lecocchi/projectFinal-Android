@@ -13,14 +13,23 @@ export class UserDescriptionPage {
   email:string;
   fullName:string;
   avatar:string;
+  mode:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.firstName = this.navParams.get('firstName');
-    this.lastName = this.navParams.get('lastName');
-    this.dni = this.navParams.get('dni');
-    this.email = this.navParams.get('email');
-    this.fullName = this.firstName + ' ' + this.lastName;
-    this.avatar = this.navParams.get('avatar');
+
+    this.mode = this.navParams.get('mode');
+
+    if (this.mode === 'detail'){
+      this.firstName = this.navParams.get('firstName');
+      this.lastName = this.navParams.get('lastName');
+      this.dni = this.navParams.get('dni');
+      this.email = this.navParams.get('email');
+      this.fullName = this.firstName + ' ' + this.lastName;
+      this.avatar = this.navParams.get('avatar');
+    } else if (this.mode === 'create'){
+
+    }
+
   }
 
 }

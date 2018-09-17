@@ -10,6 +10,8 @@ import {URL_BASE} from "../../components/config/config";
 */
 @Injectable()
 export class IssueProvider {
+  issue:IIssue;
+  issueToUpdate:IIssue;
 
   constructor(public http: HttpClient) { }
 
@@ -38,4 +40,29 @@ export class IssueProvider {
     return this.http.post(URL_BASE + "/issue/sprint/" + id);
   }
 
+}
+
+export interface IIssue{
+  assignee:string;
+  avatar:string;
+  backlog:boolean;
+  created:number;
+  description:string;
+  enabled:boolean;
+  estimated:number;
+  id:number;
+  label:string;
+  phase:string;
+  plannedEnd:number;
+  plannedStart:number;
+  priority:string;
+  remaining:number
+  reporter:string;
+  resolved:number;
+  sprint:number;
+  state:string;
+  title:string;
+  updated:number
+  version:string;
+  watcher:string;
 }
