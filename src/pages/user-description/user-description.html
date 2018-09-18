@@ -6,9 +6,10 @@
 
 
 <ion-content padding>
-  <ion-avatar class="avatar">
-    <img [src]= 'avatar' *ngIf="avatar">
-    <ion-icon ios="ios-cloud-upload" md="md-cloud-upload" *ngIf="!avatar"></ion-icon>
+  <ion-avatar class="avatar" (click)="getPicture()">
+    <img [src]="imagePreview" *ngIf="imagePreview" />
+    <img src="https://firebasestorage.googleapis.com/v0/b/tesis-6bfcc.appspot.com/o/img%2Favatar.png?alt=media&token=8dd5d8df-d4a9-44b8-b004-640de509e6e9" *ngIf="!imagePreview">
+    <!--<ion-icon ios="ios-cloud-upload" md="md-cloud-upload" *ngIf="!avatar"></ion-icon>-->
   </ion-avatar>
 
   <ion-item>

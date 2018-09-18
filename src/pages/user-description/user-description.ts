@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
+import {Camera, CameraOptions} from "@ionic-native/camera";
+import {LoadFileProvider} from "../../providers/load-file/load-file";
 
 @Component({
   selector: 'page-user-description',
@@ -14,8 +16,11 @@ export class UserDescriptionPage {
   fullName:string;
   avatar:string;
   mode:string;
+  imagePreview: string;
+  image64: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private camera: Camera,
+              private _loadFile: LoadFileProvider) {
 
     this.mode = this.navParams.get('mode');
 
@@ -30,6 +35,33 @@ export class UserDescriptionPage {
 
     }
 
+  }
+
+  getPicture(){
+    let options: CameraOptions = {
+      destinationType: this.camera.DestinationType.DATA_URL,
+      targetWidth: 1000,
+      targetHeight: 1000,
+      quality: 100,
+      correctOrientation: true
+    }
+    this.camera.getPicture( options )
+      .then(imageData => {
+        this.imagePreview = `data:image/jpeg;base64,${imageData}`;
+        this.image64 = imageData;
+        this.loadImage();
+      })
+      .catch(error =>{
+        console.error( error );
+      });
+  }
+
+  loadImage(){
+    let file = {
+      imgUrl: this.image64
+    }
+
+    this._loadFile.loadFileFirebase(file);
   }
 
 }

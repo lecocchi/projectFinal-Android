@@ -54,22 +54,16 @@ import {DetallePage} from "../pages/detalle/detalle";
 import {FechasPage} from "../pages/fechas/fechas";
 import {PersonaPage} from "../pages/persona/persona";
 import {ComentariosPage} from "../pages/comentarios/comentarios";
-
 //firebase
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireStorageModule} from "@angular/fire/storage";
 import {firebaseConfig} from "../config/firebase.config";
 import {AngularFireAuthModule} from "@angular/fire/auth";
-
-// export const firebaseConfig = {
-//   apiKey: "AIzaSyBISstmrwBdzWK0anjsnMw_sLX9hBPD5-U",
-//   authDomain: "iunimotos-96606.firebaseapp.com",
-//   databaseURL: "https://iunimotos-96606.firebaseio.com",
-//   projectId: "iunimotos-96606",
-//   storageBucket: "iunimotos-96606.appspot.com",
-//   messagingSenderId: "1080373447006"
-// };
+//plugins
+import {Camera} from '@ionic-native/camera';
+import {ImagePicker} from '@ionic-native/image-picker';
+import { LoadFileProvider } from '../providers/load-file/load-file';
 
 @NgModule({
   declarations: [
@@ -117,7 +111,9 @@ import {AngularFireAuthModule} from "@angular/fire/auth";
     IonicModule.forRoot(MyApp),
     HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+    AngularFireStorageModule // imports firebase/storage only needed for storage features
 
   ],
   bootstrap: [IonicApp],
@@ -175,7 +171,10 @@ import {AngularFireAuthModule} from "@angular/fire/auth";
     DailyProvider,
     UserProvider,
     DateProvider,
-    SprintProvider
+    SprintProvider,
+    Camera,
+    ImagePicker,
+    LoadFileProvider
   ]
 })
 export class AppModule {}
