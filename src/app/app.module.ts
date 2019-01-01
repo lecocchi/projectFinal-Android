@@ -64,6 +64,9 @@ import {AngularFireAuthModule} from "@angular/fire/auth";
 import {Camera} from '@ionic-native/camera';
 import {ImagePicker} from '@ionic-native/image-picker';
 import { LoadFileProvider } from '../providers/load-file/load-file';
+import { AuthService } from '../services/auth.service';
+
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -113,8 +116,8 @@ import { LoadFileProvider } from '../providers/load-file/load-file';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
-    AngularFireStorageModule // imports firebase/storage only needed for storage features
-
+    AngularFireStorageModule, // imports firebase/storage only needed for storage features
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -174,7 +177,8 @@ import { LoadFileProvider } from '../providers/load-file/load-file';
     SprintProvider,
     Camera,
     ImagePicker,
-    LoadFileProvider
+    LoadFileProvider,
+    AuthService
   ]
 })
 export class AppModule {}
