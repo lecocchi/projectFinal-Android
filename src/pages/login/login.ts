@@ -3,12 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import { HomePage } from "../home/home";
 import { AuthService } from "../../services/auth.service"
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @Component({
   selector: 'page-login',
@@ -17,9 +11,10 @@ import { AuthService } from "../../services/auth.service"
 export class LoginPage {
 
   rootPage = HomePage;
+  sigIn = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public auth:AuthService) {
-
+    this.sigIn = auth.loggedIn;
   }
 
   goToOtherPage() {
@@ -27,8 +22,8 @@ export class LoginPage {
   }
 
   login(){
-    // this.auth.login();
-  console.log('Login success');
+    this.auth.login();
+    console.log('Login success');
   }
 
 }
