@@ -68,6 +68,8 @@ import { AuthService } from '../services/auth.service';
 
 import { IonicStorageModule } from '@ionic/storage';
 
+import { GooglePlus } from '@ionic-native/google-plus';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -178,7 +180,8 @@ import { IonicStorageModule } from '@ionic/storage';
     Camera,
     ImagePicker,
     LoadFileProvider,
-    AuthService
+    AuthService,
+    GooglePlus
   ]
 })
 export class AppModule {}

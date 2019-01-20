@@ -24,10 +24,13 @@ export class IssuePage {
 
   constructor(public navCtrl:NavController, public navParams: NavParams,
               public issueProvider:IssueProvider, public utils:UtilsProvider){
-    this.issueProvider.issue = this.navParams.get('issue');
-    this.titleNavBar = 'SID-' + this.issueProvider.issue.id;
-    this.update = this.navParams.get('update');
-    this.issueActive = (this.issueProvider.issue.state == 'Finalizado') ? false : true;
+
+    if(this.navParams.get('update')){
+      this.issueProvider.issue = this.navParams.get('issue');
+      this.titleNavBar = 'SID-' + this.issueProvider.issue.id;
+      this.update = this.navParams.get('update');
+      this.issueActive = (this.issueProvider.issue.state == 'Finalizado') ? false : true;
+    }
   }
 
   accept(){
