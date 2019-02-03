@@ -1,8 +1,10 @@
 import {Component} from '@angular/core';
-import {AlertController, NavController, NavParams} from 'ionic-angular';
+import {AlertController, NavController, NavParams, PopoverController, LoadingController} from 'ionic-angular';
 import {SprintProvider} from "../../providers/sprint/sprint";
 import {UtilsProvider} from "../../providers/utils/utils";
 import {IssuePage} from "../issue/issue";
+import { IssueProvider, IIssue } from '../../providers/issue/issue';
+import { PopoverBacklogPage } from '../popover-backlog/popover-backlog';
 
 @Component({
   selector: 'page-sprint',
@@ -21,7 +23,10 @@ export class SprintPage {
               public navParams: NavParams,
               public  sprintProvider:SprintProvider,
               public utilsProvider:UtilsProvider,
-              public alertCtrl:AlertController) {
+              public alertCtrl:AlertController,
+              public popoverCtrl: PopoverController,
+              public issueProvider: IssueProvider,
+              public loadingCtrl: LoadingController) {
 
     this.sprint = this.navParams.get('sprint');
     this.readonly = this.navParams.get('readonly');
@@ -67,27 +72,8 @@ export class SprintPage {
           this.utilsProvider.presentToast("Se ha generado con éxito " + s.name);
           this.cancel();
         });
-
-      // this.sprintProvider.createSprint(sprint)
-      //   .subscribe(
-      //     (s:Sprint) =>{
-      //       console.log(s);
-      //       this.utilsProvider.presentToast("Se ha generado el sprint  con éxito");
-      //       this.cancel();
-      //     },
-      //     error =>{
-      //       this.alertCtrl.create({
-      //         title:"Error",
-      //         subTitle: error.error.message,
-      //         buttons:[{
-      //           text:"Aceptar",
-      //           role: "cancel"
-      //         }]
-      //       }).present();
-      //     })
     }
   }
-
 
   validateDateFrom(date:Date){
 
@@ -116,7 +102,6 @@ export class SprintPage {
       }
     }
   }
-
 
   validateDateTo(date:Date){
 
@@ -147,13 +132,34 @@ export class SprintPage {
     }
   }
 
-
   cancel(){
     this.navCtrl.pop();
   }
 
   openDetail(issue:any){
     this.navCtrl.push(IssuePage,{"issue":issue, "update":true});
+  }
+
+  presentPopover(myEvent, issue:IIssue) {
+    let popover = this.popoverCtrl.create(PopoverBacklogPage, {'issue':issue});
+
+    popover.onDidDismiss(() => {
+      let loading = this.loadingCtrl.create(
+        { spinner: 'ios',
+          content:'Cargando...'
+        });
+      loading.present();
+
+      this.issueProvider.getAllIssueActiveSprint()
+        .subscribe(data =>{
+          this.issues = data;
+          loading.dismiss();
+        });
+    });
+
+    popover.present({
+      ev: myEvent
+    });
   }
 }
 

@@ -4,7 +4,7 @@ import {SprintProvider} from "../../providers/sprint/sprint";
 import {SprintPage} from "../sprint/sprint";
 
 @Component({
-  selector: 'page-sprint',
+  selector: 'page-sprints',
   templateUrl: 'sprints.html',
 })
 export class SprintsPage {

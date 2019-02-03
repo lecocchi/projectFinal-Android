@@ -1,5 +1,19 @@
 <ion-content padding>
 
+  <ion-list class="title">
+
+    <ion-item>
+      <ion-label floating>Título <span class="required">(requerido)</span></ion-label>
+      <ion-input type="text" [(ngModel)]= 'title' (ionChange)="changeTitle($event)"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Descripción</ion-label>
+      <ion-textarea  class="area" [(ngModel)]='description' (ionChange)="changeDescription($event)"></ion-textarea>
+    </ion-item>
+
+  </ion-list>
+
   <ion-item>
     <ion-label stacked>Prioridad</ion-label>
     <ion-input type="text" [(ngModel)]="priority" (click)="selectPriority()" [readonly]="true"></ion-input>

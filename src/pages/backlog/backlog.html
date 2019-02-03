@@ -7,13 +7,13 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
   <ion-list>
     <ion-item  *ngFor="let issue of issues, let i = index">
-      <ion-avatar item-start>
-        <img [src]="issue.avatar">
-      </ion-avatar>
+      <!-- <ion-avatar item-start>
+        <img [src]="issue.avatar" *ngIf="issue.avatar">
+      </ion-avatar> -->
       <div (click)="openDetail(issue)">
         <div class="issue-code">SID-{{ issue.id }}</div>
         <div class="issue-summary">

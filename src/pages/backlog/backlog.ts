@@ -14,7 +14,10 @@ export class BacklogPage {
   avatar:string = 'https://picsum.photos/300/300?image=0';
   issuePage:any;
 
-  constructor(public navCtrl: NavController, public issueProvider: IssueProvider, public loadingCtrl:LoadingController, public popoverCtrl: PopoverController) {
+  constructor(public navCtrl: NavController, 
+    public issueProvider: IssueProvider, 
+    public loadingCtrl:LoadingController, 
+    public popoverCtrl: PopoverController) {
     this.issuePage = IssuePage;
   }
 

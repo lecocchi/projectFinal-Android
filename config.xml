@@ -93,7 +93,7 @@
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.319058628236-bnjfsgh4q2648hn8khv6pvv1oe9atqo3" />
         <variable name="WEB_APPLICATION_CLIENT_ID" value="319058628236-bnjfsgh4q2648hn8khv6pvv1oe9atqo3.apps.googleusercontent.com" />
     </plugin>
-    <engine name="android" spec="^7.1.1" />
     <engine name="ios" spec="4.5.5" />
     <engine name="browser" spec="5.0.4" />
+    <engine name="android" spec="7.0.0" />
 </widget>

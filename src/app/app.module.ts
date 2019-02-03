@@ -69,6 +69,7 @@ import { AuthService } from '../services/auth.service';
 import { IonicStorageModule } from '@ionic/storage';
 
 import { GooglePlus } from '@ionic-native/google-plus';
+import { PopoverBacklogPage } from '../pages/popover-backlog/popover-backlog';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import { GooglePlus } from '@ionic-native/google-plus';
     DetallePage,
     FechasPage,
     PersonaPage,
-    ComentariosPage
+    ComentariosPage,
+    PopoverBacklogPage
   ],
   imports: [
     BrowserModule,
@@ -158,7 +160,8 @@ import { GooglePlus } from '@ionic-native/google-plus';
     DetallePage,
     FechasPage,
     PersonaPage,
-    ComentariosPage
+    ComentariosPage,
+    PopoverBacklogPage
   ],
   providers: [
     StatusBar,
@@ -181,7 +184,8 @@ import { GooglePlus } from '@ionic-native/google-plus';
     ImagePicker,
     LoadFileProvider,
     AuthService,
-    GooglePlus
+    GooglePlus,
+    IssueProvider
   ]
 })
 export class AppModule {}

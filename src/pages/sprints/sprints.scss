@@ -1,11 +1,6 @@
-page-sprint {
+page-sprints {
 
-  .sprint{
-    &-name{
-      font-weight: bolder;
-      font-size: 1.8rem;
-    }
-
+  .sprint{    
     &-range{
       &-from{
         margin-right: 3rem;
@@ -13,6 +8,7 @@ page-sprint {
         &-label{
           color: #3b5998;
           font-weight: bolder;
+          font-size: 10px;
         }
       }
     }

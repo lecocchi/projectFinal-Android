@@ -2,21 +2,18 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {URL_BASE} from "../../components/config/config";
 
-/*
-  Generated class for the IssueProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class IssueProvider {
-  issue:IIssue;
-  issueToUpdate:IIssue;
+  issue = {} as IIssue;
+  issueToUpdate = {} as IIssue;
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient) {
+    this.issueToUpdate.reporter = 'Leandro Cocchi';
+  }
 
   getAllIssueActiveSprint(){
-    return this.http.get(URL_BASE + "/issue/active-sprints");
+    return this.http.get(URL_BASE + "/issue/active-sprint");
   }
 
   getAllIssueBacklog(){
@@ -38,6 +35,10 @@ export class IssueProvider {
   addIssueInActiveSprint(id:number){
     // @ts-ignore
     return this.http.post(URL_BASE + "/issue/sprint/" + id);
+  }
+
+  addIssueInBacklog(issue:IIssue){
+    return this.http.patch(URL_BASE + "/issue/sprint/issues/backlog/", issue);
   }
 
 }

@@ -1,3 +1,16 @@
 page-detalle {
   margin-top: 56px;
+
+  .title{
+    margin-bottom: 60px;
+  }
+
+  .area{
+    height: 100px;
+  }
+
+  .required{
+    color: 	rgb(236, 88, 88);
+    font-size: small;
+  }
 }

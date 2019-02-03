@@ -18,8 +18,8 @@
 </ion-header>
 
 <ion-tabs class="tabs">
-  <ion-tab [root]="tab1" tabTitle="Detalles"></ion-tab>
-  <ion-tab [root]="tab2" tabTitle="Personas"></ion-tab>
-  <ion-tab [root]="tab3" tabTitle="Fechas"></ion-tab>
+  <ion-tab [root]="tab1" tabTitle="Detalles" [rootParams]="update"></ion-tab>
+  <ion-tab [root]="tab2" tabTitle="Personas" [rootParams]="update"></ion-tab>
+  <ion-tab [root]="tab3" tabTitle="Fechas" [rootParams]="update"></ion-tab>
   <!--<ion-tab [root]="tab4" tabTitle="Comentarios"></ion-tab>-->
 </ion-tabs>

@@ -10,12 +10,17 @@
   <ion-list inset>
     <button ion-item *ngFor="let sprint of sprints" (click)="openSprint(sprint.id)">
       <h3 class="sprint-name">{{ sprint.name }}</h3>
-      <h4 class="sprint-range"> <span class="sprint-range-from"><span class="sprint-range-from-label">Desde:</span> {{ sprint.dateFrom | formatDateMillisecond}}</span><span class="sprint-range-to"><span class="sprint-range-from-label">Hasta:</span> {{ sprint.dateTo | formatDateMillisecond}}</span></h4>
+      <h4 class="sprint-range">
+        <span class="sprint-range-from-label">Desde: {{ sprint.dateFrom | formatDateMillisecond}}</span>
+        <span class="sprint-range-from-label">Hasta: {{ sprint.dateTo | formatDateMillisecond}}</span>
+      </h4>
     </button>
   </ion-list>
 
   <ion-fab bottom right (click)="createSprint()">
-    <button ion-fab><ion-icon name="add"></ion-icon></button>
+    <button ion-fab>
+      <ion-icon name="add"></ion-icon>
+    </button>
   </ion-fab>
 
 </ion-content>

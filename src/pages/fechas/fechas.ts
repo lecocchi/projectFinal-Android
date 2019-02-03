@@ -10,14 +10,20 @@ export class FechasPage {
   createdDate:any;
   updatedDate:any;
   resolvedDate:any;
+  update:boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public issueProvider:IssueProvider) {
 
-    this.createdDate = new Date(this.issueProvider.issue.created).toISOString();
-    this.updatedDate = new Date(this.issueProvider.issue.updated).toISOString();
-    this.resolvedDate = new Date(this.issueProvider.issue.resolved).toISOString();
-  }
+      this.update = this.navParams.data;
+      if(this.update){
+        // this.createdDate = new Date(this.issueProvider.issue.created).toISOString();
+        // this.updatedDate = new Date(this.issueProvider.issue.updated).toISOString();
+        this.resolvedDate = new Date(this.issueProvider.issue.resolved).toISOString();
+      }
 
+      this.createdDate = new Date().toISOString();
+      this.updatedDate = new Date().toISOString();
+  }
 
 }
