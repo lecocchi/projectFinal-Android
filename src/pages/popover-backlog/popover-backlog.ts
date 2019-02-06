@@ -9,6 +9,7 @@ import { UtilsProvider } from '../../providers/utils/utils';
   templateUrl: 'popover-backlog.html',
 })
 export class PopoverBacklogPage {
+  issue:IIssue;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public issueProvider: IssueProvider,
@@ -17,7 +18,8 @@ export class PopoverBacklogPage {
   }
 
   sendToBacklog() {
-    this.issueProvider.addIssueInBacklog(this.viewCtrl.getNavParams().get("issue"))
+    this.issue = this.viewCtrl.getNavParams().get("issue");
+    this.issueProvider.addIssueInBacklog(this.issue)
       .subscribe( (i:IIssue) =>{
         this.utils.presentToast(`Se envió el issue SID-${i.id} al Backlog`);
       });
@@ -25,7 +27,13 @@ export class PopoverBacklogPage {
     this.viewCtrl.dismiss();
   }
 
-  close() {
+  delete() {
+    this.issue = this.viewCtrl.getNavParams().get("issue");
+    this.issueProvider.deleteIssue(this.issue.id)
+    .subscribe( (i:IIssue) =>{
+      this.utils.presentToast(`Se eliminó el issue SID-${i.id}`);
+    });
+
     this.viewCtrl.dismiss();
   }
 

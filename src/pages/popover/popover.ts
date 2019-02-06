@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {NavController, NavParams, ViewController} from 'ionic-angular';
-import {IssueProvider} from "../../providers/issue/issue";
+import {IssueProvider, IIssue} from "../../providers/issue/issue";
 import {UtilsProvider} from "../../providers/utils/utils";
 
 @Component({
@@ -14,8 +14,6 @@ export class PopoverPage {
               public utils: UtilsProvider) {
   }
 
-  ionViewDidLoad() { }
-
   sendToSprint() {
     this.issueProvider.addIssueInActiveSprint(this.viewCtrl.getNavParams().get("id"))
       .subscribe( i =>{
@@ -25,7 +23,12 @@ export class PopoverPage {
     this.viewCtrl.dismiss();
   }
 
-  close() {
+  delete() {
+    this.issueProvider.deleteIssue(this.viewCtrl.getNavParams().get("id"))
+    .subscribe( (i:IIssue) =>{
+      this.utils.presentToast(`Se eliminó el issue SID-${i.id}`);
+    });
+
     this.viewCtrl.dismiss();
   }
 

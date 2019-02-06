@@ -41,6 +41,14 @@ export class IssueProvider {
     return this.http.patch(URL_BASE + "/issue/sprint/issues/backlog/", issue);
   }
 
+  deleteIssue(id:number){
+    return this.http.delete(URL_BASE + "/issue/" + id);
+  }
+
+  getIssueBySprintId(id:number){
+    return this.http.get(URL_BASE + "/issue/issues/" + id);
+  }
+
 }
 
 export interface IIssue{

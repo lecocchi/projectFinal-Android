@@ -25,8 +25,6 @@ export class PersonaPage {
       this.issueActive = (this.issueProvider.issue.state == 'Finalizado') ? false : true;
     } else {
       this.issueActive = true;
-      this.reporter = issueProvider.issueToUpdate.reporter;
-      this.issueProvider.issue.reporter = this.reporter;
     }
 
     this.userProvider.getAllUser()
@@ -41,6 +39,10 @@ export class PersonaPage {
           );
         });
       });
+  }
+
+  ionViewDidEnter(){
+    this.reporter =  this.issueProvider.issue.reporter;
   }
 
   selectAssignee() {

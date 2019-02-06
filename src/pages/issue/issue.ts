@@ -21,11 +21,13 @@ export class IssuePage {
   titleNavBar: string;
   issueActive: boolean;
   update: boolean;
+  backlog: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public issueProvider: IssueProvider, public utils: UtilsProvider) {
 
     this.update = this.navParams.get('update');
+    this.backlog = this.navParams.get("backlog");
 
     if (this.update) {
       this.issueProvider.issue = this.navParams.get('issue');
@@ -46,7 +48,7 @@ export class IssuePage {
             this.utils.presentToast(`Se modificó el issue SID- ${this.issueProvider.issue.id} con éxito`);
           });
       } else {
-        this.issueProvider.issue.backlog = true;
+        this.issueProvider.issue.backlog = this.backlog;
         this.issueProvider.createNewIssue(this.issueProvider.issue)
           .subscribe(data => {
             this.utils.presentToast(`Se creó el issue con éxito`);

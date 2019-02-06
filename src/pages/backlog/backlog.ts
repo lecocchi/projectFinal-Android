@@ -23,7 +23,6 @@ export class BacklogPage {
 
 
   ionViewDidEnter(){
-
     let loading = this.loadingCtrl.create(
       { spinner: 'ios',
         content:'Cargando...'
@@ -38,10 +37,11 @@ export class BacklogPage {
   }
 
   openDetail(issue:any){
-    this.navCtrl.push(IssuePage,{"issue":issue, "update":true, "backlog": true});
+    this.navCtrl.push(IssuePage,{"issue":issue, "update":true});
   }
 
   createNewIssue(){
+    this.issueProvider.issue.reporter = 'Leandro Sebastian Cocchi';
     this.navCtrl.push(IssuePage, {"issue":null, "update": false, "backlog": true});
   }
 

@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import {URL_BASE} from "../../components/config/config";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import {Observable} from "rxjs";
 
 @Injectable()
 export class SprintProvider {
@@ -22,10 +21,6 @@ export class SprintProvider {
 
   getSprintById(id:string){
     return this.http.get(URL_BASE + "/sprint/" + id);
-  }
-
-  getIssueBySprintId(id:number){
-    return this.http.get(URL_BASE + "/issue/sprint/issues/" + id);
   }
 
 }

@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import {ToastController} from "ionic-angular";
-import {error} from "util";
 
 @Injectable()
 export class LoadFileProvider {

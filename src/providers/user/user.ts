@@ -2,13 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {URL_BASE} from "../../components/config/config";
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 
 
 @Injectable()
 export class UserProvider {
-
-
 
   constructor(public http: HttpClient, private afDB: AngularFirestore) { }
 

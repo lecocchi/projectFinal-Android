@@ -31,7 +31,7 @@ export class SprintPage {
     this.sprint = this.navParams.get('sprint');
     this.readonly = this.navParams.get('readonly');
 
-    this.sprintProvider.getIssueBySprintId(this.sprint.id)
+    this.issueProvider.getIssueBySprintId(this.sprint.id)
       .subscribe( i =>{
         this.issues = i;
       })
@@ -44,6 +44,20 @@ export class SprintPage {
       this.to = new Date(this.sprint.dateTo).toISOString();
     }
 
+  }
+
+  ionViewDidEnter(){
+    let loading = this.loadingCtrl.create(
+      { spinner: 'ios',
+        content:'Cargando...'
+      });
+    loading.present();
+
+    this.issueProvider.getIssueBySprintId(this.sprint.id)
+      .subscribe(data =>{
+        this.issues = data;
+        loading.dismiss();
+      });
   }
 
 
@@ -140,6 +154,11 @@ export class SprintPage {
     this.navCtrl.push(IssuePage,{"issue":issue, "update":true});
   }
 
+  createNewIssue(){
+    this.issueProvider.issue.reporter = 'Leandro Sebastian Cocchi';
+    this.navCtrl.push(IssuePage, {"issue":null, "update": false, "backlog": false});
+  }
+
   presentPopover(myEvent, issue:IIssue) {
     let popover = this.popoverCtrl.create(PopoverBacklogPage, {'issue':issue});
 
@@ -150,7 +169,7 @@ export class SprintPage {
         });
       loading.present();
 
-      this.issueProvider.getAllIssueActiveSprint()
+      this.issueProvider.getIssueBySprintId(this.sprint.id)
         .subscribe(data =>{
           this.issues = data;
           loading.dismiss();
