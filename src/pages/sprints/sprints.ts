@@ -39,13 +39,13 @@ export class SprintsPage {
   }
 
   createSprint(){
-    this.navCtrl.push(this.sprintPage);
+    this.navCtrl.push(this.sprintPage, {'sprint': null, 'readonly': false, 'create': true});
   }
 
   openSprint(id:string){
     this.sprintProvider.getSprintById(id)
       .subscribe( s =>{
-        this.navCtrl.push(this.sprintPage, {'sprint': s, 'readonly': true});
+        this.navCtrl.push(this.sprintPage, {'sprint': s, 'readonly': true, 'create':false});
       });
   }
 

@@ -2,9 +2,12 @@
   <ion-navbar color="primary">
     <ion-title>
       {{name}}
-      <div class="sprint-range">
+      <div class="sprint-range" *ngIf='!create'>
         <span class="sprint-range-from-label">Del: {{ sprint.dateFrom | formatDateMillisecond}}</span>
         <span class="sprint-range-from-label">Al: {{ sprint.dateTo | formatDateMillisecond}}</span>
+      </div>
+      <div class="sprint-range" *ngIf='create'>
+        Crear Sprint
       </div>
     </ion-title>
     <ion-buttons end *ngIf="!readonly">
@@ -24,26 +27,43 @@
 
 
 <ion-content padding>
-  <ion-list>
-    <ion-item *ngFor="let issue of issues, let i = index">
-      <!-- <ion-avatar item-start>
+  <div *ngIf="!create">
+    <ion-list>
+      <ion-item *ngFor="let issue of issues, let i = index">
+        <!-- <ion-avatar item-start>
         <img [src]="issue.avatar">
       </ion-avatar> -->
-      <div (click)="openDetail(issue)">
-        <div class="issue-code">SID-{{ issue.id }}</div>
-        <div class="issue-summary">
-          {{ issue.title }}
+        <div (click)="openDetail(issue)">
+          <div class="issue-code">SID-{{ issue.id }}</div>
+          <div class="issue-summary">
+            {{ issue.title }}
+          </div>
         </div>
-      </div>
-      <button icon-only (click)="presentPopover($event, issue)" item-end class="more">
-        <ion-icon name="more"></ion-icon>
-      </button>
-    </ion-item>
-  </ion-list>
+        <button icon-only (click)="presentPopover($event, issue)" item-end class="more">
+          <ion-icon name="more"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-list>
 
     <!-- this fab is placed at top right -->
     <ion-fab bottom right (click)="createNewIssue()">
-      <button ion-fab><ion-icon name="add"></ion-icon></button>
+      <button ion-fab>
+        <ion-icon name="add"></ion-icon>
+      </button>
     </ion-fab>
+  </div>
+
+  <div *ngIf="create">
+
+    <ion-item>
+      <ion-label>Desde</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" placeholder="" [(ngModel)]="from"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Hasta</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" placeholder="" [(ngModel)]="to"></ion-datetime>
+    </ion-item>
+  </div>
 
 </ion-content>
