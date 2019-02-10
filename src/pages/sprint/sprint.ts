@@ -72,17 +72,14 @@ export class SprintPage {
 
   createSprint() {
 
-    console.log(this.from);
-    console.log(this.to);
-
     // if (this.name == undefined || this.name == null) {
     //   this.utilsProvider.presentToast("Falta ingresar el 'NOMBRE' del sprint")
     // } else 
     
     if (this.from == undefined || this.from == null) {
-      this.utilsProvider.presentToast("Falta ingresar la fecha 'DESDE' del sprint")
+      this.utilsProvider.presentPrompt("Error", "Falta ingresar la fecha 'DESDE' del sprint");
     } else if (this.to == undefined || this.to == null) {
-      this.utilsProvider.presentToast("Falta ingresar la fecha 'HASTA' del sprint")
+      this.utilsProvider.presentPrompt("Error", "Falta ingresar la fecha 'HASTA' del sprint");
     } else {
 
       let fromDate: string[] = this.from.toString().split("-");
@@ -99,6 +96,9 @@ export class SprintPage {
         .subscribe((s: Sprint) => {
           this.utilsProvider.presentToast("Se ha generado con éxito " + s.name);
           this.cancel();
+        },
+        (err)=>{
+          this.utilsProvider.presentPrompt(err.error.title, err.error.message);
         });
     }
   }

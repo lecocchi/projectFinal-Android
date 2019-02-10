@@ -70,6 +70,7 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { GooglePlus } from '@ionic-native/google-plus';
 import { PopoverBacklogPage } from '../pages/popover-backlog/popover-backlog';
+import { PopoverSprintPage } from '../pages/popover-sprint/popover-sprint';
 
 @NgModule({
   declarations: [
@@ -111,7 +112,8 @@ import { PopoverBacklogPage } from '../pages/popover-backlog/popover-backlog';
     FechasPage,
     PersonaPage,
     ComentariosPage,
-    PopoverBacklogPage
+    PopoverBacklogPage,
+    PopoverSprintPage
   ],
   imports: [
     BrowserModule,
@@ -161,7 +163,8 @@ import { PopoverBacklogPage } from '../pages/popover-backlog/popover-backlog';
     FechasPage,
     PersonaPage,
     ComentariosPage,
-    PopoverBacklogPage
+    PopoverBacklogPage,
+    PopoverSprintPage
   ],
   providers: [
     StatusBar,

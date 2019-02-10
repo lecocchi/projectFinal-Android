@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {ToastController} from "ionic-angular";
+import {ToastController, AlertController} from "ionic-angular";
 
 @Injectable()
 export class UtilsProvider {
@@ -7,7 +7,7 @@ export class UtilsProvider {
   days = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
   months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 
-  constructor( public toastCtrl: ToastController) { }
+  constructor( public toastCtrl: ToastController, public alertCtrl:AlertController) { }
 
   isEmpty(object:any):boolean{
     return object === undefined || object == "";
@@ -28,6 +28,16 @@ export class UtilsProvider {
       "year": date.year,
       "dayWeek": this.getDayInSpanish(date.dayOfWeek)
     }
+  }
+
+  presentPrompt(title:string, message:string) {
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: message,
+      buttons: [{text: 'Aceptar'}
+      ]
+    });
+    alert.present();
   }
 
 
