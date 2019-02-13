@@ -23,8 +23,8 @@ export class SprintProvider {
     return this.http.get(URL_BASE + "/sprint/" + id);
   }
 
-  finishSprint(issue:any){
-    return this.http.post(URL_BASE + "/sprint/finish", issue);
+  finishSprint(sprint:any){
+    return this.http.post(URL_BASE + "/sprint/finish", sprint);
   }
 
 }
