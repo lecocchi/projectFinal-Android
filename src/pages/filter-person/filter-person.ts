@@ -13,37 +13,35 @@ export class FilterPersonPage {
   personToSearch:string;
   personsToShow:any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider, public dailyProvider: DailyProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider, public dailyProvider: DailyProvider) {}
 
+
+  ionViewWillEnter(){
+    this.personsToShow = [];
     this.userProvider.getAllUser()
-      .subscribe( data => {
-        this.persons = data;
+      .subscribe( (users:any) => {
+        this.persons = users;
 
-        for( let person of this.persons){
-
+        for( let user of users){
           let personToShow:any = {
-            "firstName":person.firstName,
-            "lastName":person.lastName,
-            "userName":person.userName,
-            "avatar":person.avatar,
+            "firstName":user.firstName,
+            "lastName":user.lastName,
+            "userName":user.userName,
+            "avatar":user.avatar,
             "yesterday":"",
             "today":"",
             "checked": false
           }
-
           this.personsToShow.push(personToShow);
         }
-
 
         this.dailyProvider.daily.daily_items
           .forEach( itemProvider =>{
             this.personsToShow.forEach( itemShow =>{
-              if (itemProvider.user_name == itemShow.user_name)
+              if (itemProvider.userName === itemShow.userName)
                 itemShow.checked = true;
             });
-
           })
-
       });
   }
 
@@ -54,7 +52,7 @@ export class FilterPersonPage {
 
   changeStatusChecked(person:any){
     this.personsToShow
-      .filter(item => person.user_name == item.user_name)
+      .filter(item => person.userName === item.userName)
       .map(item => {
         item.checked = !item.checked;
       });
@@ -63,14 +61,14 @@ export class FilterPersonPage {
     accept(){
         this.personsToShow.map( itemShow => {
             if (itemShow.checked){
-                if (!this.dailyProvider.daily.daily_items.some(itemOrigin => itemShow.user_name === itemOrigin.user_name)) {
+                if (!this.dailyProvider.daily.daily_items.some(itemOrigin => itemShow.userName === itemOrigin.userName)) {
                     this.dailyProvider.daily.daily_items.push(itemShow);
                 }
             }
         });
 
         this.dailyProvider.daily.daily_items.map(itemOrigin =>{
-            this.personsToShow.filter( itemShow => itemShow.user_name === itemOrigin.user_name)
+            this.personsToShow.filter( itemShow => itemShow.userName === itemOrigin.userName)
                 .map(item =>{
                     if (!item.checked)
                         this.dailyProvider.daily.daily_items.splice(this.dailyProvider.daily.daily_items.indexOf(itemOrigin), 1);

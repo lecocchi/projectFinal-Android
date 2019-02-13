@@ -18,12 +18,12 @@
 
 </ion-header>
 
-<ion-content>
+<ion-content padding>
     <ion-list>
         <ion-item *ngFor="let member of members, let i = index" (click)='push(member)' class="items">
 
-            <ion-avatar item-start class="avatar">
-                <img [src]="member.avatar">
+            <ion-avatar item-start >
+              <avatar>{{member.firstName.substring(0,1) | uppercase }}</avatar>
             </ion-avatar>
 
             <div class="name">{{member.firstName}} {{member.lastName}}  </div>
@@ -41,12 +41,8 @@
         </ion-item>
     </ion-list>
 
-    <ion-fab right bottom *ngIf="dailyActive">
-        <button ion-fab color="light"><ion-icon name="add"></ion-icon></button>
-        <ion-fab-list side="top">
-            <button ion-fab><ion-icon ios="ios-person" md="md-person" (click)="pushFilter()"></ion-icon></button>
-            <button ion-fab><ion-icon ios="ios-people" md="md-people"></ion-icon></button>
-        </ion-fab-list>
-    </ion-fab>
 
+    <ion-fab bottom right (click)="pushFilter()" *ngIf="dailyActive">
+      <button ion-fab><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
 </ion-content>

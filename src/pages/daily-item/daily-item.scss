@@ -9,16 +9,6 @@ page-daily-item {
     //font-size: 1.7rem;
     font-weight: 500;
   }
-  .items {
-    display: flex;
-    align-items: center;
-
-    &-ios,
-    &-md,
-    &-wp {
-      padding-left: 0 !important;
-    }
-  }
 
   .item-ios ion-avatar ion-img, .item-ios ion-avatar img,
   .item-md ion-avatar ion-img, .item-md ion-avatar img
@@ -79,6 +69,21 @@ page-daily-item {
     color: #4db69d;
     font-weight: bold;
     font-size: 30px !important;
+  }
+
+  .items {
+    display: flex;
+    align-items: center;
+
+    &-ios,
+    &-md,
+    &-wp {
+      padding-left: 0 !important;
+    }
+  }
+
+  .item-md{
+    padding-left: 0px !important
   }
 
 

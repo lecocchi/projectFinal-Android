@@ -29,7 +29,18 @@ export class DailyPage {
 
     this.dailyProvider.getAllDailies()
       .subscribe( data => {
+
+
+
+        // console.log(data);
         this.dailies = data.reverse();
+
+        this.dailies.forEach(d => {
+          // console.log(d.created_at.dayOfWeek);
+          // console.log(this.utils.getDayInSpanish(d.created_at.dayOfWeek));
+          d.created_at.dayOfWeek = this.utils.getDayInSpanish(d.created_at.dayOfWeek);
+        });
+
         loading.dismiss();
       });
   }

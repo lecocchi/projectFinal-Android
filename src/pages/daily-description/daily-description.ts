@@ -20,16 +20,16 @@ export class DailyDescriptionPage {
 
     this.member = this.navParams.get("member");
 
-    this.dailyProvider.daily.daily_items.filter( m => {
-      if (m.user_name == this.member.user_name ) {
-        this.today = m.today;
-        this.yesterday = m.yesterday;
-      }
-    });
   }
 
 
   ionViewWillEnter(){
+    this.dailyProvider.daily.daily_items.filter( m => {
+      if (m.userName === this.member.userName ) {
+        this.today = m.today;
+        this.yesterday = m.yesterday;
+      }
+    });
 
     if ( this.dailyProvider.daily.created_at != undefined){
       this.dateProvider.now()
@@ -44,7 +44,7 @@ export class DailyDescriptionPage {
 
   accept(){
     this.dailyProvider.daily.daily_items.filter(m => {
-      if (m.user_name == this.member.user_name){
+      if (m.userName == this.member.userName){
         m.today = this.today;
         m.yesterday  = this.yesterday;
       }

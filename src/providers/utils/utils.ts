@@ -26,7 +26,7 @@ export class UtilsProvider {
       "day":date.dayOfMonth,
       "month": this.months[date.monthValue - 1],
       "year": date.year,
-      "dayWeek": this.getDayInSpanish(date.dayOfWeek)
+      "dayWeek": date.dayOfWeek
     }
   }
 
@@ -41,7 +41,7 @@ export class UtilsProvider {
   }
 
 
-  private getDayInSpanish(day:string): string{
+  public getDayInSpanish(day:string): string{
     switch (day){
       case "MONDAY":{
         return "Lunes"
