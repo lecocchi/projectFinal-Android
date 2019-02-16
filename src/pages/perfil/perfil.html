@@ -18,14 +18,6 @@
 
 
 <ion-content padding>
-  <!-- <ion-avatar class="avatar">
-    <avatar>{{ firstName. substring(0,1) | uppercase}}</avatar>
-  </ion-avatar> -->
-    <ion-item class="toggle">
-      <ion-label class="{{class}}">Login por redes sociales</ion-label>
-      <ion-toggle [(ngModel)]="isNetwork" (ionChange)="change()"></ion-toggle>
-    </ion-item>
-
   <ion-item>
     <ion-label floating>Nombre</ion-label>
     <ion-input type="text" [(ngModel)]="firstName"></ion-input>
@@ -41,14 +33,10 @@
     <ion-input type="text" [(ngModel)]="userName"></ion-input>
   </ion-item>
 
-  <ion-item class="item-leave-height">
-    <ion-label>Rol</ion-label>
-    <ion-select [(ngModel)]="role">
-        <ion-option value="1">Desarrollador</ion-option>
-        <ion-option value="2">Scrum Master</ion-option>
-        <ion-option value="3">Admin</ion-option>
-    </ion-select>
-</ion-item>
+  <ion-item>
+    <ion-label floating>Rol</ion-label>
+    <ion-input type="text" [(ngModel)]="role"></ion-input>
+  </ion-item>
 
   <ion-item>
     <ion-label floating>Email</ion-label>
@@ -59,10 +47,5 @@
     <ion-label floating>Password</ion-label>
     <ion-input type="text" [(ngModel)]="password"></ion-input>
   </ion-item>
-
-  <ion-item class="toggle">
-    <ion-label class="{{classEnabled}}">{{enabledText}}</ion-label>
-    <ion-toggle [(ngModel)]="isEnabled" (ionChange)="changeEnabled()"></ion-toggle>
-  </ion-item>
-
+    
 </ion-content>

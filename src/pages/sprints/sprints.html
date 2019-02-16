@@ -22,7 +22,7 @@
     </button>
   </ion-list>
 
-  <ion-fab bottom right (click)="createSprint()">
+  <ion-fab bottom right (click)="createSprint()" *ngIf="role == 2 || role == 3">
     <button ion-fab>
       <ion-icon name="add"></ion-icon>
     </button>

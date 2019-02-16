@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <div class="content" (click)="goToPage(dailyPage)">
+    <div class="content" (click)="goToPage(dailyPage)" *ngIf="rol == 2 || rol == 3">
       <div class="avatar daily">DY</div>
       <div class="avatar-text">
         Daily
@@ -45,14 +45,14 @@
       </div>
     </div>
 
-    <div class="content" (click)="goToPage(configPage)">
+    <div class="content" (click)="goToPage(configPage)" *ngIf="rol == 2 || rol == 3">
       <div class="avatar config">CF</div>
       <div class="avatar-text">
         Configuración
       </div>
     </div>
 
-    <div class="content" (click)="goToPage(usersPage)">
+    <div class="content" (click)="goToPage(usersPage)" *ngIf="rol == 3">
       <div class="avatar config">US</div>
       <div class="avatar-text">
         Usuarios

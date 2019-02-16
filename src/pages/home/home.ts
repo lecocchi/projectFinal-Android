@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AlertController, MenuController, NavController, Platform} from 'ionic-angular';
+import {AlertController, MenuController, NavController, Platform, NavParams} from 'ionic-angular';
 
 import {BacklogPage} from '../backlog/backlog';
 import {ActiveSprintPage} from "../active-sprint/active-sprint";
@@ -26,12 +26,18 @@ export class HomePage {
   SprintsPage: any = SprintsPage;
   configPage:any = ConfigPage;
   perfilPage:any = PerfilPage
+  rol:string;
 
   public alertShown:boolean = false;
 
 
-  constructor(public navCtrl: NavController, public menuCtrl: MenuController,public platform: Platform,public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public menuCtrl: MenuController,
+              public platform: Platform,
+              public alertCtrl: AlertController) {
 
+    this.rol = this.navParams.get("rol");
     this.platform.registerBackButtonAction(()=>{
 
       if (this.navCtrl.getActive().id == 'n4-1'){
@@ -52,6 +58,9 @@ export class HomePage {
       }
     })
   }
+
+
+  ionViewCanEnter(){ }
 
   goToPage(page){
     this.navCtrl.push(page);

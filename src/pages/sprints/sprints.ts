@@ -3,6 +3,7 @@ import {LoadingController, NavController, NavParams, PopoverController} from 'io
 import {SprintProvider} from "../../providers/sprint/sprint";
 import {SprintPage} from "../sprint/sprint";
 import { PopoverSprintPage } from '../popover-sprint/popover-sprint';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-sprints',
@@ -12,11 +13,17 @@ export class SprintsPage {
 
   sprints:any = [];
   sprintPage:any = SprintPage;
+  role:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public sprintProvider:SprintProvider,
               public loadingCtrl: LoadingController,
-              public popoverCtrl: PopoverController) {
+              public popoverCtrl: PopoverController,
+              public storage:Storage) {
+
+    this.storage.get("rol").then((r) =>{
+      this.role = r;
+    });
   }
 
   ionViewWillEnter() {
