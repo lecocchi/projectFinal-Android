@@ -1,14 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { HomePage } from "../home/home";
-import { AuthService } from "../../services/auth.service"
-
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { UserProvider } from '../../providers/user/user';
+import { UtilsProvider } from '../../providers/utils/utils';
 
 @Component({
   selector: 'page-login',
@@ -17,8 +11,14 @@ import { AuthService } from "../../services/auth.service"
 export class LoginPage {
 
   rootPage = HomePage;
+  userName:string;
+  password:string;
+  
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public auth:AuthService) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public userProvider: UserProvider,
+              public utilProvider: UtilsProvider) {
 
   }
 
@@ -26,9 +26,20 @@ export class LoginPage {
     this.navCtrl.push(HomePage);
   }
 
-  login(){
-    // this.auth.login();
-  console.log('Login success');
+  loginForUserAndPass(){
+    let user = {
+      "user_name" : this.userName,
+      "password" : this.password
+    }
+
+    this.userProvider.loginForUserAndPass(user)
+      .subscribe((u:any) => {
+        this.navCtrl.push(this.rootPage);
+        console.log(u);
+      },
+      (err) => {
+        this.utilProvider.presentPrompt(err.error.title, err.error.message);
+      })
   }
 
 }

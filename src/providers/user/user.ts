@@ -30,4 +30,9 @@ export class UserProvider {
   }
 
 
+  loginForUserAndPass(userLogin:any){
+    return this.http.post(URL_BASE + "/user/login-mail", userLogin);
+  }
+
+
 }

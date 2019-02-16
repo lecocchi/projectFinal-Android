@@ -8,6 +8,7 @@ import {ReportsPage} from "../reports/reports";
 import {UsersPage} from "../users/users";
 import {ConfigPage} from "../config/config";
 import {SprintsPage} from "../sprints/sprints";
+import { PerfilPage } from '../perfil/perfil';
 
 @Component({
   selector: 'page-home',
@@ -24,6 +25,7 @@ export class HomePage {
   usersPage: any = UsersPage;
   SprintsPage: any = SprintsPage;
   configPage:any = ConfigPage;
+  perfilPage:any = PerfilPage
 
   public alertShown:boolean = false;
 

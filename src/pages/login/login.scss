@@ -66,11 +66,15 @@ page-login {
     &-email-title {
       color: $secondary;
       font-family: 'PT Sans', sans-serif;
-      font-size: 1.2em;
+      font-size: 1.4em;
     }
 
     &-net-title {
       padding-bottom: 1em;
+    }
+
+    &-email-title{
+      margin-top: 9rem;
     }
 
     &-net-btn{
@@ -205,6 +209,15 @@ page-login {
 
 .btn-login-google{
   height: 45px;
+}
+
+.btn-login-user{
+  width: 80%;
+}
+
+.btn-user{
+  font-size: 1.7rem !important;
+  height: 55px;
 }
 
 }
