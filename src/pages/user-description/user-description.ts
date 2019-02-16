@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
-import {Camera, CameraOptions} from "@ionic-native/camera";
-import {LoadFileProvider} from "../../providers/load-file/load-file";
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { UserProvider } from '../../providers/user/user';
+import { UtilsProvider } from '../../providers/utils/utils';
 
 @Component({
   selector: 'page-user-description',
@@ -9,59 +9,109 @@ import {LoadFileProvider} from "../../providers/load-file/load-file";
 })
 export class UserDescriptionPage {
 
-  firstName:string;
-  lastName:string;
-  dni:number;
-  email:string;
-  fullName:string;
-  avatar:string;
-  mode:string;
-  imagePreview: string;
-  image64: string;
+  id: number;
+  firstName: string = "";
+  lastName: string;
+  dni: number;
+  email: string;
+  userName: string;
+  fullName: string;
+  password: string;
+  mode: string;
+  class: string = 'login';
+  role: string;
+  enabledText: string;
+  isEnabled: boolean;
+  isNetwork: boolean;
+  classEnabled: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private camera: Camera,
-              private _loadFile: LoadFileProvider) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public userProvider: UserProvider,
+    public utilProvider: UtilsProvider) {
 
     this.mode = this.navParams.get('mode');
+    this.role = "1";
 
-    if (this.mode === 'detail'){
+    if (this.mode === 'detail') {
+      this.id = this.navParams.get('id');
       this.firstName = this.navParams.get('firstName');
       this.lastName = this.navParams.get('lastName');
       this.dni = this.navParams.get('dni');
       this.email = this.navParams.get('email');
       this.fullName = this.firstName + ' ' + this.lastName;
-      this.avatar = this.navParams.get('avatar');
-    } else if (this.mode === 'create'){
+      this.userName = this.navParams.get('userName');
+      this.isEnabled = this.navParams.get('isEnabled');
+      this.isNetwork = this.navParams.get('isNetwork');
+      this.role = this.navParams.get('rol');
+      this.password = this.navParams.get('password');
 
+    } else if (this.mode === 'create') {
+      this.firstName = "";
+      this.fullName = 'Nuevo Usuario';
+      this.isEnabled = true;
+      this.enabledText = 'Habilitado';
+      this.isNetwork = false;
+    }
+
+    this.class = (this.isNetwork) ? 'enabled' : 'disabled';
+
+    if (this.isEnabled) {
+      this.classEnabled = 'enabledToggle';
+      this.enabledText = 'Habilitado';
+    } else {
+      this.classEnabled = 'disabledToggle';
+      this.enabledText = 'No habilitado';
     }
 
   }
 
-  getPicture(){
-    let options: CameraOptions = {
-      destinationType: this.camera.DestinationType.DATA_URL,
-      targetWidth: 1000,
-      targetHeight: 1000,
-      quality: 100,
-      correctOrientation: true
-    }
-    this.camera.getPicture( options )
-      .then(imageData => {
-        this.imagePreview = `data:image/jpeg;base64,${imageData}`;
-        this.image64 = imageData;
-        this.loadImage();
-      })
-      .catch(error =>{
-        console.error( error );
-      });
+  change() {
+    this.class = (this.isNetwork) ? 'enabled' : 'disabled';
+    this.password = '';
   }
 
-  loadImage(){
-    let file = {
-      imgUrl: this.image64
-    }
-
-    this._loadFile.loadFileFirebase(file);
+  accept() {
+    console.log("Crear usuario");
   }
 
+  changeEnabled() {
+    if (this.isEnabled) {
+      this.classEnabled = 'enabledToggle';
+      this.enabledText = 'Habilitado';
+    } else {
+      this.classEnabled = 'disabledToggle';
+      this.enabledText = 'No habilitado';
+    }
+  }
+
+  createUser() {
+
+    let user = {
+      "id": this.id,
+      "firstName": this.firstName,
+      "lastName": this.lastName,
+      "dni": this.dni,
+      "email": this.email,
+      "userName": this.userName,
+      "rol": this.role,
+      "password": this.password,
+      "enabled": this.isEnabled,
+      "isNetwork": this.isNetwork
+    }
+
+
+    this.userProvider.createUser(user)
+      .subscribe((u: any) => {
+        if (this.mode === 'detail')
+          this.utilProvider.presentToast("Se modificó el usuario " + user.firstName + " " + user.lastName);
+        else
+          this.utilProvider.presentToast("Se creó el usuario " + u.firtName + " " + u.lastName);
+
+        this.navCtrl.pop();
+      },
+        (err) => {
+          this.utilProvider.presentPrompt(err.error.title, err.error.message);
+        });
+  }
 }

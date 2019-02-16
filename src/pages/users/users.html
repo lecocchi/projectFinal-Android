@@ -1,28 +1,25 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Usuario</ion-title>
+    <ion-title>Administración de Usuarios</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
   <ion-list>
-    <ion-item-sliding *ngFor="let user of users | async">
-      <ion-item (click)="openDetail(user)">
-        <ion-avatar item-start>
-          <img [src]="imagePreview" *ngIf="imagePreview" />
-        </ion-avatar>
-        <div class="issue-code">{{ user.firstName + ' ' + user.lastName  }}</div>
-        <div class="issue-summary">
-          {{ user.rol }}
-        </div>
-      </ion-item>
-    </ion-item-sliding>
+    <ion-item *ngFor="let user of users" (click)="openDetail(user)">
+      <ion-avatar item-start>
+        <avatar>{{user.firstName.substring(0,1) | uppercase}}</avatar>
+      </ion-avatar>
+      <div class="issue-summary full-name">
+        {{ user.firstName }} {{ user.lastName}}
+      </div>
+      <p class="user-name">{{ user.userName}}</p>
+      <ion-icon *ngIf="user.checked" name="checkmark-circle" item-end class="checked"></ion-icon>
+    </ion-item>
+
   </ion-list>
 
-  <button ion-button (click)="choosePicture()">Seleccionar</button>
-  <button ion-button (click)="getPicture()">Camera</button>
-  <button ion-button (click)="loadImage()">Subir</button>
 
   <!-- this fab is placed at top right -->
   <ion-fab bottom right>

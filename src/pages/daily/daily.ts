@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
-import {LoadingController, NavController, NavParams} from 'ionic-angular';
-import {DailyItemPage} from "../daily-item/daily-item";
-import {DailyProvider} from "../../providers/daily/daily";
-import {UtilsProvider} from "../../providers/utils/utils";
+import { Component } from '@angular/core';
+import { LoadingController, NavController, NavParams } from 'ionic-angular';
+import { DailyItemPage } from "../daily-item/daily-item";
+import { DailyProvider } from "../../providers/daily/daily";
+import { UtilsProvider } from "../../providers/utils/utils";
 
 @Component({
   selector: 'page-daily-tab',
@@ -10,15 +10,14 @@ import {UtilsProvider} from "../../providers/utils/utils";
 })
 export class DailyPage {
 
-  dailyItemPage:any = DailyItemPage;
-  dailies:any = [];
+  dailyItemPage: any = DailyItemPage;
+  dailies: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public dailyProvider: DailyProvider, public utils:UtilsProvider,
-              public loadingCtrl:LoadingController) {
-  }
+    public dailyProvider: DailyProvider, public utils: UtilsProvider,
+    public loadingCtrl: LoadingController) { }
 
-  ionViewWillEnter(){
+  ionViewCanEnter() {
 
     let loading = this.loadingCtrl.create({
       spinner: 'ios',
@@ -28,16 +27,10 @@ export class DailyPage {
     loading.present();
 
     this.dailyProvider.getAllDailies()
-      .subscribe( data => {
-
-
-
-        // console.log(data);
+      .subscribe((data: any) => {
         this.dailies = data.reverse();
 
         this.dailies.forEach(d => {
-          // console.log(d.created_at.dayOfWeek);
-          // console.log(this.utils.getDayInSpanish(d.created_at.dayOfWeek));
           d.created_at.dayOfWeek = this.utils.getDayInSpanish(d.created_at.dayOfWeek);
         });
 
@@ -45,18 +38,18 @@ export class DailyPage {
       });
   }
 
-  createNewDaily(){
+  createNewDaily() {
 
     this.dailyProvider.isThereDailyToday()
-      .subscribe( isThereDaily =>{
-        if (isThereDaily){
+      .subscribe(isThereDaily => {
+        if (isThereDaily) {
           this.utils.presentToast("Ya existe una daily activa para el día de hoy");
-        } else{
-          let daily:any = {
-            "firstName":"Leandro",
-            "lastName":"Cocchi",
-            "userName":"lecocchi",
-            "daily_items":[]
+        } else {
+          let daily: any = {
+            "firstName": "Leandro",
+            "lastName": "Cocchi",
+            "userName": "lecocchi",
+            "daily_items": []
           }
 
           this.dailyProvider.daily = daily;
@@ -66,7 +59,7 @@ export class DailyPage {
       });
   }
 
-  openDetail(daily:any){
+  openDetail(daily: any) {
     this.dailyProvider.daily = daily;
     this.navCtrl.push(this.dailyItemPage);
   }

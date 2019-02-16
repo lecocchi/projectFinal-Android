@@ -25,4 +25,9 @@ export class UserProvider {
     })
   }
 
+  createUser(user:any){
+    return this.http.post(URL_BASE + "/user/", user);
+  }
+
+
 }

@@ -2,7 +2,7 @@
 
   <ion-navbar color='primary'>
     <ion-title>Descripción</ion-title>
-    <div class="member">{{member.first_name}} {{member.last_name}}</div>
+    <div class="member">{{member.firstName}} {{member.lastName}}</div>
     <ion-buttons end>
       <button ion-button icon-only (click)="accept()" *ngIf="dailyActive">
         <ion-icon name="checkmark" class="accept"></ion-icon>
@@ -20,11 +20,11 @@
 
 <ion-content padding>
   <ion-item>
-    <ion-label color="primary" stacked>Yesterday</ion-label>
-    <ion-textarea type="text" placeholder="What did you do yesterday?" [(ngModel)]="yesterday" [readonly]="!dailyActive"></ion-textarea>
+    <ion-label color="primary" stacked>Ayer</ion-label>
+    <ion-textarea type="text" placeholder="¿Qué hiciste ayer?" [(ngModel)]="yesterday" [readonly]="!dailyActive"></ion-textarea>
   </ion-item>
   <ion-item>
-    <ion-label color="primary" stacked>Today</ion-label>
-    <ion-textarea type="text" placeholder="What do you doing today?" [(ngModel)]="today" [readonly]="!dailyActive"></ion-textarea>
+    <ion-label color="primary" stacked>Hoy</ion-label>
+    <ion-textarea type="text" placeholder="¿Qué vas a hacer hoy?" [(ngModel)]="today" [readonly]="!dailyActive"></ion-textarea>
   </ion-item>
 </ion-content>

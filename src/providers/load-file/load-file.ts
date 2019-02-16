@@ -6,9 +6,7 @@ import {ToastController} from "ionic-angular";
 @Injectable()
 export class LoadFileProvider {
 
-  constructor(public http: HttpClient, private toastCtrl : ToastController) {
-    console.log('Hello LoadFileProvider Provider');
-  }
+  constructor(public http: HttpClient, private toastCtrl : ToastController) { }
 
   loadFileFirebase(file: File){
     return new Promise( (resolve, reject) => {

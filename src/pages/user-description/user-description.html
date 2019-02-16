@@ -1,16 +1,30 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>{{ fullName }}</ion-title>
+
+    <ion-buttons end *ngIf="!readonly">
+      <button ion-button icon-only (click)="createUser()">
+        <ion-icon name="checkmark" class="accept"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons end>
+      <button ion-button icon-only navPop>
+        <ion-icon name="close" class="cancel"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-  <ion-avatar class="avatar" (click)="getPicture()">
-    <img [src]="imagePreview" *ngIf="imagePreview" />
-    <img src="https://firebasestorage.googleapis.com/v0/b/tesis-6bfcc.appspot.com/o/img%2Favatar.png?alt=media&token=8dd5d8df-d4a9-44b8-b004-640de509e6e9" *ngIf="!imagePreview">
-    <!--<ion-icon ios="ios-cloud-upload" md="md-cloud-upload" *ngIf="!avatar"></ion-icon>-->
-  </ion-avatar>
+  <!-- <ion-avatar class="avatar">
+    <avatar>{{ firstName. substring(0,1) | uppercase}}</avatar>
+  </ion-avatar> -->
+    <ion-item class="toggle">
+      <ion-label class="{{class}}">Login por redes sociales</ion-label>
+      <ion-toggle [(ngModel)]="isNetwork" (ionChange)="change()"></ion-toggle>
+    </ion-item>
 
   <ion-item>
     <ion-label floating>Nombre</ion-label>
@@ -23,13 +37,32 @@
   </ion-item>
 
   <ion-item>
-    <ion-label floating>DNI</ion-label>
-    <ion-input type="text" [(ngModel)]="dni"></ion-input>
+    <ion-label floating>Usuario</ion-label>
+    <ion-input type="text" [(ngModel)]="userName"></ion-input>
   </ion-item>
+
+  <ion-item class="item-leave-height">
+    <ion-label>Rol</ion-label>
+    <ion-select [(ngModel)]="role">
+        <ion-option value="1">Desarrollador</ion-option>
+        <ion-option value="2">Scrum Master</ion-option>
+        <ion-option value="3">Admin</ion-option>
+    </ion-select>
+</ion-item>
 
   <ion-item>
     <ion-label floating>Email</ion-label>
     <ion-input type="text" [(ngModel)]="email"></ion-input>
+  </ion-item>
+
+  <ion-item *ngIf="!isNetwork">
+    <ion-label floating>Password</ion-label>
+    <ion-input type="text" [(ngModel)]="password"></ion-input>
+  </ion-item>
+
+  <ion-item class="toggle">
+    <ion-label class="{{classEnabled}}">{{enabledText}}</ion-label>
+    <ion-toggle [(ngModel)]="isEnabled" (ionChange)="changeEnabled()"></ion-toggle>
   </ion-item>
 
 </ion-content>

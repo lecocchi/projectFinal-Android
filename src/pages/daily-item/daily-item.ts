@@ -4,6 +4,7 @@ import {DailyDescriptionPage} from "../daily-description/daily-description";
 import {DailyProvider} from "../../providers/daily/daily";
 import {FilterPersonPage} from "../filter-person/filter-person";
 import {DateProvider} from "../../providers/date/date";
+import { UtilsProvider } from '../../providers/utils/utils';
 
 @Component({
   selector: 'page-daily-item',
@@ -16,13 +17,15 @@ export class DailyItemPage {
   dailyActive:boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public dailyProvider: DailyProvider, public dateProvider:DateProvider) {
+              public dailyProvider: DailyProvider, public dateProvider:DateProvider,
+              public utils: UtilsProvider) {
 
     this.members = this.dailyProvider.daily.daily_items;
 
     if ( this.dailyProvider.daily.created_at == undefined){
       this.dateProvider.now()
         .subscribe( date => {
+          date.dayOfWeek = this.utils.getDayInSpanish(date.dayOfWeek);
           this.dailyCreated  = date
         })
     }else{
@@ -54,7 +57,7 @@ export class DailyItemPage {
 
   createDaily(){
     this.dailyProvider.createDaily()
-      .subscribe( data => {
+      .subscribe( (data:any) => {
         this.navCtrl.pop();
       });
   }
