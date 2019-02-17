@@ -13,9 +13,14 @@ export class PersonaPage {
   assignees: any = [];
   issueActive: boolean;
   update: boolean;
+  firstName:string;
+  lastName:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public issueProvider: IssueProvider,
-    public alertCtrl: AlertController, public userProvider: UserProvider) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams, 
+              public issueProvider: IssueProvider,
+              public alertCtrl: AlertController, 
+              public userProvider: UserProvider){
 
     this.update = this.navParams.data;
 

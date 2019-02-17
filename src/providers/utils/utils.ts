@@ -16,7 +16,7 @@ export class UtilsProvider {
   presentToast(message:string) {
     let toast = this.toastCtrl.create({
       message: message,
-      duration: 2000
+      duration: 2500
     });
     toast.present();
   }

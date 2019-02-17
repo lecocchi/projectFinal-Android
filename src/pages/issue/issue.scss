@@ -40,4 +40,50 @@ page-issue {
     font-size: 30px !important;
   }
 
+  .tabs-md .tabbar{
+    background: #274469;
+  }
+
+  .tabs-md .tab-button-text{
+    color: white;
+    font-size: 1.5rem;
+  }
+
+  .tabs-md .tab-button[aria-selected=true] .tab-button-text{
+    color: rgb(194, 201, 117);
+    font-weight: bold;
+    font-size: 1.7rem;
+  }
+
+  @media screen and (min-width: 600px) and (max-width: 1000px){
+    .scroll-content,
+    .fixed-content,
+    .tabs-md .tabbar{
+      left: 15%;
+      width: 70%;
+      border: 1px solid #ccc;
+      box-shadow: 5px 5px 30px #d4d4d4;
+    }
+    
+    ion-navbar.toolbar{
+      padding-left: 15%;
+      padding-right: 15% !important;
+    }
+  }
+
+  @media screen and (min-width: 1000px){
+    .scroll-content,
+    .fixed-content,
+    .tabs-md .tabbar{
+      left: 25%;
+      width: 50%;
+      border: 1px solid #ccc;
+      box-shadow: 5px 5px 30px #d4d4d4;
+    }
+
+    ion-navbar.toolbar{
+      padding-left: 25%;
+      padding-right: 25% !important;
+    }
+  }
 }

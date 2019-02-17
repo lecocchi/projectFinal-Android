@@ -41,7 +41,7 @@ export class BacklogPage {
   }
 
   createNewIssue(){
-    this.issueProvider.issue.reporter = 'Leandro Sebastian Cocchi';
+    // this.issueProvider.issue.reporter = 'Leandro Sebastian Cocchi';
     this.navCtrl.push(IssuePage, {"issue":null, "update": false, "backlog": true});
   }
 

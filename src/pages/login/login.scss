@@ -207,18 +207,24 @@ page-login {
     align-items: center;
   }
 
-.btn-login-google{
-  height: 45px;
-}
+  .btn-login-google{
+    height: 45px;
+  }
 
-.btn-login-user{
-  width: 80%;
-}
+  .btn-login-user{
+    width: 80%;
+  }
 
-.btn-user{
-  font-size: 1.7rem !important;
-  height: 55px;
-}
+  .btn-user{
+    font-size: 1.7rem !important;
+    height: 55px;
+  }
+
+  @media screen and (min-width: 451px){
+    .login-email{
+      padding: 0px;
+    }
+  }
 
 }
 

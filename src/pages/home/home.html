@@ -45,10 +45,17 @@
       </div>
     </div>
 
-    <div class="content" (click)="goToPage(configPage)" *ngIf="rol == 2 || rol == 3">
+    <!-- <div class="content" (click)="goToPage(configPage)" *ngIf="rol == 2 || rol == 3">
       <div class="avatar config">CF</div>
       <div class="avatar-text">
         Configuración
+      </div>
+    </div> -->
+
+    <div class="content" (click)="goToPage(versionPage)">
+      <div class="avatar config">VE</div>
+      <div class="avatar-text">
+        Versiones
       </div>
     </div>
 

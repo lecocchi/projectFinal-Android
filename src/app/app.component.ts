@@ -10,6 +10,7 @@ import {timer} from "rxjs/observable/timer";
 })
 export class MyApp {
   rootPage:any = LoginPage;
+  // rootPage:any = DashboardPage;
 
   showSplash = true;
 

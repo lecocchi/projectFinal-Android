@@ -7,13 +7,6 @@ import {PriorityPage} from "../priority/priority";
 import {RolPage} from "../rol/rol";
 import {StatePage} from "../state/state";
 
-/**
- * Generated class for the ConfigPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @Component({
   selector: 'page-config',
   templateUrl: 'config.html',

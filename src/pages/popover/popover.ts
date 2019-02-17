@@ -18,6 +18,9 @@ export class PopoverPage {
     this.issueProvider.addIssueInActiveSprint(this.viewCtrl.getNavParams().get("id"))
       .subscribe( i =>{
         this.utils.presentToast(`Se envió el issue SID-${i.id} al sprint`);
+      },
+      (err) => {
+        this.utils.presentPrompt(err.error.title, err.error.message);
       });
 
     this.viewCtrl.dismiss();

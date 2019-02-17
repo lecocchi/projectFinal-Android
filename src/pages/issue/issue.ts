@@ -6,6 +6,7 @@ import { PersonaPage } from "../persona/persona";
 import { FechasPage } from "../fechas/fechas";
 import { ComentariosPage } from "../comentarios/comentarios";
 import { UtilsProvider } from "../../providers/utils/utils";
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -22,19 +23,33 @@ export class IssuePage {
   issueActive: boolean;
   update: boolean;
   backlog: boolean;
+  firstName:string;
+  lastName:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    public issueProvider: IssueProvider, public utils: UtilsProvider) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public issueProvider: IssueProvider, 
+              public utils: UtilsProvider,
+              public storage: Storage) {
 
     this.update = this.navParams.get('update');
     this.backlog = this.navParams.get("backlog");
+    this.cleanIssue();
 
     if (this.update) {
       this.issueProvider.issue = this.navParams.get('issue');
       this.titleNavBar = 'SID-' + this.issueProvider.issue.id;
       this.issueActive = (this.issueProvider.issue.state == 'Finalizado') ? false : true;
     } else {
+      this.issueProvider.issue.id = null;
       this.issueActive = true;
+      this.storage.get('firstName').then((f)=>{
+        this.firstName = f;
+        this.storage.get('lastName').then((l)=>{
+          this.lastName = l;
+          this.issueProvider.issue.reporter = this.firstName + ' ' + this.lastName;
+        });
+      });
     }
   }
 
@@ -60,5 +75,31 @@ export class IssuePage {
 
   cancel() {
     this.navCtrl.pop();
+  }
+
+  cleanIssue(){
+    this.issueProvider.issue.id = null;
+    this.issueProvider.issue.label = null;
+    this.issueProvider.issue.plannedEnd = null;
+    this.issueProvider.issue.plannedStart = null;
+    this.issueProvider.issue.priority = null;
+    this.issueProvider.issue.remaining = null;
+    this.issueProvider.issue.reporter = null;
+    this.issueProvider.issue.resolved = null;
+    this.issueProvider.issue.sprint = null;
+    this.issueProvider.issue.state = null;
+    this.issueProvider.issue.title = null;
+    this.issueProvider.issue.updated = null;
+    this.issueProvider.issue.version = null;
+    this.issueProvider.issue.watcher = null;
+    this.issueProvider.issue.assignee = null;
+    this.issueProvider.issue.avatar = null;
+    this.issueProvider.issue.backlog = null;
+    this.issueProvider.issue.created = null;
+    this.issueProvider.issue.description = null;
+    this.issueProvider.issue.enabled = true;
+    this.issueProvider.issue.estimated = null;
+    this.issueProvider.issue.label = null;
+    this.issueProvider.issue.phase = null;
   }
 }

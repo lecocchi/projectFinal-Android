@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import { HomePage } from "../home/home";
 import { UserProvider } from '../../providers/user/user';
 import { UtilsProvider } from '../../providers/utils/utils';
@@ -20,7 +20,8 @@ export class LoginPage {
               public navParams: NavParams,
               public userProvider: UserProvider,
               public utilProvider: UtilsProvider,
-              private storage: Storage) {
+              private storage: Storage,
+              public platform:Platform) {
 
   }
 
@@ -52,7 +53,10 @@ export class LoginPage {
         this.storage.set("rol", u.rol);
         this.storage.set("userName", u.userName);
 
-        this.navCtrl.push(this.rootPage, {"rol": u.rol});
+        this.platform.ready().then((readySource) => {
+            this.navCtrl.push(this.rootPage, {"rol": u.rol});          
+        });
+
       },
       (err) => {
         this.utilProvider.presentPrompt(err.error.title, err.error.message);
