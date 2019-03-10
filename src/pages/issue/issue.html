@@ -3,7 +3,7 @@
   <ion-navbar color="primary">
     <ion-title>{{ titleNavBar }}</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="accept()" *ngIf="issueActive">
+      <button ion-button icon-only (click)="accept()" *ngIf="!issueInactive">
         <ion-icon name="checkmark" class="accept"></ion-icon>
       </button>
     </ion-buttons>

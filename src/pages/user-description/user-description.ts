@@ -33,7 +33,13 @@ export class UserDescriptionPage {
     this.mode = this.navParams.get('mode');
     this.role = "1";
 
-    if (this.mode === 'detail') {
+    if (this.mode === 'create'){
+      this.firstName = "";
+      this.fullName = 'Nuevo Usuario';
+      this.isEnabled = true;
+      this.enabledText = 'Habilitado';
+      this.isNetwork = false;
+    }else{
       this.id = this.navParams.get('id');
       this.firstName = this.navParams.get('firstName');
       this.lastName = this.navParams.get('lastName');
@@ -45,13 +51,6 @@ export class UserDescriptionPage {
       this.isNetwork = this.navParams.get('isNetwork');
       this.role = this.navParams.get('rol');
       this.password = this.navParams.get('password');
-
-    } else if (this.mode === 'create') {
-      this.firstName = "";
-      this.fullName = 'Nuevo Usuario';
-      this.isEnabled = true;
-      this.enabledText = 'Habilitado';
-      this.isNetwork = false;
     }
 
     this.class = (this.isNetwork) ? 'enabled' : 'disabled';
@@ -100,18 +99,28 @@ export class UserDescriptionPage {
       "isNetwork": this.isNetwork
     }
 
+    console.log(user);
 
-    this.userProvider.createUser(user)
+
+    if (this.mode === 'create'){
+      this.userProvider.createUser(user)
       .subscribe((u: any) => {
-        if (this.mode === 'detail')
-          this.utilProvider.presentToast("Se modificó el usuario " + user.firstName + " " + user.lastName);
-        else
-          this.utilProvider.presentToast("Se creó el usuario " + u.firtName + " " + u.lastName);
-
-        this.navCtrl.pop();
+          this.utilProvider.presentToast("Se creó el usuario " + u.firstName + " " + u.lastName);
+          this.navCtrl.pop();
       },
         (err) => {
           this.utilProvider.presentPrompt(err.error.title, err.error.message);
         });
+    }else{
+      this.userProvider.updateUser(user)
+      .subscribe((u:any) =>{
+          this.utilProvider.presentToast("Se modificó el usuario " + user.firstName + " " + user.lastName);
+          this.navCtrl.pop();
+        },
+        (err) =>{
+          this.utilProvider.presentPrompt(err.error.title, err.error.message);
+        }
+      )
+    }
   }
 }

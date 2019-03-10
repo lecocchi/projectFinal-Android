@@ -16,19 +16,16 @@ export class FechasPage {
               public issueProvider:IssueProvider) {
 
       this.update = this.navParams.data;
-      this.createdDate = new Date(this.issueProvider.issue.created).toISOString();
-      this.updatedDate = new Date(this.issueProvider.issue.updated).toISOString();
 
-      // if(this.update){
-      //   this.createdDate = new Date(this.issueProvider.issue.created).toISOString();
-      //   this.updatedDate = new Date(this.issueProvider.issue.updated).toISOString();
-      //   // this.resolvedDate = new Date(this.issueProvider.issue.resolved).toISOString();
-      // }else{
-      //   this.createdDate = new Date().toISOString();
-      //   this.updatedDate = new Date().toISOString();
-      // }
+      if(this.update){
+        this.createdDate = new Date(this.issueProvider.issue.created).toISOString();
+        this.updatedDate = new Date(this.issueProvider.issue.updated).toISOString();
+        if (this.issueProvider.issue.resolved != null)
+          this.resolvedDate = new Date(this.issueProvider.issue.resolved).toISOString();
 
-
+      }else{
+        this.createdDate = new Date().toISOString();
+        this.updatedDate = new Date().toISOString();
+      }
   }
-
 }

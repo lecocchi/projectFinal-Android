@@ -26,7 +26,6 @@ export class UsersPage {
     this.userProvider.getAllUser()
     .subscribe( (users:any) => {
       this.users = users;
-      // console.log(users);
     });
   }
 
@@ -44,7 +43,7 @@ export class UsersPage {
       'isEnabled' : user.enabled,
       'isNetwork' : user.isNetwork,
       'password' : user.password
-    } );
+    });
   }
 
   createUser(){

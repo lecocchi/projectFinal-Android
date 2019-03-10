@@ -17,21 +17,24 @@ export class DetallePage {
   state: string;
   priority: string;
   version: string;
-  issueActive: boolean;
+  issueInactive: boolean;
   update: boolean;
   title: string = "";
   description: string;
+  disabledState: boolean;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public stateProvider: StateProvider, public priorityProvider: PrioritiesProvider,
     public versionProvider: VersionsProvider, public alertCtrl: AlertController,
-    public issueProvider: IssueProvider,
-  ) {
+    public issueProvider: IssueProvider) {
 
     this.update = this.navParams.data;
 
     if (this.update) {
-      this.issueActive = (this.issueProvider.issue.state == 'Finalizado') ? false : true;
+      this.issueInactive = (this.issueProvider.issue.state === 'FINALIZADO') ? true : false;
+
+      this.disabledState = this.issueInactive || this.issueProvider.issue.backlog;
 
       this.issueProvider.issueToUpdate = this.issueProvider.issue;
       this.title = this.issueProvider.issue.title;
@@ -40,21 +43,17 @@ export class DetallePage {
       this.priority = this.issueProvider.issue.priority;
       this.version = this.issueProvider.issue.version;
     } else {
-      this.issueActive = true;
+      this.issueInactive = false;
+      this.state = 'CREADO';
+      this.issueProvider.issue.state = this.state;
+      this.disabledState = true;
     }
 
     //STATES
     this.stateProvider.getAllState()
       .subscribe((s: any) => {
-        this.states.push({
-          type: 'radio',
-          label: 'Sin estado',
-          value: ''
-        });
         s.forEach(state => {
           this.states.push({
-            type: 'radio',
-            label: state.name,
             value: state.name
           })
         })
@@ -64,14 +63,10 @@ export class DetallePage {
     this.priorityProvider.getAllPriority()
       .subscribe((p: any) => {
         this.priorities.push({
-          type: 'radio',
-          label: 'Sin prioridad',
-          value: ''
+          value: 'Sin prioridad'
         });
         p.forEach(pri => {
           this.priorities.push({
-            type: 'radio',
-            label: pri.name,
             value: pri.name
           });
         })
@@ -81,14 +76,10 @@ export class DetallePage {
     this.versionProvider.getAllVersion()
       .subscribe((v: any) => {
         this.versions.push({
-          type: 'radio',
-          label: 'Sin versión',
-          value: ''
+          value: 'Sin versión'
         });
         v.forEach(ve => {
           this.versions.push({
-            type: 'radio',
-            label: ve.name,
             value: ve.name
           });
         })
@@ -96,57 +87,17 @@ export class DetallePage {
   }
 
 
-  //STATE
-  selectState() {
-    if (this.issueActive) {
-      this.alertCtrl.create({
-        title: 'Estados',
-        inputs: this.states,
-        buttons: [{
-          text: 'Seleccionar',
-          handler: state => {
-            this.state = state;
-            this.issueProvider.issueToUpdate.state = state;
-          }
-        }]
-      }).present();
-    }
+  onChangePriority($event){
+    this.issueProvider.issueToUpdate.priority = $event;
   }
 
-  //PRIORITY
-  selectPriority() {
-    if (this.issueActive) {
-      this.alertCtrl.create({
-        title: 'Prioridades',
-        inputs: this.priorities,
-        buttons: [{
-          text: 'Seleccionar',
-          handler: priority => {
-            this.priority = priority;
-            this.issueProvider.issueToUpdate.priority = priority;
-          }
-        }]
-      }).present();
-    }
+  onChangeState($event){
+    this.issueProvider.issueToUpdate.state = $event;
   }
 
-  //VERSION
-  selectVersion() {
-    if (this.issueActive) {
-      this.alertCtrl.create({
-        title: 'Versiones',
-        inputs: this.versions,
-        buttons: [{
-          text: 'Seleccionar',
-          handler: version => {
-            this.version = version;
-            (this.update) ? this.issueProvider.issueToUpdate.version = version : this.version = version;
-          }
-        }]
-      }).present();
-    }
+  onChangeVersion($event){
+    this.issueProvider.issueToUpdate.version = $event;
   }
-
 
   changeTitle($event){
     this.issueProvider.issue.title = $event.value;

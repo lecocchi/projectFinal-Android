@@ -29,10 +29,17 @@ export class UserProvider {
     return this.http.post(URL_BASE + "/user/", user);
   }
 
+  updateUser(user:any){
+    return this.http.put(URL_BASE + "/user/" + user.id, user);
+  }
+
 
   loginForUserAndPass(userLogin:any){
     return this.http.post(URL_BASE + "/user/login-mail", userLogin);
   }
 
+  changePassword(changePassword: any){
+    return this.http.patch(URL_BASE + "/user/password", changePassword);
+  }
 
 }

@@ -52,11 +52,9 @@ export class LoginPage {
         this.storage.set("lastName", u.lastName);
         this.storage.set("rol", u.rol);
         this.storage.set("userName", u.userName);
+        this.storage.set("isNetwork", u.isNetwork);
 
-        this.platform.ready().then((readySource) => {
-            this.navCtrl.push(this.rootPage, {"rol": u.rol});          
-        });
-
+        this.navCtrl.push(this.rootPage, {"rol": u.rol});
       },
       (err) => {
         this.utilProvider.presentPrompt(err.error.title, err.error.message);

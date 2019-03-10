@@ -1,67 +1,67 @@
-<ion-header>
+<!-- <ion-header>
   <ion-navbar color='primary' hideBackButton="true" #content>
     <ion-title>
       {{ navTitle}}
     </ion-title>
   </ion-navbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content class="background">
 
   <div class="option-group">
 
     <div class="content" (click)="goToPage(backlogPage)">
-      <div class="avatar backlog">BK</div>
-      <div class="avatar-text">
+      <div class="avatar1 backlog">BK</div>
+      <div class="avatar1-text">
         Backlog
       </div>
     </div>
 
     <div class="content" (click)="goToPage(SprintsPage)">
-      <div class="avatar active-sprint">SP</div>
-      <div class="avatar-text">
+      <div class="avatar1 active-sprint">SP</div>
+      <div class="avatar1-text">
         Sprints
       </div>
     </div>
 
     <div class="content" (click)="goToPage(dailyPage)" *ngIf="rol == 2 || rol == 3">
-      <div class="avatar daily">DY</div>
-      <div class="avatar-text">
+      <div class="avatar1 daily">DY</div>
+      <div class="avatar1-text">
         Daily
       </div>
     </div>
 
     <div class="content" (click)="goToPage(reportsPage)">
-      <div class="avatar report">RE</div>
-      <div class="avatar-text">
+      <div class="avatar1 report">RE</div>
+      <div class="avatar1-text">
         Reportes
       </div>
     </div>
 
     <div class="content" (click)="goToPage(perfilPage)">
-      <div class="avatar report">MP</div>
-      <div class="avatar-text">
+      <div class="avatar1 report">MP</div>
+      <div class="avatar1-text">
         Mi perfil
       </div>
     </div>
 
     <!-- <div class="content" (click)="goToPage(configPage)" *ngIf="rol == 2 || rol == 3">
-      <div class="avatar config">CF</div>
-      <div class="avatar-text">
+      <div class="avatar1 config">CF</div>
+      <div class="avatar1-text">
         Configuración
       </div>
     </div> -->
 
     <div class="content" (click)="goToPage(versionPage)">
-      <div class="avatar config">VE</div>
-      <div class="avatar-text">
+      <div class="avatar1 config">VE</div>
+      <div class="avatar1-text">
         Versiones
       </div>
     </div>
 
     <div class="content" (click)="goToPage(usersPage)" *ngIf="rol == 3">
-      <div class="avatar config">US</div>
-      <div class="avatar-text">
+      <div class="avatar1 config">US</div>
+      <div class="avatar1-text">
         Usuarios
       </div>
     </div>

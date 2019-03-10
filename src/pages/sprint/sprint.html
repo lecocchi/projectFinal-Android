@@ -39,7 +39,7 @@
             {{ issue.title }}
           </div>
         </div>
-        <button icon-only (click)="presentPopover($event, issue)" item-end class="more">
+        <button icon-only (click)="presentPopover($event, issue)" item-end class="more" *ngIf="issue.state != 'FINALIZADO'">
           <ion-icon name="more"></ion-icon>
         </button>
       </ion-item>

@@ -2,8 +2,8 @@
   <ion-navbar color="primary">
     <ion-title>Mi perfil</ion-title>
 
-    <ion-buttons end *ngIf="!readonly">
-      <button ion-button icon-only>
+    <!-- <ion-buttons end *ngIf="!readonly">
+      <button ion-button icon-only (click)="accept()">
         <ion-icon name="checkmark" class="accept"></ion-icon>
       </button>
     </ion-buttons>
@@ -12,7 +12,7 @@
       <button ion-button icon-only navPop>
         <ion-icon name="close" class="cancel"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-navbar>
 </ion-header>
 
@@ -20,32 +20,31 @@
 <ion-content padding>
   <ion-item>
     <ion-label floating>Nombre</ion-label>
-    <ion-input type="text" [(ngModel)]="firstName"></ion-input>
+    <ion-input type="text" [(ngModel)]="firstName" [disabled]=true></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label floating>Apellido</ion-label>
-    <ion-input type="text" [(ngModel)]="lastName"></ion-input>
+    <ion-input type="text" [(ngModel)]="lastName" [disabled]=true></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label floating>Usuario</ion-label>
-    <ion-input type="text" [(ngModel)]="userName"></ion-input>
+    <ion-input type="text" [(ngModel)]="userName" [disabled]=true></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label floating>Rol</ion-label>
-    <ion-input type="text" [(ngModel)]="role"></ion-input>
+    <ion-input type="text" [(ngModel)]="role" [disabled]=true></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label floating>Email</ion-label>
-    <ion-input type="text" [(ngModel)]="email"></ion-input>
+    <ion-input type="text" [(ngModel)]="email" [disabled]=true></ion-input>
   </ion-item>
 
-  <ion-item *ngIf="!isNetwork">
-    <ion-label floating>Password</ion-label>
-    <ion-input type="text" [(ngModel)]="password"></ion-input>
-  </ion-item>
+  <button ion-button class="changePassword" (click)="changePassword()" *ngIf="!isNetwork">
+    Cambiar contraseña
+  </button>
     
 </ion-content>

@@ -20,7 +20,7 @@ export class IssuePage {
   tab3 = FechasPage;
   tab4 = ComentariosPage;
   titleNavBar: string;
-  issueActive: boolean;
+  issueInactive: boolean;
   update: boolean;
   backlog: boolean;
   firstName:string;
@@ -34,15 +34,15 @@ export class IssuePage {
 
     this.update = this.navParams.get('update');
     this.backlog = this.navParams.get("backlog");
-    this.cleanIssue();
 
     if (this.update) {
       this.issueProvider.issue = this.navParams.get('issue');
       this.titleNavBar = 'SID-' + this.issueProvider.issue.id;
-      this.issueActive = (this.issueProvider.issue.state == 'Finalizado') ? false : true;
+      this.issueInactive = (this.issueProvider.issue.state === 'FINALIZADO') ? true : false;
     } else {
+      this.cleanIssue();
       this.issueProvider.issue.id = null;
-      this.issueActive = true;
+      this.issueInactive = false;
       this.storage.get('firstName').then((f)=>{
         this.firstName = f;
         this.storage.get('lastName').then((l)=>{

@@ -29,4 +29,8 @@ export class DailyProvider {
     return this.http.get(URL_BASE + "/daily/today");
   }
 
+  sendMail(dailyId:string){
+    return this.http.post(URL_BASE + "/daily/" + dailyId + "/mail/", null);
+  }
+
 }

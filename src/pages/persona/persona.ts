@@ -11,10 +11,11 @@ export class PersonaPage {
   reporter: string;
   assignee: string;
   assignees: any = [];
-  issueActive: boolean;
+  issueInactive: boolean;
   update: boolean;
   firstName:string;
   lastName:string;
+  disabledAssignee:boolean;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
@@ -27,9 +28,11 @@ export class PersonaPage {
     if (this.update) {
       this.reporter = this.issueProvider.issue.reporter;
       this.assignee = this.issueProvider.issue.assignee;
-      this.issueActive = (this.issueProvider.issue.state == 'Finalizado') ? false : true;
+      this.issueInactive = (this.issueProvider.issue.state === 'FINALIZADO') ? true : false;
+      this.disabledAssignee = this.issueInactive || this.issueProvider.issue.backlog;
     } else {
-      this.issueActive = true;
+      this.issueInactive = false;
+      this.disabledAssignee = true;
     }
 
     this.userProvider.getAllUser()
@@ -50,19 +53,7 @@ export class PersonaPage {
     this.reporter =  this.issueProvider.issue.reporter;
   }
 
-  selectAssignee() {
-    if (this.issueActive) {
-      this.alertCtrl.create({
-        title: 'Asignar a',
-        inputs: this.assignees,
-        buttons: [{
-          text: 'Seleccionar',
-          handler: assignee => {
-            this.assignee = assignee;
-            this.issueProvider.issueToUpdate.assignee = assignee;
-          }
-        }]
-      }).present();
-    }
+  onChangeAssignee($event){
+    this.issueProvider.issueToUpdate.assignee = $event;
   }
 }

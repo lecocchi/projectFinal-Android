@@ -2,12 +2,19 @@
 
   <ion-item>
     <ion-label stacked>Creado por</ion-label>
-    <ion-input type="text" [(ngModel)]="reporter" [readonly]="true" ></ion-input>
+    <ion-input type="text" [(ngModel)]="reporter" [disabled]="true"></ion-input>
   </ion-item>
 
-  <ion-item>
+  <!-- <ion-item>
     <ion-label stacked>Asignado a</ion-label>
-    <ion-input type="text" [(ngModel)]="assignee" [readonly]="true" (click)="selectAssignee()"></ion-input>
-  </ion-item>
+    <ion-input type="text" [(ngModel)]="assignee" [disabled]="issueInactive" (click)="selectAssignee()"></ion-input>
+  </ion-item> -->
+
+  <ion-item>
+      <ion-label>Asignado a</ion-label>
+      <ion-select [(ngModel)]="assignee" [disabled]="disabledAssignee" (ionChange)="onChangeAssignee($event)">
+        <ion-option  *ngFor="let assignee of assignees" [value]=assignee.value>{{assignee.value}}</ion-option>
+      </ion-select>
+    </ion-item>
 
 </ion-content>

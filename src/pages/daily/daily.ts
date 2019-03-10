@@ -64,4 +64,17 @@ export class DailyPage {
     this.navCtrl.push(this.dailyItemPage);
   }
 
+  sendMail(dailyId:string){
+
+    this.utils.presentToast("Enviando mails .......");
+
+    this.dailyProvider.sendMail(dailyId)
+    .subscribe((m) => {
+      this.utils.presentToast("Se han enviado los mails correctamente");
+    },
+    (err) =>{
+      this.utils.presentPrompt("Error", "Error al enviar los mails");
+    });
+  }
+
 }

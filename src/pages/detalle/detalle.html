@@ -4,29 +4,36 @@
 
     <ion-item>
       <ion-label floating>Título <span class="required">(requerido)</span></ion-label>
-      <ion-input type="text" [(ngModel)]= 'title' (ionChange)="changeTitle($event)"></ion-input>
+      <ion-input type="text" [(ngModel)]= 'title' (ionChange)="changeTitle($event)" [disabled]="issueInactive"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label floating>Descripción</ion-label>
-      <ion-textarea  class="area" [(ngModel)]='description' (ionChange)="changeDescription($event)"></ion-textarea>
+      <ion-textarea  class="area" [(ngModel)]='description' (ionChange)="changeDescription($event)" [disabled]="issueInactive"></ion-textarea>
     </ion-item>
 
   </ion-list>
+  <ion-item>
+      <ion-label>Prioridad</ion-label>
+      <ion-select [(ngModel)]="priority" [disabled]="issueInactive" (ionChange)="onChangePriority($event)">
+        <ion-option  *ngFor="let priority of priorities" [value]=priority.value>{{priority.value}}</ion-option>
+      </ion-select>
+    </ion-item>
+
 
   <ion-item>
-    <ion-label stacked>Prioridad</ion-label>
-    <ion-input type="text" [(ngModel)]="priority" (click)="selectPriority()" [readonly]="true"></ion-input>
+    <ion-label>Estado</ion-label>
+    <ion-select [(ngModel)]="state" [disabled]="disabledState" (ionChange)="onChangeState($event)">
+      <ion-option  *ngFor="let state of states" [value]=state.value>{{state.value}}</ion-option>
+    </ion-select>
   </ion-item>
 
-  <ion-item>
-    <ion-label stacked>Estado</ion-label>
-    <ion-input type="text" [(ngModel)]="state" (click)="selectState()" [readonly]="true"></ion-input>
-  </ion-item>
 
   <ion-item>
-    <ion-label stacked>Versión</ion-label>
-    <ion-input type="text" [(ngModel)]="version" (click)="selectVersion()" [readonly]="true"></ion-input>
-  </ion-item>
+      <ion-label>Versión</ion-label>
+      <ion-select [(ngModel)]="version" [disabled]="issueInactive" (ionChange)="onChangeVersion($event)">
+        <ion-option  *ngFor="let version of versions" [value]=version.value>{{version.value}}</ion-option>
+      </ion-select>
+    </ion-item>
 
 </ion-content>
