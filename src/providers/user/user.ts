@@ -18,7 +18,6 @@ export class UserProvider {
     return new Promise((resolve, reject) => {
       this.afDB.collection('tesis').doc('users')
         .valueChanges().subscribe( data =>{
-          console.log(data);
 
           resolve();
       })

@@ -22,14 +22,11 @@ export class LoadFileProvider {
 
         ()=>{}, //saber el % de cuantos Mbs se ha subido
         (error)=>{
-          console.log("Error en la carga");
-          console.log(JSON.stringify(error));
           this.showToast(JSON.stringify(error));
           reject();
         },
 
       ()=>{
-        console.log('Archivo subido');
         this.showToast('Imagen cargada correctamente');
         resolve();
       }

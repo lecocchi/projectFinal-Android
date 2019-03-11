@@ -29,7 +29,6 @@ export class DailyPage {
     this.dailyProvider.getAllDailies()
       .subscribe((data: any) => {
         this.dailies = data.reverse();
-
         this.dailies.forEach(d => {
           d.created_at.dayOfWeek = this.utils.getDayInSpanish(d.created_at.dayOfWeek);
         });

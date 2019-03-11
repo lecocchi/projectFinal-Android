@@ -18,7 +18,7 @@ export class ModalPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ModalPage');
+    
   }
 
 }

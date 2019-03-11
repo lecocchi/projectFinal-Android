@@ -58,7 +58,7 @@ export class PerfilPage {
   ionViewCanEnter(){ }
 
   accept(){
-    console.log("Cambiar");
+
   }
 
   changePassword(){

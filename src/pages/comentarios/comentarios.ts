@@ -18,7 +18,7 @@ export class ComentariosPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ComentariosPage');
+    
   }
 
 }

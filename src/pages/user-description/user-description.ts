@@ -99,9 +99,6 @@ export class UserDescriptionPage {
       "isNetwork": this.isNetwork
     }
 
-    console.log(user);
-
-
     if (this.mode === 'create'){
       this.userProvider.createUser(user)
       .subscribe((u: any) => {
