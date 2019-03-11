@@ -41,4 +41,8 @@ export class UserProvider {
     return this.http.patch(URL_BASE + "/user/password", changePassword);
   }
 
+  loginForGooglePlus(userLoginGooglePlus:any){
+    return this.http.post(URL_BASE + "/user/google-plus", userLoginGooglePlus);
+  }
+
 }
