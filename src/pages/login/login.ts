@@ -5,6 +5,8 @@ import { UserProvider } from '../../providers/user/user';
 import { UtilsProvider } from '../../providers/utils/utils';
 import { Storage } from '@ionic/storage';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'page-login',
@@ -24,7 +26,8 @@ export class LoginPage {
               public utilProvider: UtilsProvider,
               private storage: Storage,
               public platform:Platform,
-              private gp: GooglePlus) {
+              private gp: GooglePlus,
+              public afAuth: AngularFireAuth) {
 
   }
 
@@ -98,8 +101,53 @@ export class LoginPage {
           })
       }).catch(err => console.log(err));
     }else{
-      console.log("Not cordova");
+      this.doGoogleLogin();
+      // this.afAuth.auth.signOut().then(res =>{
+      //   console.log(res)
+      // })
     }
+  }
+
+  doGoogleLogin(){
+    return new Promise<any>((resolve, reject) => {
+      let provider = new firebase.auth.GoogleAuthProvider();
+      provider.addScope('profile');
+      provider.addScope('email');
+      this.afAuth.auth
+      .signInWithPopup(provider)
+      .then(res => {
+        let userLoginGooglePlus = {
+          "email":res.user.email
+        }
+
+        this.userProvider.loginForGooglePlus(userLoginGooglePlus)
+          .subscribe( (u:any) =>{
+            this.storage.remove("id");
+            this.storage.remove("email");
+            this.storage.remove("firstName");
+            this.storage.remove("lastName");
+            this.storage.remove("rol");
+            this.storage.remove("userName");
+    
+            this.storage.set("id", u.id);
+            this.storage.set("email", u.email);
+            this.storage.set("firstName", u.firstName);
+            this.storage.set("lastName", u.lastName);
+            this.storage.set("rol", u.rol);
+            this.storage.set("userName", u.userName);
+            this.storage.set("isNetwork", u.isNetwork);
+    
+            this.navCtrl.push(this.rootPage, {"rol": u.rol});
+          },
+          (err) =>{
+            this.gp.logout().then((res)=>{});
+            this.utilProvider.presentPrompt(err.error.title, err.error.message);
+          })
+      })
+      .catch((err)=>{
+        this.utilProvider.presentPrompt("ERROR", "Error al intentar conectarse a google");
+      })
+    })
   }
 
 }
