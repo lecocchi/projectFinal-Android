@@ -34,7 +34,7 @@
     "@ionic/pro": "1.0.20",
     "@ionic/storage": "^2.2.0",
     "angularfire2": "^5.1.2",
-    "cordova-android": "7.0.0",
+    "cordova-android": "8.0.0",
     "cordova-browser": "5.0.4",
     "cordova-plugin-camera": "^4.0.3",
     "cordova-plugin-device": "^2.0.2",
@@ -44,16 +44,17 @@
     "cordova-plugin-ionic-webview": "^1.2.1",
     "cordova-plugin-nativestorage": "^2.3.2",
     "cordova-plugin-splashscreen": "^5.0.2",
+    "cordova-plugin-sqlite": "^1.0.3",
     "cordova-plugin-telerik-imagepicker": "^2.2.2",
     "cordova-plugin-whitelist": "^1.3.3",
-    "cordova-sqlite-storage": "^2.5.0",
+    "cordova-sqlite-storage": "3.2.0",
     "firebase": "^5.9.0",
     "ionic-angular": "3.9.2",
     "ionic-datepicker": "^1.2.1",
     "ionic-native": "^2.9.0",
     "ionicons": "3.0.0",
     "promise-polyfill": "^8.1.0",
-    "rxjs": "^6.3.2",
+    "rxjs": "6.3.2",
     "rxjs-compat": "^6.3.2",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.26"
@@ -78,13 +79,13 @@
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-googleplus": {
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.319058628236-bnjfsgh4q2648hn8khv6pvv1oe9atqo3",
-        "WEB_APPLICATION_CLIENT_ID": "319058628236-bnjfsgh4q2648hn8khv6pvv1oe9atqo3.apps.googleusercontent.com"
+        "WEB_APPLICATION_CLIENT_ID": "319058628236-bnjfsgh4q2648hn8khv6pvv1oe9atqo3.apps.googleusercontent.com",
+        "PLAY_SERVICES_VERSION": "11.8.0"
       },
       "cordova-plugin-nativestorage": {}
     },
     "platforms": [
-      "browser",
-      "android"
+      "browser"
     ]
   }
 }

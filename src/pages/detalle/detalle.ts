@@ -22,12 +22,14 @@ export class DetallePage {
   title: string = "";
   description: string;
   disabledState: boolean;
+  estimated:number;
+  estimatedList:any = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89];
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public stateProvider: StateProvider, public priorityProvider: PrioritiesProvider,
-    public versionProvider: VersionsProvider, public alertCtrl: AlertController,
-    public issueProvider: IssueProvider) {
+              public stateProvider: StateProvider, public priorityProvider: PrioritiesProvider,
+              public versionProvider: VersionsProvider, public alertCtrl: AlertController,
+              public issueProvider: IssueProvider) {
 
     this.update = this.navParams.data;
 
@@ -42,12 +44,21 @@ export class DetallePage {
       this.state = this.issueProvider.issue.state;
       this.priority = this.issueProvider.issue.priority;
       this.version = this.issueProvider.issue.version;
+      this.estimated = this.issueProvider.issue.estimated;
+
     } else {
       this.issueInactive = false;
       this.state = 'CREADO';
       this.issueProvider.issue.state = this.state;
       this.disabledState = true;
     }
+
+    // var i:number = 0;
+    //
+    // for (i ; i < 50 ; i ++){
+    //   this.estimatedList.push(i);
+    // }
+
 
     //STATES
     this.stateProvider.getAllState()
@@ -105,6 +116,10 @@ export class DetallePage {
 
   changeDescription($event){
     this.issueProvider.issue.description = $event.value;
+  }
+
+  onChangeEstimated($event){
+    this.issueProvider.issue.estimated = $event;
   }
 
 

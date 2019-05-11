@@ -52,6 +52,15 @@ export class PopoverSprintPage {
             ]
           });
           alert.present();
+        }else{
+          this.sprintProvider.finishSprint(this.viewCtrl.getNavParams().get("sprint"))
+            .subscribe((i: any) => {
+                this.utils.presentToast(`Se finalizó el Sprint ${i.id}`);
+                this.viewCtrl.dismiss();
+              },
+              (err) => {
+                this.utilProvider.presentPrompt(err.error.title, err.error.message);
+              });
         }
       },
         (err) => {

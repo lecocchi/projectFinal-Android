@@ -34,6 +34,8 @@ export class UserProvider {
 
 
   loginForUserAndPass(userLogin:any){
+
+    console.log("LOGIN WITH MAIL ==>> " + URL_BASE + "/user/login-mail");
     return this.http.post(URL_BASE + "/user/login-mail", userLogin);
   }
 

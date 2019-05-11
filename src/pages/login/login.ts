@@ -36,6 +36,9 @@ export class LoginPage {
   }
 
   loginForUserAndPass(){
+
+    console.log("Click under button login with mail");
+
     let user = {
       "user_name" : this.userName,
       "password" : this.password
@@ -145,6 +148,7 @@ export class LoginPage {
           })
       })
       .catch((err)=>{
+        console.log(err);
         this.utilProvider.presentPrompt("ERROR", "Error al intentar conectarse a google");
       })
     })

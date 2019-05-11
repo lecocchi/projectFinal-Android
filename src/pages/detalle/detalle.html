@@ -14,11 +14,11 @@
 
   </ion-list>
   <ion-item>
-      <ion-label>Prioridad</ion-label>
-      <ion-select [(ngModel)]="priority" [disabled]="issueInactive" (ionChange)="onChangePriority($event)">
-        <ion-option  *ngFor="let priority of priorities" [value]=priority.value>{{priority.value}}</ion-option>
-      </ion-select>
-    </ion-item>
+    <ion-label>Prioridad</ion-label>
+    <ion-select [(ngModel)]="priority" [disabled]="issueInactive" (ionChange)="onChangePriority($event)">
+      <ion-option  *ngFor="let priority of priorities" [value]=priority.value>{{priority.value}}</ion-option>
+    </ion-select>
+  </ion-item>
 
 
   <ion-item>
@@ -30,10 +30,17 @@
 
 
   <ion-item>
-      <ion-label>Versión</ion-label>
-      <ion-select [(ngModel)]="version" [disabled]="issueInactive" (ionChange)="onChangeVersion($event)">
-        <ion-option  *ngFor="let version of versions" [value]=version.value>{{version.value}}</ion-option>
-      </ion-select>
-    </ion-item>
+    <ion-label>Versión</ion-label>
+    <ion-select [(ngModel)]="version" [disabled]="issueInactive" (ionChange)="onChangeVersion($event)">
+      <ion-option  *ngFor="let version of versions" [value]=version.value>{{version.value}}</ion-option>
+    </ion-select>
+  </ion-item>
 
-</ion-content>
+  <ion-item>
+    <ion-label>Estimación</ion-label>
+    <ion-select [(ngModel)]="estimated" [disabled]="issueInactive" (ionChange)="onChangeEstimated($event)">
+      <ion-option  *ngFor="let estimated of estimatedList" [value]=estimated>{{estimated}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+</ion-content>estimated
