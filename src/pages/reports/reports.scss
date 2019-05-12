@@ -1,4 +1,5 @@
 page-reports {
+
     @media screen and (min-width: 600px) and (max-width: 1000px){
         .scroll-content,
         .fixed-content,
@@ -31,4 +32,23 @@ page-reports {
           padding-right: 25% !important;
         }
       }
+
+  .container{
+    height: 50vh;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+  }
+
+  .velocity, .report{
+    margin: 25px !important;
+    height: 100px;
+    width: 200px;
+    font-weight: bold;
+  }
+
+  .report{
+    background-color: #216856;
+  }
 }

@@ -9,6 +9,9 @@
 
 <ion-content padding>
 
-  <button ion-button round (click)="goToPage(velocityPage)">Velocity Chart</button>
+  <div class="container">
+    <button ion-button round (click)="goToPage(velocityPage)" class="velocity">Velocity Chart</button>
+    <button ion-button round (click)="goToPage(sprintReportPage)" class="report">Sprint Report</button>
+  </div>
 
 </ion-content>

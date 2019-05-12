@@ -1,0 +1,30 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Sprint Report</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list *ngFor="let report of sprintReports">
+    <ion-list-header>
+      {{report.sprint}}
+    </ion-list-header>
+    <ion-item *ngFor="let issue of report.issues">
+      <div>
+        <div class="issue-code">SID-{{ issue.id }}</div>
+        <div class="issue-summary">
+          {{ issue.title }}
+        </div>
+      </div>
+    </ion-item>
+    <br>
+    <br>
+    <br>
+
+  </ion-list>
+
+</ion-content>

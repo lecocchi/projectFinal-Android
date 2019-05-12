@@ -1,0 +1,52 @@
+page-sprint-report {
+  @media screen and (min-width: 600px) and (max-width: 1000px){
+    .scroll-content,
+    .fixed-content,
+    .tabs-md .tabbar{
+      left: 15%;
+      width: 70%;
+      border: 1px solid #ccc;
+      box-shadow: 5px 5px 30px #d4d4d4;
+    }
+
+    ion-navbar.toolbar{
+      padding-left: 15%;
+      padding-right: 15% !important;
+    }
+  }
+
+  @media screen and (min-width: 1000px){
+    .scroll-content,
+    .fixed-content,
+    .fixed-content,
+    .tabs-md .tabbar{
+      left: 25%;
+      width: 50%;
+      border: 1px solid #ccc;
+      box-shadow: 5px 5px 30px #d4d4d4;
+    }
+
+    ion-navbar.toolbar{
+      padding-left: 25%;
+      padding-right: 25% !important;
+    }
+  }
+
+  .issue-code {
+    color: #286090;
+    font-weight: 600;
+    font-size: 1.1em;
+  }
+
+  .issue-summary {
+    font-weight: 500;
+    color: #5a5959;
+  }
+
+
+  ion-list-header{
+    color: #216856 !important;
+    font-size: x-large !important;
+    font-weight: bold !important;
+  }
+}

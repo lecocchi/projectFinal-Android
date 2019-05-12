@@ -73,6 +73,7 @@ import { PopoverBacklogPage } from '../pages/popover-backlog/popover-backlog';
 import { PopoverSprintPage } from '../pages/popover-sprint/popover-sprint';
 import { PerfilPage } from '../pages/perfil/perfil';
 import {VelocityPage} from "../pages/velocity/velocity";
+import {SprintReportPage} from "../pages/sprint-report/sprint-report";
 
 @NgModule({
   declarations: [
@@ -117,7 +118,8 @@ import {VelocityPage} from "../pages/velocity/velocity";
     PopoverBacklogPage,
     PopoverSprintPage,
     PerfilPage,
-    VelocityPage
+    VelocityPage,
+    SprintReportPage
   ],
   imports: [
     BrowserModule,
@@ -170,7 +172,8 @@ import {VelocityPage} from "../pages/velocity/velocity";
     PopoverBacklogPage,
     PopoverSprintPage,
     PerfilPage,
-    VelocityPage
+    VelocityPage,
+    SprintReportPage
   ],
   providers: [
     StatusBar,

@@ -31,4 +31,8 @@ export class SprintProvider {
     return this.http.get(URL_BASE + "/sprint/velocity")
   }
 
+  sprintReports(){
+    return this.http.get(URL_BASE + "/sprint/sprint-report");
+  }
+
 }
