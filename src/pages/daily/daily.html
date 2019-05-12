@@ -14,7 +14,7 @@
       <h2 class="date" (click)="openDetail(daily)">{{daily.created_at | formatDate}}</h2>
 
       <button  icon-only (click)="sendMail(daily.id)" item-end class="send">
-          <ion-icon name="send"></ion-icon>
+          <ion-icon name="send" *ngIf="false"></ion-icon>
         </button>
     </ion-item>
   </ion-list>
