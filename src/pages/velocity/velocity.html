@@ -1,0 +1,21 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Velocity Chart</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <table>
+        <tr>
+          <th>Sprint</th>
+          <th>Story Points</th>
+        </tr>
+        <tr *ngFor="let velocity of velocities">
+          <td>{{velocity.sprint}}</td>
+          <td>{{velocity.story}}</td>
+        </tr>
+      </table>
+</ion-content>

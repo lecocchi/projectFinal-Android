@@ -27,4 +27,8 @@ export class SprintProvider {
     return this.http.post(URL_BASE + "/sprint/finish", sprint);
   }
 
+  velocityChart(){
+    return this.http.get(URL_BASE + "/sprint/velocity")
+  }
+
 }

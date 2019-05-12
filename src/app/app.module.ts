@@ -72,6 +72,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { PopoverBacklogPage } from '../pages/popover-backlog/popover-backlog';
 import { PopoverSprintPage } from '../pages/popover-sprint/popover-sprint';
 import { PerfilPage } from '../pages/perfil/perfil';
+import {VelocityPage} from "../pages/velocity/velocity";
 
 @NgModule({
   declarations: [
@@ -115,7 +116,8 @@ import { PerfilPage } from '../pages/perfil/perfil';
     ComentariosPage,
     PopoverBacklogPage,
     PopoverSprintPage,
-    PerfilPage
+    PerfilPage,
+    VelocityPage
   ],
   imports: [
     BrowserModule,
@@ -167,7 +169,8 @@ import { PerfilPage } from '../pages/perfil/perfil';
     ComentariosPage,
     PopoverBacklogPage,
     PopoverSprintPage,
-    PerfilPage
+    PerfilPage,
+    VelocityPage
   ],
   providers: [
     StatusBar,
