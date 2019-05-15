@@ -34,7 +34,6 @@ export class DetallePage {
     this.update = this.navParams.data;
 
     if (this.update) {
-      this.issueInactive = (this.issueProvider.issue.state === 'FINALIZADO') ? true : false;
 
       this.disabledState = this.issueInactive || this.issueProvider.issue.backlog;
 
@@ -50,15 +49,9 @@ export class DetallePage {
       this.issueInactive = false;
       this.state = 'CREADO';
       this.issueProvider.issue.state = this.state;
-      this.disabledState = true;
+      this.disabledState = this.issueProvider.issue.backlog;
+      console.log('isBacklog = ' + this.issueProvider.issue.backlog);
     }
-
-    // var i:number = 0;
-    //
-    // for (i ; i < 50 ; i ++){
-    //   this.estimatedList.push(i);
-    // }
-
 
     //STATES
     this.stateProvider.getAllState()

@@ -43,6 +43,7 @@ export class IssuePage {
       this.cleanIssue();
       this.issueProvider.issue.id = null;
       this.issueInactive = false;
+      this.issueProvider.issue.backlog = this.backlog;
       this.storage.get('firstName').then((f)=>{
         this.firstName = f;
         this.storage.get('lastName').then((l)=>{

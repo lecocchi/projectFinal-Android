@@ -32,7 +32,7 @@ export class PersonaPage {
       this.disabledAssignee = this.issueInactive || this.issueProvider.issue.backlog;
     } else {
       this.issueInactive = false;
-      this.disabledAssignee = true;
+      this.disabledAssignee = this.issueProvider.issue.backlog;
     }
 
     this.userProvider.getAllUser()
