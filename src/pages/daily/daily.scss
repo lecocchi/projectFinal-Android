@@ -22,6 +22,12 @@ page-daily-tab {
     padding-right: 0;
   }
 
+  .sprint{
+    color: #636363;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
   @media screen and (min-width: 600px) and (max-width: 1000px){
     .scroll-content,
     .fixed-content,

@@ -7,11 +7,12 @@
 <ion-content padding>
 
   <ion-list>
-    <ion-item *ngFor="let daily of dailies">
+    <ion-item *ngFor="let daily of dailies" (click)="openDetail(daily)">
       <ion-avatar item-start>
-        <avatar>{{ daily.created_at.dayOfWeek.substring(0,1) | uppercase }}</avatar>
+        <avatar *ngIf="daily.created_at != undefined">{{ daily.created_at.dayOfWeek.substring(0,1) | uppercase }}</avatar>
       </ion-avatar>
-      <h2 class="date" (click)="openDetail(daily)">{{daily.created_at | formatDate}}</h2>
+      <h2 class="date">{{daily.created_at | formatDate}}</h2>
+      <h3 class="sprint">Sprint {{ daily.sprint }}</h3>
 
       <button  icon-only (click)="sendMail(daily.id)" item-end class="send">
           <ion-icon name="send" *ngIf="false"></ion-icon>

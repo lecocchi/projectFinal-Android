@@ -21,7 +21,7 @@ var ReportsPage = (function () {
         this.navParams = navParams;
     }
     ReportsPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad ReportsPage');
+
     };
     ReportsPage.decorators = [
         { type: Component, args: [{

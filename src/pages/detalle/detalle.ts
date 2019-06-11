@@ -35,8 +35,6 @@ export class DetallePage {
 
     if (this.update) {
 
-      this.disabledState = this.issueInactive || this.issueProvider.issue.backlog;
-
       this.issueProvider.issueToUpdate = this.issueProvider.issue;
       this.title = this.issueProvider.issue.title;
       this.description = this.issueProvider.issue.description;
@@ -45,12 +43,14 @@ export class DetallePage {
       this.version = this.issueProvider.issue.version;
       this.estimated = this.issueProvider.issue.estimated;
 
+      this.issueInactive = this.issueProvider.issue.state === 'FINALIZADO' ? true : false;
+      this.disabledState = this.issueInactive || this.issueProvider.issue.backlog;
+
     } else {
       this.issueInactive = false;
       this.state = 'CREADO';
       this.issueProvider.issue.state = this.state;
       this.disabledState = this.issueProvider.issue.backlog;
-      console.log('isBacklog = ' + this.issueProvider.issue.backlog);
     }
 
     //STATES

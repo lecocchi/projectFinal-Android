@@ -35,4 +35,8 @@ export class SprintProvider {
     return this.http.get(URL_BASE + "/sprint/sprint-report");
   }
 
+  sprintActive(){
+    return this.http.get(URL_BASE + "/sprint/active");
+  }
+
 }

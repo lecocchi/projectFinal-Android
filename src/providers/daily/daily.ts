@@ -16,7 +16,6 @@ export class DailyProvider {
 
   createDaily(): any{
 
-
     delete this.daily.created_at;
     this.daily.daily_items.forEach(item =>{
       delete item.created_at;

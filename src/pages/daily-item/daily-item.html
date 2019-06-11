@@ -1,7 +1,9 @@
 <ion-header>
 
     <ion-navbar color='primary'>
-      <ion-title>Daily</ion-title>
+      <ion-title>Daily    
+        <span class="sprint">(Sprint {{sprint}})</span>
+      </ion-title>
       <div class="daily-date">{{dailyCreated | formatDate}}</div>
       <ion-buttons end>
         <button ion-button icon-only (click)="createDaily()" *ngIf="dailyActive">
@@ -43,6 +45,6 @@
 
 
     <ion-fab bottom right (click)="pushFilter()" *ngIf="dailyActive">
-      <button ion-fab><ion-icon name="add"></ion-icon></button>
+      <button ion-fab><ion-icon name="person-add"></ion-icon></button>
     </ion-fab>
 </ion-content>

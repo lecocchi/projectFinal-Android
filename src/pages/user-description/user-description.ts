@@ -71,7 +71,6 @@ export class UserDescriptionPage {
   }
 
   accept() {
-    console.log("Crear usuario");
   }
 
   changeEnabled() {

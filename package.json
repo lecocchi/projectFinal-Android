@@ -34,20 +34,20 @@
     "@ionic/pro": "1.0.20",
     "@ionic/storage": "^2.2.0",
     "angularfire2": "^5.1.2",
-    "cordova-android": "8.0.0",
+    "cordova-android": "7.1.4",
     "cordova-browser": "5.0.4",
     "cordova-plugin-camera": "^4.0.3",
     "cordova-plugin-device": "^2.0.2",
-    "cordova-plugin-googleplus": "~6.0.0",
+    "cordova-plugin-googleplus": "^6.0.0",
     "cordova-plugin-inappbrowser": "^3.0.0",
-    "cordova-plugin-ionic-keyboard": "^2.1.2",
+    "cordova-plugin-ionic-keyboard": "^2.1.3",
     "cordova-plugin-ionic-webview": "^1.2.1",
     "cordova-plugin-nativestorage": "^2.3.2",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-sqlite": "^1.0.3",
-    "cordova-plugin-telerik-imagepicker": "^2.2.2",
+    "cordova-plugin-telerik-imagepicker": "^2.3.2",
     "cordova-plugin-whitelist": "^1.3.3",
-    "cordova-sqlite-storage": "3.2.0",
+    "cordova-sqlite-storage": "^3.2.0",
     "firebase": "^5.9.0",
     "ionic-angular": "3.9.2",
     "ionic-datepicker": "^1.2.1",
@@ -85,7 +85,8 @@
       "cordova-plugin-nativestorage": {}
     },
     "platforms": [
-      "browser"
+      "browser",
+      "android"
     ]
   }
 }

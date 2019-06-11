@@ -15,12 +15,14 @@ export class DailyItemPage {
   members: any[] = [];
   dailyCreated: any;
   dailyActive:boolean;
+  sprint:number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public dailyProvider: DailyProvider, public dateProvider:DateProvider,
               public utils: UtilsProvider) {
 
     this.members = this.dailyProvider.daily.daily_items;
+    this.sprint = this.dailyProvider.daily.sprint;
 
     if ( this.dailyProvider.daily.created_at == undefined){
       this.dateProvider.now()

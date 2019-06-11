@@ -37,8 +37,6 @@ export class LoginPage {
 
   loginForUserAndPass(){
 
-    console.log("Click under button login with mail");
-
     let user = {
       "user_name" : this.userName,
       "password" : this.password
@@ -66,14 +64,25 @@ export class LoginPage {
         this.navCtrl.push(this.rootPage, {"rol": u.rol});
       },
       (err) => {
-        this.utilProvider.presentPrompt(err.error.title, err.error.message);
+        // statusText: "Unknown Error"
+        console.log();
+
+        if (err.statusText === "Unknown Error")
+          this.utilProvider.presentPrompt("ERROR", "Error al conectarse con el servidor");
+        else
+          this.utilProvider.presentPrompt(err.error.title, err.error.message);
       })
   }
 
   loginGP(){
 
     if(this.platform.is('cordova')){
+
+      console.log("LOGIN ANDROID");
+      
       this.gp.login({}).then(res =>{
+
+        console.log("RESPUESTA LOGIN GOOGLE " + res);
 
         let userLoginGooglePlus = {
           "email":res.email
@@ -148,7 +157,6 @@ export class LoginPage {
           })
       })
       .catch((err)=>{
-        console.log(err);
         this.utilProvider.presentPrompt("ERROR", "Error al intentar conectarse a google");
       })
     })
