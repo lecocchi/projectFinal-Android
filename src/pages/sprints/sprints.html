@@ -9,7 +9,10 @@
 <ion-content>
   <ion-list ion-item *ngFor="let sprint of sprints">
     <div  (click)="openSprint(sprint.id)">
-      <h3 class="sprint-name">{{ sprint.name }}</h3>
+      <h3 class="sprint-name">{{ sprint.name }} 
+        <span *ngIf="sprint.isActive" class="activo">(Activo)</span>
+        <span *ngIf="!sprint.isActive" class="inactivo">(Finalizado)</span>
+      </h3>
       <div>
         <span class="sprint-range-from">Desde: <span
             class="sprint-range-from-label">{{ sprint.dateFrom | formatDateMillisecond}}</span></span>

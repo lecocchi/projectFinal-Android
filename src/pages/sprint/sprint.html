@@ -2,6 +2,10 @@
   <ion-navbar color="primary">
     <ion-title>
       {{name}}
+
+      <span *ngIf="sprint.isActive" class="activo">(Activo)</span>
+      <span *ngIf="!sprint.isActive" class="inactivo">(Finalizado)</span>
+      
       <div class="sprint-range" *ngIf='!create'>
         <span class="sprint-range-from-label">Del: {{ sprint.dateFrom | formatDateMillisecond}}</span>
         <span class="sprint-range-from-label">Al: {{ sprint.dateTo | formatDateMillisecond}}</span>

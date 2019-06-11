@@ -51,6 +51,18 @@ page-sprint {
     padding-right: 0;
   }
 
+  .activo{
+    color: #45c145;
+    font-size: 16px;
+    margin-left: 10px;
+  }
+
+  .inactivo{
+    color: #ea6060;
+    font-size: 16px;
+    margin-left: 10px;
+  }
+
   @media screen and (min-width: 600px) and (max-width: 1000px){
     .scroll-content,
     .fixed-content,
