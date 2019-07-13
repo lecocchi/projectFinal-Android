@@ -10,6 +10,7 @@ import {ConfigPage} from "../config/config";
 import {SprintsPage} from "../sprints/sprints";
 import { PerfilPage } from '../perfil/perfil';
 import { VersionsPage } from '../versions/versions';
+import { AboutPage } from '../about/about';
 
 @Component({
   selector: 'page-home',
@@ -26,8 +27,9 @@ export class HomePage {
   usersPage: any = UsersPage;
   SprintsPage: any = SprintsPage;
   configPage:any = ConfigPage;
-  perfilPage:any = PerfilPage
-  versionPage:any = VersionsPage
+  perfilPage:any = PerfilPage;
+  versionPage:any = VersionsPage;
+  aboutPage:any = AboutPage;
   rol:string;
 
   public alertShown:boolean = false;

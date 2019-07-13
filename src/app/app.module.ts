@@ -54,6 +54,7 @@ import {DetallePage} from "../pages/detalle/detalle";
 import {FechasPage} from "../pages/fechas/fechas";
 import {PersonaPage} from "../pages/persona/persona";
 import {ComentariosPage} from "../pages/comentarios/comentarios";
+import { AboutPage } from "../pages/about/about";
 //firebase
 import {AngularFireModule} from '@angular/fire';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
@@ -119,7 +120,8 @@ import {SprintReportPage} from "../pages/sprint-report/sprint-report";
     PopoverSprintPage,
     PerfilPage,
     VelocityPage,
-    SprintReportPage
+    SprintReportPage,
+    AboutPage
   ],
   imports: [
     BrowserModule,
@@ -173,7 +175,8 @@ import {SprintReportPage} from "../pages/sprint-report/sprint-report";
     PopoverSprintPage,
     PerfilPage,
     VelocityPage,
-    SprintReportPage
+    SprintReportPage,
+    AboutPage
   ],
   providers: [
     StatusBar,
