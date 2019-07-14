@@ -14,7 +14,7 @@
       {{report.sprint}}
     </ion-list-header>
     <ion-item *ngFor="let issue of report.issues">
-      <div>
+      <div (click)="openDetail(issue)">
         <div class="issue-code">SID-{{ issue.id }}</div>
         <div class="issue-summary">
           {{ issue.title }}
