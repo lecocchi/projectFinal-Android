@@ -61,7 +61,7 @@ export class LoginPage {
         this.storage.set("userName", u.userName);
         this.storage.set("isNetwork", u.isNetwork);
 
-        this.navCtrl.push(this.rootPage, {"rol": u.rol});
+        this.navCtrl.push(this.rootPage, {"rol": u.rol, "firstName": u.firstName, "lastName": u.lastName});
       },
       (err) => {
         // statusText: "Unknown Error"

@@ -29,11 +29,19 @@ page-home {
     }
   }
 
-  .scroll-content{
+  .user-active{
+    padding: 0 12px;
+    color: #a3b6b1;
+    font-weight: bolder;
+    font-size: 15px;
   }
 
   .content{
     display: inline-block;
+    text-align: center;
+  }
+
+  ion-navbar{
     text-align: center;
   }
 

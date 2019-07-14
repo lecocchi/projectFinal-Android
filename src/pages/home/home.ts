@@ -30,7 +30,10 @@ export class HomePage {
   perfilPage:any = PerfilPage;
   versionPage:any = VersionsPage;
   aboutPage:any = AboutPage;
-  rol:string;
+  rol:number;
+  firstName: string;
+  lastName: string;
+  rolName: string;
 
   public alertShown:boolean = false;
 
@@ -42,6 +45,30 @@ export class HomePage {
               public alertCtrl: AlertController) {
 
     this.rol = this.navParams.get("rol");
+    console.log(this.rol);
+    switch (this.rol){
+      case 1: {
+        this.rolName = "Desarrollador";
+        break;
+      }
+      case 2:{
+        this.rolName = "Scrum Master";
+        break;
+      }
+      case 3:{
+        this.rolName = "Administrador";
+        break;
+      }
+      default:{
+        this.rolName = "Sin rol";
+        break;
+      }
+    }
+
+    this.firstName = this.navParams.get("firstName");
+    this.lastName = this.navParams.get("lastName");
+
+
     this.platform.registerBackButtonAction(()=>{
 
       if (this.navCtrl.getActive().id == 'n4-1'){
