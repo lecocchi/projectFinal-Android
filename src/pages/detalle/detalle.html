@@ -37,7 +37,7 @@
   </ion-item>
 
   <ion-item>
-    <ion-label>Estimación</ion-label>
+    <ion-label>Estimación (Story Point)</ion-label>
     <ion-select [(ngModel)]="estimated" [disabled]="issueInactive" (ionChange)="onChangeEstimated($event)">
       <ion-option  *ngFor="let estimated of estimatedList" [value]=estimated>{{estimated}}</ion-option>
     </ion-select>
