@@ -13,7 +13,7 @@
           <th>Sprint</th>
           <th>Story Points</th>
         </tr>
-        <tr *ngFor="let velocity of velocities">
+        <tr *ngFor="let velocity of velocities" (click)="openSprint(velocity.sprint)">
           <td>{{velocity.sprint}}</td>
           <td>{{velocity.story}}</td>
         </tr>

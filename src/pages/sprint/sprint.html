@@ -50,7 +50,7 @@
     </ion-list>
 
     <!-- this fab is placed at top right -->
-    <ion-fab bottom right (click)="createNewIssue()">
+    <ion-fab bottom right (click)="createNewIssue()" *ngIf="sprint.isActive">
       <button ion-fab>
         <ion-icon name="add"></ion-icon>
       </button>

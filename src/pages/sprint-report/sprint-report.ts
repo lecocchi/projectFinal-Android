@@ -19,8 +19,7 @@ export class SprintReportPage {
       });
   }
 
-  ionViewDidLoad() {
-  }
+  ionViewDidLoad() {}
 
   openDetail(issue:any){
     this.navCtrl.push(IssuePage,{"issue":issue, "update":true});

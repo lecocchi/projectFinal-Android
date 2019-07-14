@@ -45,7 +45,6 @@ export class HomePage {
               public alertCtrl: AlertController) {
 
     this.rol = this.navParams.get("rol");
-    console.log(this.rol);
     switch (this.rol){
       case 1: {
         this.rolName = "Desarrollador";
