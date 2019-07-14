@@ -1,114 +1,78 @@
-page-about {
+  page-about {
 
     .scroll-content{
-        display: flex !important;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column
-    }
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column
+  }
+  
 
-    .icon{
-        color: #274469;
-        font-size: 45px;
-        font-weight: bolder;
-        font-style: oblique;
-        text-align: center;
-        margin-bottom: 20px;
-    }
+  .icon1{
+      color: #274469;
+      font-size: 45px;
+      font-weight: bolder;
+      font-style: oblique;
+      text-align: center;
+      margin-bottom: 20px;
+  }
 
-    .version{
-        margin: 10px 0 20px 0;
-        font-size: 15px;
-        font-weight: bold;
-        //text-align: center;
-    }
+  .version{
+      margin: 10px 0 20px 0;
+      font-size: 15px;
+      font-weight: bold;
+      //text-align: center;
+  }
 
-    .contact{
-        font-size: 18px;
-        font-weight: bold;
-    }
+  .contact{
+      font-size: 18px;
+      font-weight: bold;
+  }
 
-    .lista{
-        font-size: 15px;
-    }
+  .lista{
+      font-size: 15px;
+  }
 
-    .email{
-        font-style: oblique;
-        margin-left: 14px;
-    }
+  .email{
+      font-style: oblique;
+      margin-left: 14px;
+  }
+  
 
-    .issue-code {
-        color: #286090;
-        font-weight: 600;
-        font-size: 1.1em;
-      }
-    
-      .issue-summary {
-        font-weight: 500;
-        color: #5a5959;
-      }
-    
-      ion-spinner * {
-        stroke: #000;
-        fill: #8b0000;
-        position: fixed;
-        z-index: 999;
-        height: 5rem !important;
-        width: 5rem !important;
-        overflow: auto;
-        margin: auto;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-      }
-    
-      .more{
-        background-color:transparent !important;
-        color: black;
-        font-size: 1.6rem;
-        padding-right: 0;
-      }
-    
-      .custom-popover {
-        width: 60%;
-      }
-    
       .item-md,
       .item-ios{
-        padding-left: 0 !important
+          padding-left: 0;
       }
-    
-    
+
       @media screen and (min-width: 600px) and (max-width: 1000px){
-        .scroll-content,
-        .fixed-content,
-        .tabs-md .tabbar{
-          left: 15%;
-          width: 70%;
-          border: 1px solid #ccc;
-          box-shadow: 5px 5px 30px #d4d4d4;
+          .scroll-content,
+          .fixed-content,
+          .tabs-md .tabbar{
+            left: 15%;
+            width: 70%;
+            border: 1px solid #ccc;
+            box-shadow: 5px 5px 30px #d4d4d4;
+          }
+          
+          ion-navbar.toolbar{
+            padding-left: 15%;
+            padding-right: 15% !important;
+          }
         }
-        
-        ion-navbar.toolbar{
-          padding-left: 15%;
-          padding-right: 15% !important;
+      
+        @media screen and (min-width: 1000px){
+          .scroll-content,
+          .fixed-content,
+          .tabs-md .tabbar{
+            left: 25%;
+            width: 50%;
+            border: 1px solid #ccc;
+            box-shadow: 5px 5px 30px #d4d4d4;
+          }
+      
+          ion-navbar.toolbar{
+            padding-left: 25%;
+            padding-right: 25% !important;
+          }
         }
-      }
-    
-      @media screen and (min-width: 1000px){
-        .scroll-content,
-        .fixed-content,
-        .tabs-md .tabbar{
-          left: 25%;
-          width: 50%;
-          border: 1px solid #ccc;
-          box-shadow: 5px 5px 30px #d4d4d4;
-        }
-    
-        ion-navbar.toolbar{
-          padding-left: 25%;
-          padding-right: 25% !important;
-        }
-      }
-}
+  }

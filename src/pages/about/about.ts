@@ -1,12 +1,8 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
+import {UserDescriptionPage} from "../user-description/user-description";
+import { UserProvider } from '../../providers/user/user';
 
-/**
- * Generated class for the AboutPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @Component({
   selector: 'page-about',
@@ -14,11 +10,43 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class AboutPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+  users:any = [];
+
+  userDescriptionPage:any = UserDescriptionPage;
+  imagePreview: string;
+  image64: string;
+
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public userProvider: UserProvider) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AboutPage');
+  ionViewWillEnter(){
+    this.userProvider.getAllUser()
+    .subscribe( (users:any) => {
+      this.users = users;
+    });
   }
 
+  openDetail(user:any){
+    this.navCtrl.push(this.userDescriptionPage, {
+      'id' : user.id,
+      'firstName':user.firstName,
+      'lastName':user.lastName,
+      'dni':user.dni,
+      'email':user.email,
+      'userName': user.userName,
+      'rol':user.rol,
+      'avatar':user.avatar,
+      'mode': 'detail',
+      'isEnabled' : user.enabled,
+      'isNetwork' : user.isNetwork,
+      'password' : user.password
+    });
+  }
+
+  createUser(){
+    this.navCtrl.push(this.userDescriptionPage,{mode: 'create'});
+  }
 }
