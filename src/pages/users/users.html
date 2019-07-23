@@ -7,7 +7,7 @@
 <ion-content padding>
 
   <ion-list>
-    <ion-item *ngFor="let user of users" (click)="openDetail(user)">
+    <ion-item *ngFor="let user of users" (click)="openDetail(user)" class="cursor">
       <ion-avatar item-start>
         <avatar>{{user.firstName.substring(0,1) | uppercase}}</avatar>
       </ion-avatar>

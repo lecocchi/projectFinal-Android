@@ -34,7 +34,6 @@
     "@ionic/pro": "1.0.20",
     "@ionic/storage": "^2.2.0",
     "angularfire2": "^5.1.2",
-    "cordova-android": "7.1.4",
     "cordova-browser": "5.0.4",
     "cordova-plugin-camera": "^4.0.3",
     "cordova-plugin-device": "^2.0.2",
@@ -57,7 +56,8 @@
     "rxjs": "6.3.2",
     "rxjs-compat": "^6.3.2",
     "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.26"
+    "zone.js": "0.8.26",
+    "cordova-android": "~7.1.4"
   },
   "devDependencies": {
     "@ionic/app-scripts": "^3.2.2",

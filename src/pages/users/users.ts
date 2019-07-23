@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, LoadingController, PopoverController} from 'ionic-angular';
 import {UserDescriptionPage} from "../user-description/user-description";
 import { UserProvider } from '../../providers/user/user';
 
@@ -19,13 +19,24 @@ export class UsersPage {
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              public userProvider: UserProvider) {
+              public userProvider: UserProvider,
+              public loadingCtrl:LoadingController, 
+              public popoverCtrl: PopoverController) {
   }
 
   ionViewWillEnter(){
+
+    let loading = this.loadingCtrl.create(
+      { spinner: 'ios',
+        content:'Cargando...'
+      });
+    loading.present();
+
+    
     this.userProvider.getAllUser()
     .subscribe( (users:any) => {
       this.users = users;
+      loading.dismiss();
     });
   }
 

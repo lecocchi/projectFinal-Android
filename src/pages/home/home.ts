@@ -11,6 +11,7 @@ import {SprintsPage} from "../sprints/sprints";
 import { PerfilPage } from '../perfil/perfil';
 import { VersionsPage } from '../versions/versions';
 import { AboutPage } from '../about/about';
+import { ProjectsPage } from '../projects/projects';
 
 @Component({
   selector: 'page-home',
@@ -30,6 +31,7 @@ export class HomePage {
   perfilPage:any = PerfilPage;
   versionPage:any = VersionsPage;
   aboutPage:any = AboutPage;
+  projectsPage:any = ProjectsPage
   rol:number;
   firstName: string;
   lastName: string;

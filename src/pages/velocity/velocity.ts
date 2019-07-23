@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,LoadingController, PopoverController} from 'ionic-angular';
 import {SprintProvider} from "../../providers/sprint/sprint";
 import {SprintPage} from "../sprint/sprint";
 
@@ -15,15 +15,26 @@ export class VelocityPage {
 
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public sprintProvider: SprintProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public sprintProvider: SprintProvider,
+    public loadingCtrl:LoadingController, 
+    public popoverCtrl: PopoverController) {
+
+  }
+
+  ionViewDidEnter(){
+    let loading = this.loadingCtrl.create(
+      { spinner: 'ios',
+        content:'Cargando...'
+      });
+    loading.present();
+
     this.sprintProvider.velocityChart()
       .subscribe(v => {
         console.log(v);
         this.velocities = v;
-      })
+        loading.dismiss();
+      });
   }
-
-  ionViewDidLoad() {}
 
   goToPage(){}
 

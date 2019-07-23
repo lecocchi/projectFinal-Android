@@ -28,6 +28,10 @@ page-daily-tab {
     font-weight: 700;
   }
 
+  .cursor:hover{
+    cursor: pointer;
+  }
+
   @media screen and (min-width: 600px) and (max-width: 1000px){
     .scroll-content,
     .fixed-content,

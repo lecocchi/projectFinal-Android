@@ -11,64 +11,64 @@
 
   <div class="option-group">
 
+    <div class="content" (click)="goToPage(projectsPage)" *ngIf="rol == 3">
+      <div class="avatar1 config"><img src="assets/icon/project.png" alt="PR" srcset=""></div>
+      <div class="avatar1-text">
+        Proyectos
+      </div>
+    </div>
+
     <div class="content" (click)="goToPage(backlogPage)">
-      <div class="avatar1 backlog"><img src="../../assets/icon/backlog.png" alt="BK" srcset=""></div>
+      <div class="avatar1 backlog"><img src="assets/icon/backlog.png" alt="BK" srcset=""></div>
       <div class="avatar1-text">
         Backlog
       </div>
     </div>
 
     <div class="content" (click)="goToPage(SprintsPage)">
-      <div class="avatar1 active-sprint"><img src="../../assets/icon/sprint.png" alt="SP" srcset=""></div>
+      <div class="avatar1 active-sprint"><img src="assets/icon/sprint.png" alt="SP" srcset=""></div>
       <div class="avatar1-text">
         Sprints
       </div>
     </div>
 
     <div class="content" (click)="goToPage(dailyPage)" *ngIf="rol == 2 || rol == 3">
-      <div class="avatar1 daily"><img src="../../assets/icon/daily.png" alt="DY" srcset=""></div>
+      <div class="avatar1 daily"><img src="assets/icon/daily.png" alt="DY" srcset=""></div>
       <div class="avatar1-text">
         Daily
       </div>
     </div>
 
     <div class="content" (click)="goToPage(reportsPage)">
-      <div class="avatar1 report"><img src="../../assets/icon/report.png" alt="RE" srcset=""></div>
+      <div class="avatar1 report"><img src="assets/icon/report.png" alt="RE" srcset=""></div>
       <div class="avatar1-text">
         Reportes
       </div>
     </div>
 
     <div class="content" (click)="goToPage(perfilPage)">
-      <div class="avatar1 report"><img src="../../assets/icon/perfil.png" alt="MP" srcset=""></div>
+      <div class="avatar1 report"><img src="assets/icon/perfil.png" alt="MP" srcset=""></div>
       <div class="avatar1-text">
         Mi perfil
       </div>
     </div>
 
-    <!-- <div class="content" (click)="goToPage(configPage)" *ngIf="rol == 2 || rol == 3">
-      <div class="avatar1 config">CF</div>
-      <div class="avatar1-text">
-        Configuración
-      </div>
-    </div> -->
-
     <div class="content" (click)="goToPage(versionPage)">
-      <div class="avatar1 config"><img src="../../assets/icon/version.png" alt="VE" srcset=""></div>
+      <div class="avatar1 config"><img src="assets/icon/version.png" alt="VE" srcset=""></div>
       <div class="avatar1-text">
         Versiones
       </div>
     </div>
 
     <div class="content" (click)="goToPage(usersPage)" *ngIf="rol == 3">
-      <div class="avatar1 config"><img src="../../assets/icon/users.png" alt="US" srcset=""></div>
+      <div class="avatar1 config"><img src="assets/icon/users.png" alt="US" srcset=""></div>
       <div class="avatar1-text">
         Usuarios
       </div>
     </div>
 
     <div class="content" (click)="goToPage(aboutPage)" *ngIf="rol == 3">
-      <div class="avatar1 config"><img src="../../assets/icon/about.png" alt="AB" srcset=""></div>
+      <div class="avatar1 config"><img src="assets/icon/about.png" alt="AB" srcset=""></div>
       <div class="avatar1-text">
         Acerca de
       </div>

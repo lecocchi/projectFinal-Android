@@ -55,6 +55,8 @@ import {FechasPage} from "../pages/fechas/fechas";
 import {PersonaPage} from "../pages/persona/persona";
 import {ComentariosPage} from "../pages/comentarios/comentarios";
 import { AboutPage } from "../pages/about/about";
+import { ProjectsPage } from "../pages/projects/projects";
+import { ProjectPage } from "../pages/project/project";
 
 //firebase
 import {AngularFireModule} from '@angular/fire';
@@ -76,6 +78,7 @@ import { PopoverSprintPage } from '../pages/popover-sprint/popover-sprint';
 import { PerfilPage } from '../pages/perfil/perfil';
 import {VelocityPage} from "../pages/velocity/velocity";
 import {SprintReportPage} from "../pages/sprint-report/sprint-report";
+import { ProjectProvider } from '../providers/project/project';
 
 @NgModule({
   declarations: [
@@ -122,7 +125,9 @@ import {SprintReportPage} from "../pages/sprint-report/sprint-report";
     PerfilPage,
     VelocityPage,
     SprintReportPage,
-    AboutPage
+    AboutPage,
+    ProjectsPage,
+    ProjectPage
   ],
   imports: [
     BrowserModule,
@@ -177,7 +182,9 @@ import {SprintReportPage} from "../pages/sprint-report/sprint-report";
     PerfilPage,
     VelocityPage,
     SprintReportPage,
-    AboutPage
+    AboutPage,
+    ProjectsPage,
+    ProjectPage
   ],
   providers: [
     StatusBar,
@@ -201,7 +208,8 @@ import {SprintReportPage} from "../pages/sprint-report/sprint-report";
     LoadFileProvider,
     AuthService,
     GooglePlus,
-    IssueProvider
+    IssueProvider,
+    ProjectProvider
   ]
 })
 export class AppModule {}

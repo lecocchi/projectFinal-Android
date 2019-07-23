@@ -49,6 +49,10 @@ page-backlog {
     padding-left: 0 !important
   }
 
+  .cursor:hover{
+    cursor: pointer;
+  }
+
 
   @media screen and (min-width: 600px) and (max-width: 1000px){
     .scroll-content,
