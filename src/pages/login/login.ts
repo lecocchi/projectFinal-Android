@@ -94,11 +94,11 @@ export class LoginPage {
 
     if(this.platform.is('cordova')){
 
-      console.log("LOGIN ANDROID");
+      this.utilProvider.presentPrompt("LOGIN ANDROID", "EMPEZANDO A LOGUEARSE EN ADNROID");
       
       this.gp.login({}).then(res =>{
 
-        console.log("RESPUESTA LOGIN GOOGLE " + res);
+        this.utilProvider.presentPrompt("RESPUESTA LOGIN GOOGLE", res);
 
         let userLoginGooglePlus = {
           "email":res.email

@@ -53,4 +53,8 @@ export class UserProvider {
     return this.http.get(URL_BASE + "/user/projects");
   }
 
+  getUserByProject(id:number){
+    return this.http.get(URL_BASE + "/user/project/" + id);
+  }
+
 }

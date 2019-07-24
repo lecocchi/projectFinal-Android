@@ -36,7 +36,7 @@ export class ProjectPage {
     loading.present();
 
 
-    this.userProvider.getAllUser()
+    this.userProvider.getUserByProject(this.project.id)
           .subscribe((users: any) => {
 
         for (let user of users) {
