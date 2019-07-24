@@ -13,6 +13,7 @@ import { VersionsPage } from '../versions/versions';
 import { AboutPage } from '../about/about';
 import { ProjectsPage } from '../projects/projects';
 import { Storage } from '@ionic/storage';
+import { UserProvider } from '../../providers/user/user';
 
 @Component({
   selector: 'page-home',
@@ -38,6 +39,8 @@ export class HomePage {
   lastName: string;
   rolName: string;
   projectName:string;
+  projectId:string;
+  userId:string;
 
   public alertShown:boolean = false;
 
@@ -49,7 +52,8 @@ export class HomePage {
               public alertCtrl: AlertController,
               private storage: Storage, 
               public loadingCtrl:LoadingController, 
-              public popoverCtrl: PopoverController) {
+              public popoverCtrl: PopoverController,
+              public userProvider: UserProvider) {
 
     this.rol = this.navParams.get("rol");
     switch (this.rol){
@@ -74,6 +78,8 @@ export class HomePage {
     this.firstName = this.navParams.get("firstName");
     this.lastName = this.navParams.get("lastName");
 
+    this.projectName = this.navParams.get("project").name;
+
 
     this.platform.registerBackButtonAction(()=>{
 
@@ -96,23 +102,91 @@ export class HomePage {
     })
   }
 
-
-  ionViewWillEnter() {
-
-    let loading = this.loadingCtrl.create(
-      { spinner: 'ios',
-        content:'Cargando...'
-      });
-    loading.present();
-
-    this.storage.get("projectName").then((n)=>{
-      this.projectName = n;
-      loading.dismiss();
+  ionViewDidLoad(){
+    const alert = this.alertCtrl.create({
+      title: 'Recuerde ....',
+      subTitle: 'Para cambiar de proyecto presione sobre el nombre del proyecto ubicado en la parte superior',
+      buttons: [{
+        text:'Aceptar',
+        cssClass: 'btn-alert-ok',
+      }]
     });
+    alert.present()
   }
 
-  goToPage(page){
-    this.navCtrl.push(page);
-  }
+    ionViewWillEnter() { }
 
+    goToPage(page){
+      this.navCtrl.push(page);
+    }
+
+    changeProject(){
+
+      let loading = this.loadingCtrl.create(
+        { spinner: 'ios',
+          content:'Cargando...'
+        });
+      loading.present();
+
+      this.storage.get("id")
+        .then((i)=>{
+          this.userProvider.getProjectsByUserId(i)
+            .subscribe((p:any)=>{
+              this.storage.get("projectId")
+                .then((i)=>{
+                  this.projectId = i;
+
+                  if(p.length > 1)
+                    this.showRadio(p);
+                  else{
+                    const alert = this.alertCtrl.create({
+                    title: 'Proyectos',
+                    subTitle: 'Usted solamente esta asociado a un solo proyecto.\n Para mayor información comuniquese con un administrador.',
+                    buttons: [{
+                      text:'Aceptar',
+                      cssClass: 'btn-alert-ok',
+                    }]
+                  });
+    alert.present()
+                  }
+
+
+                  loading.dismiss();
+                })
+            });
+        });
+    }
+
+    showRadio(projects:any) {
+      let alert = this.alertCtrl.create();
+      alert.setTitle('Proyectos');
+
+      projects.forEach(p => {
+        alert.addInput({
+        type: 'radio',
+        label: p.name,
+        value: p.id,
+        checked: (p.id === this.projectId)
+        });
+      });
+
+      alert.addButton({
+        text: 'Cancelar',
+        cssClass: 'btn-alert-cancel'});
+
+      alert.addButton({
+        text: 'Aceptar',
+        cssClass: 'btn-alert-ok',
+        handler: (data:any) => {
+          this.storage.remove("projectId");
+          this.storage.set("projectId", projects[data - 1].id);
+
+          this.projectName = projects[data - 1].name;
+
+          this.storage.remove("projectName");
+          this.storage.set("projectName", this.projectName);
+        }
+      });
+    alert.present();
+  }
 }

@@ -77,15 +77,12 @@ export class LoginPage {
             if(p.length > 1)
               this.navCtrl.push(DashboardProjectPage, {"p":p, "user": u});
             else
-              this.navCtrl.push(this.rootPage, {"rol": u.rol, "firstName": u.firstName, "lastName": u.lastName});
+              this.navCtrl.push(this.rootPage, {"rol": u.rol, "firstName": u.firstName, "lastName": u.lastName, "project":p});
 
             loading.dismiss();
           })
       },
       (err) => {
-        // statusText: "Unknown Error"
-        console.log();
-
         if (err.statusText === "Unknown Error")
           this.utilProvider.presentPrompt("ERROR", "Error al conectarse con el servidor");
         else
@@ -130,12 +127,11 @@ export class LoginPage {
             this.gp.logout().then((res)=>{});
             this.utilProvider.presentPrompt(err.error.title, err.error.message);
           })
-      }).catch(err => console.log(err));
+      }).catch(err => {
+          this.utilProvider.presentPrompt("ERROR", err);
+        });
     }else{
       this.doGoogleLogin();
-      // this.afAuth.auth.signOut().then(res =>{
-      //   console.log(res)
-      // })
     }
   }
 
@@ -180,9 +176,24 @@ export class LoginPage {
               .subscribe((p:any)=>{
                 if(p.length > 1)
                   this.navCtrl.push(DashboardProjectPage, {"p":p, "user": u});
-                else
-                  this.navCtrl.push(this.rootPage, {"rol": u.rol, "firstName": u.firstName, "lastName": u.lastName});
-                  //this.navCtrl.push(this.rootPage, {"rol": u.rol});
+                else{
+
+                  let projectId = p[0].id;
+                  let projectName = p[0].name;
+
+                  var projectToSend = {
+                    "id": projectId,
+                    "name":projectName
+                  }
+
+                  this.storage.remove("projectId");
+                  this.storage.remove("projectName");
+
+                  this.storage.set("projectId", projectId);
+                  this.storage.set("projectName", projectName);
+
+                  this.navCtrl.push(this.rootPage, {"rol": u.rol, "firstName": u.firstName, "lastName": u.lastName, "project":projectToSend});
+                }
 
                 loading.dismiss();
               })
@@ -190,7 +201,10 @@ export class LoginPage {
           },
           (err) =>{
             this.gp.logout().then((res)=>{});
-            this.utilProvider.presentPrompt(err.error.title, err.error.message);
+            if (err.statusText === "Unknown Error")
+              this.utilProvider.presentPrompt("ERROR", "Error al conectarse con el servidor");
+            else
+              this.utilProvider.presentPrompt(err.error.title, err.error.message);
           })
       })
       .catch((err)=>{

@@ -49,4 +49,8 @@ export class UserProvider {
     return this.http.get(URL_BASE + "/user/projects/" + id);
   }
 
+  getAllProjects(){
+    return this.http.get(URL_BASE + "/user/projects");
+  }
+
 }

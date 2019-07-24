@@ -91,6 +91,10 @@ page-home {
     align-self: auto;
   }
 
+  .cursor:hover{
+    cursor: pointer;
+  }
+
   @media screen and (max-width: 599px){
     img{
       width: 60px;

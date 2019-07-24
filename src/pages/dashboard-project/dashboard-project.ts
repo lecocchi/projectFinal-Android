@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Platform, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { HomePage } from '../home/home';
 
@@ -14,7 +14,11 @@ export class DashboardProjectPage {
   user:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              private storage: Storage) {
+              private storage: Storage,
+              public platform:Platform,
+              public alertCtrl: AlertController) {
+
+    this.registerBackButton();
   }
 
   ionViewWillEnter() {
@@ -29,7 +33,34 @@ export class DashboardProjectPage {
     this.storage.set("projectId", project.id);
     this.storage.set("projectName", project.name);
 
-    this.navCtrl.push(this.rootPage, {"rol": this.user.rol, "firstName": this.user.firstName, "lastName": this.user.lastName});
+    let projectToSend = {
+      "id": project.id,
+      "name": project.name
+    }
+
+    this.navCtrl.push(this.rootPage, {"rol": this.user.rol, "firstName": this.user.firstName, "lastName": this.user.lastName, "project": projectToSend});
   }
 
+
+  registerBackButton(){
+    this.platform.registerBackButtonAction(()=>{
+
+    if (this.navCtrl.getActive().id == 'n4-1'){
+      this.alertCtrl.create({
+        title: 'Salir',
+        subTitle:'¿Desea  salir de la app?',
+        buttons:[{
+          text:'Si',
+          handler: data=>{
+            this.platform.exitApp();
+          }
+        },{
+          text:'No'
+        }]
+      }).present();
+      }else{
+        this.navCtrl.pop();
+      }
+    })
+  }
 }
