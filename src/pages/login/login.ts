@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Platform } from 'ionic-angular';
+import { NavController, NavParams, Platform, LoadingController, PopoverController} from 'ionic-angular';
 import { HomePage } from "../home/home";
 import { UserProvider } from '../../providers/user/user';
 import { UtilsProvider } from '../../providers/utils/utils';
@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import { DashboardProjectPage } from '../dashboard-project/dashboard-project';
 
 @Component({
   selector: 'page-login',
@@ -27,7 +28,9 @@ export class LoginPage {
               private storage: Storage,
               public platform:Platform,
               private gp: GooglePlus,
-              public afAuth: AngularFireAuth) {
+              public afAuth: AngularFireAuth, 
+              public loadingCtrl:LoadingController, 
+              public popoverCtrl: PopoverController) {
 
   }
 
@@ -61,7 +64,23 @@ export class LoginPage {
         this.storage.set("userName", u.userName);
         this.storage.set("isNetwork", u.isNetwork);
 
-        this.navCtrl.push(this.rootPage, {"rol": u.rol, "firstName": u.firstName, "lastName": u.lastName});
+
+        let loading = this.loadingCtrl.create(
+              { spinner: 'ios',
+                content:'Cargando...'
+              });
+            loading.present();
+
+
+        this.userProvider.getProjectsByUserId(u.id)
+          .subscribe((p:any)=>{
+            if(p.length > 1)
+              this.navCtrl.push(DashboardProjectPage, {"p":p, "user": u});
+            else
+              this.navCtrl.push(this.rootPage, {"rol": u.rol, "firstName": u.firstName, "lastName": u.lastName});
+
+            loading.dismiss();
+          })
       },
       (err) => {
         // statusText: "Unknown Error"
@@ -148,8 +167,26 @@ export class LoginPage {
             this.storage.set("rol", u.rol);
             this.storage.set("userName", u.userName);
             this.storage.set("isNetwork", u.isNetwork);
+
+
+            let loading = this.loadingCtrl.create(
+              { spinner: 'ios',
+                content:'Cargando...'
+              });
+            loading.present();
+
+
+            this.userProvider.getProjectsByUserId(u.id)
+              .subscribe((p:any)=>{
+                if(p.length > 1)
+                  this.navCtrl.push(DashboardProjectPage, {"p":p, "user": u});
+                else
+                  this.navCtrl.push(this.rootPage, {"rol": u.rol, "firstName": u.firstName, "lastName": u.lastName});
+                  //this.navCtrl.push(this.rootPage, {"rol": u.rol});
+
+                loading.dismiss();
+              })
     
-            this.navCtrl.push(this.rootPage, {"rol": u.rol});
           },
           (err) =>{
             this.gp.logout().then((res)=>{});

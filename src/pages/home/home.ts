@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AlertController, MenuController, NavController, Platform, NavParams} from 'ionic-angular';
+import {AlertController, MenuController, NavController, Platform, NavParams, LoadingController, PopoverController} from 'ionic-angular';
 
 import {BacklogPage} from '../backlog/backlog';
 import {ActiveSprintPage} from "../active-sprint/active-sprint";
@@ -12,6 +12,7 @@ import { PerfilPage } from '../perfil/perfil';
 import { VersionsPage } from '../versions/versions';
 import { AboutPage } from '../about/about';
 import { ProjectsPage } from '../projects/projects';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-home',
@@ -36,6 +37,7 @@ export class HomePage {
   firstName: string;
   lastName: string;
   rolName: string;
+  projectName:string;
 
   public alertShown:boolean = false;
 
@@ -44,7 +46,10 @@ export class HomePage {
               public navParams: NavParams,
               public menuCtrl: MenuController,
               public platform: Platform,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController,
+              private storage: Storage, 
+              public loadingCtrl:LoadingController, 
+              public popoverCtrl: PopoverController) {
 
     this.rol = this.navParams.get("rol");
     switch (this.rol){
@@ -92,7 +97,19 @@ export class HomePage {
   }
 
 
-  ionViewCanEnter(){ }
+  ionViewWillEnter() {
+
+    let loading = this.loadingCtrl.create(
+      { spinner: 'ios',
+        content:'Cargando...'
+      });
+    loading.present();
+
+    this.storage.get("projectName").then((n)=>{
+      this.projectName = n;
+      loading.dismiss();
+    });
+  }
 
   goToPage(page){
     this.navCtrl.push(page);

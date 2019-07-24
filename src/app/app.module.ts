@@ -79,6 +79,7 @@ import { PerfilPage } from '../pages/perfil/perfil';
 import {VelocityPage} from "../pages/velocity/velocity";
 import {SprintReportPage} from "../pages/sprint-report/sprint-report";
 import { ProjectProvider } from '../providers/project/project';
+import { DashboardProjectPage } from '../pages/dashboard-project/dashboard-project';
 
 @NgModule({
   declarations: [
@@ -127,7 +128,8 @@ import { ProjectProvider } from '../providers/project/project';
     SprintReportPage,
     AboutPage,
     ProjectsPage,
-    ProjectPage
+    ProjectPage,
+    DashboardProjectPage
   ],
   imports: [
     BrowserModule,
@@ -184,7 +186,8 @@ import { ProjectProvider } from '../providers/project/project';
     SprintReportPage,
     AboutPage,
     ProjectsPage,
-    ProjectPage
+    ProjectPage,
+    DashboardProjectPage
   ],
   providers: [
     StatusBar,

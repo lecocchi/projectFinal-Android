@@ -34,7 +34,6 @@ export class UserProvider {
 
 
   loginForUserAndPass(userLogin:any){
-
     return this.http.post(URL_BASE + "/user/login-mail", userLogin);
   }
 
@@ -44,6 +43,10 @@ export class UserProvider {
 
   loginForGooglePlus(userLoginGooglePlus:any){
     return this.http.post(URL_BASE + "/user/google-plus", userLoginGooglePlus);
+  }
+
+  getProjectsByUserId(id:number){
+    return this.http.get(URL_BASE + "/user/projects/" + id);
   }
 
 }

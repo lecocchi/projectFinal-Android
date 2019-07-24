@@ -1,0 +1,21 @@
+page-dashboard-project {
+
+    .scroll-content{
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .button-md {
+        margin-left: 0;
+        margin-right: 0;
+        max-width: 300px;
+        height: 65px;
+        margin: 10px 0;
+    }
+
+    .cursor:hover{
+        cursor: pointer;
+    }
+}
