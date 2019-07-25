@@ -48,7 +48,24 @@
         <ion-option value="2">Scrum Master</ion-option>
         <ion-option value="3">Admin</ion-option>
     </ion-select>
-</ion-item>
+  </ion-item>
+
+  <ion-card>
+    <ion-card-header>
+      Proyectos     
+      <button ion-button (click)="updateProjects()">
+        Modificar
+      </button>
+    </ion-card-header>
+
+    <ion-list *ngFor="let project of projects">
+      <button ion-item>
+         <ion-icon ios="ios-checkmark" md="md-checkmark" class="icono"></ion-icon>
+        {{ project.name }}
+      </button>
+
+    </ion-list>
+  </ion-card>
 
   <ion-item>
     <ion-label floating>Email</ion-label>

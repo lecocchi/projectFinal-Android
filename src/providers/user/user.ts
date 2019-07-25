@@ -57,4 +57,8 @@ export class UserProvider {
     return this.http.get(URL_BASE + "/user/project/" + id);
   }
 
+  addProjectsByUser(userProjects:any){
+    return this.http.put(URL_BASE + "/user/add-projects", userProjects);
+  }
+
 }

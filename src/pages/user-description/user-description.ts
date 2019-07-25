@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 import { UtilsProvider } from '../../providers/utils/utils';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-user-description',
@@ -24,11 +25,22 @@ export class UserDescriptionPage {
   isEnabled: boolean;
   isNetwork: boolean;
   classEnabled: string;
+  projects:any = [];
+  projects_id:any = [];
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public userProvider: UserProvider,
-    public utilProvider: UtilsProvider) {
+    public utilProvider: UtilsProvider,
+    public storage:Storage,
+    public loadingCtrl:LoadingController,
+    public alertCtrl: AlertController) {
+
+    let loading = this.loadingCtrl.create(
+      { spinner: 'ios',
+        content:'Cargando...'
+      });
+    loading.present();
 
     this.mode = this.navParams.get('mode');
     this.role = "1";
@@ -63,6 +75,12 @@ export class UserDescriptionPage {
       this.enabledText = 'No habilitado';
     }
 
+    userProvider.getProjectsByUserId(this.id)
+      .subscribe((p)=>{
+        this.projects = p;
+        loading.dismiss();
+      }
+    );
   }
 
   change() {
@@ -101,6 +119,11 @@ export class UserDescriptionPage {
     if (this.mode === 'create'){
       this.userProvider.createUser(user)
       .subscribe((u: any) => {
+
+
+
+
+
           this.utilProvider.presentToast("Se creó el usuario " + u.firstName + " " + u.lastName);
           this.navCtrl.pop();
       },
@@ -118,5 +141,69 @@ export class UserDescriptionPage {
         }
       )
     }
+  }
+
+  updateProjects(){ 
+    this.showCheckbox();
+  }
+
+  showCheckbox() {
+
+    let loading = this.loadingCtrl.create(
+      { spinner: 'ios',
+        content:'Cargando...'
+      });
+    loading.present();
+
+    this.userProvider.getAllProjects()
+      .subscribe((p:any)=>{
+      
+        let alert = this.alertCtrl.create();
+        alert.setTitle('Proyectos');
+
+        p.forEach(project => {
+          alert.addInput({
+            type: 'checkbox',
+            label: project.name,
+            value: project.id,
+            checked: this.projects.some(pr => project.id === pr.id)
+          });  
+        });
+
+
+        alert.addButton({
+          text: 'Cancelar',
+          cssClass: 'btn-alert-cancel',
+          });
+        alert.addButton({
+          text: 'Aceptar',
+          cssClass: 'btn-alert-ok',
+          handler: data => {
+
+            let loading = this.loadingCtrl.create(
+              { spinner: 'ios',
+                content:'Cargando...'
+              });
+            loading.present();
+
+            let user_projects = {
+              "user_id": this.id,
+              "projects_id":data
+            }
+
+            this.userProvider.addProjectsByUser(user_projects)
+              .subscribe(()=>{
+                loading.dismiss();
+                this.navCtrl.pop();
+              }
+            )
+          }
+        });
+
+        loading.dismiss();
+
+        alert.present();
+
+      });
   }
 }

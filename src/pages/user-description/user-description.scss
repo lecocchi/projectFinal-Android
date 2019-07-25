@@ -75,6 +75,39 @@ page-user-description {
     font-size: 30px !important;
   }
 
+  ion-card-header {
+    display: flex;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    justify-content: space-between;
+    background: #216856;
+    color: white;
+  }
+
+  .card-header-md {
+    font-size: 1.6rem;
+    color: white;
+    padding: 16px;
+    font-size: 20px;
+    font-weight: bolder;
+  }
+
+  .update{
+    color: white;
+    font-weight: bold;
+    font-size: 25px !important;
+  }
+
+  .icono{
+    font-size: 25px;
+    margin-right: 25px;
+  }
+
+  .cursor:hover{
+    cursor: pointer;
+  }
+
   @media screen and (min-width: 600px) and (max-width: 1000px){
     .scroll-content,
     .fixed-content,
