@@ -16,8 +16,8 @@ export class IssueProvider {
     return this.http.get(URL_BASE + "/issue/active-sprint");
   }
 
-  getAllIssueBacklog(){
-    return this.http.get(URL_BASE + "/issue/backlog")
+  getAllIssueBacklog(projectId:number){
+    return this.http.get(URL_BASE + "/issue/backlog/projects/" + projectId);
   }
 
   getIssueById(id:number){
@@ -25,7 +25,7 @@ export class IssueProvider {
   }
 
   createNewIssue(issue:any){
-    return this.http.post(URL_BASE+"/issue/", issue);
+    return this.http.post(URL_BASE + "/issue/", issue);
   }
 
   updateIssue(issue:any , id:number){
@@ -78,4 +78,5 @@ export interface IIssue{
   updated:number
   version:string;
   watcher:string;
+  idProject:number;
 }

@@ -3,6 +3,7 @@ import {LoadingController, NavController, PopoverController} from 'ionic-angular
 import {IssuePage} from "../issue/issue";
 import {IssueProvider} from "../../providers/issue/issue";
 import {PopoverPage} from "../popover/popover";
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-backlog',
@@ -17,7 +18,8 @@ export class BacklogPage {
   constructor(public navCtrl: NavController, 
     public issueProvider: IssueProvider, 
     public loadingCtrl:LoadingController, 
-    public popoverCtrl: PopoverController) {
+    public popoverCtrl: PopoverController,
+    public storage:Storage) {
     this.issuePage = IssuePage;
   }
 
@@ -29,10 +31,13 @@ export class BacklogPage {
       });
     loading.present();
 
-    this.issueProvider.getAllIssueBacklog()
-      .subscribe(data =>{
-        this.issues = data;
-        loading.dismiss();
+    this.storage.get("projectId")
+      .then((projectId:any)=>{
+        this.issueProvider.getAllIssueBacklog(projectId)
+          .subscribe(data =>{
+            this.issues = data;
+            loading.dismiss();
+          });
       });
   }
 
@@ -55,10 +60,13 @@ export class BacklogPage {
         });
       loading.present();
 
-      this.issueProvider.getAllIssueBacklog()
-        .subscribe(data =>{
-          this.issues = data;
-          loading.dismiss();
+      this.storage.get("projectId")
+        .then(id => {
+          this.issueProvider.getAllIssueBacklog(id)
+            .subscribe(data =>{
+              this.issues = data;
+              loading.dismiss();
+            });
         });
     });
 

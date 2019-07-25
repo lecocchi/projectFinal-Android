@@ -145,12 +145,10 @@ export class HomePage {
                     buttons: [{
                       text:'Aceptar',
                       cssClass: 'btn-alert-ok',
-                    }]
-                  });
-    alert.present()
+                      }]
+                    });
+                    alert.present()
                   }
-
-
                   loading.dismiss();
                 })
             });
@@ -179,9 +177,9 @@ export class HomePage {
         cssClass: 'btn-alert-ok',
         handler: (data:any) => {
           this.storage.remove("projectId");
-          this.storage.set("projectId", projects[data - 1].id);
+          this.storage.set("projectId", data);
 
-          this.projectName = projects[data - 1].name;
+          this.projectName = projects.find(e => e.id === data).name
 
           this.storage.remove("projectName");
           this.storage.set("projectName", this.projectName);

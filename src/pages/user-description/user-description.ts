@@ -36,12 +36,6 @@ export class UserDescriptionPage {
     public loadingCtrl:LoadingController,
     public alertCtrl: AlertController) {
 
-    let loading = this.loadingCtrl.create(
-      { spinner: 'ios',
-        content:'Cargando...'
-      });
-    loading.present();
-
     this.mode = this.navParams.get('mode');
     this.role = "1";
 
@@ -63,6 +57,18 @@ export class UserDescriptionPage {
       this.isNetwork = this.navParams.get('isNetwork');
       this.role = this.navParams.get('rol');
       this.password = this.navParams.get('password');
+
+      let loading = this.loadingCtrl.create(
+        { spinner: 'ios',
+          content:'Cargando...'
+        });
+      loading.present();
+
+      userProvider.getProjectsByUserId(this.id)
+        .subscribe((p)=>{
+          this.projects = p;
+          loading.dismiss();
+        });
     }
 
     this.class = (this.isNetwork) ? 'enabled' : 'disabled';
@@ -75,12 +81,7 @@ export class UserDescriptionPage {
       this.enabledText = 'No habilitado';
     }
 
-    userProvider.getProjectsByUserId(this.id)
-      .subscribe((p)=>{
-        this.projects = p;
-        loading.dismiss();
-      }
-    );
+
   }
 
   change() {
@@ -116,39 +117,50 @@ export class UserDescriptionPage {
       "isNetwork": this.isNetwork
     }
 
+    let loading = this.loadingCtrl.create(
+    { spinner: 'ios',
+      content:'Cargando...'
+    });
+    loading.present();
+
     if (this.mode === 'create'){
       this.userProvider.createUser(user)
       .subscribe((u: any) => {
 
+        let user_projects = {
+          "user_id": u.id,
+          "projects_id":this.projects.map((p) => p.id)
+        }
 
-
-
-
-          this.utilProvider.presentToast("Se creó el usuario " + u.firstName + " " + u.lastName);
-          this.navCtrl.pop();
-      },
-        (err) => {
-          this.utilProvider.presentPrompt(err.error.title, err.error.message);
-        });
+        this.userProvider.addProjectsByUser(user_projects)
+          .subscribe(()=>{
+            loading.dismiss();
+            this.utilProvider.presentToast("Se creó el usuario " + u.firstName + " " + u.lastName);
+            this.navCtrl.pop();})},
+      (err) => {
+        this.utilProvider.presentPrompt(err.error.title, err.error.message);
+      });
     }else{
       this.userProvider.updateUser(user)
       .subscribe((u:any) =>{
-          this.utilProvider.presentToast("Se modificó el usuario " + user.firstName + " " + user.lastName);
-          this.navCtrl.pop();
-        },
-        (err) =>{
-          this.utilProvider.presentPrompt(err.error.title, err.error.message);
+
+        let user_projects = {
+          "user_id": this.id,
+          "projects_id":this.projects.map((p) => p.id)
         }
-      )
+
+        this.userProvider.addProjectsByUser(user_projects)
+          .subscribe(()=>{
+            loading.dismiss();
+            this.utilProvider.presentToast("Se modificó el usuario " + user.firstName + " " + user.lastName);
+            this.navCtrl.pop();})},
+      (err) =>{
+        this.utilProvider.presentPrompt(err.error.title, err.error.message);
+      });
     }
   }
 
   updateProjects(){ 
-    this.showCheckbox();
-  }
-
-  showCheckbox() {
-
     let loading = this.loadingCtrl.create(
       { spinner: 'ios',
         content:'Cargando...'
@@ -167,9 +179,7 @@ export class UserDescriptionPage {
             label: project.name,
             value: project.id,
             checked: this.projects.some(pr => project.id === pr.id)
-          });  
-        });
-
+          });});
 
         alert.addButton({
           text: 'Cancelar',
@@ -186,24 +196,17 @@ export class UserDescriptionPage {
               });
             loading.present();
 
-            let user_projects = {
-              "user_id": this.id,
-              "projects_id":data
-            }
+            let idsProject = {
+              "ids": data
+            };
 
-            this.userProvider.addProjectsByUser(user_projects)
-              .subscribe(()=>{
-                loading.dismiss();
-                this.navCtrl.pop();
-              }
-            )
-          }
-        });
+            this.userProvider.getProjectsByProjectId(idsProject)
+              .subscribe((p:any)=>{
+                this.projects = p;
+                loading.dismiss();})}});
 
         loading.dismiss();
-
         alert.present();
-
       });
   }
 }

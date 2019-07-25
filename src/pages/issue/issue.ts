@@ -62,15 +62,21 @@ export class IssuePage {
         this.issueProvider.updateIssue(this.issueProvider.issueToUpdate, this.issueProvider.issue.id)
           .subscribe(data => {
             this.utils.presentToast(`Se modificó el issue SID- ${this.issueProvider.issue.id} con éxito`);
+            this.navCtrl.pop();
           });
       } else {
-        this.issueProvider.issue.backlog = this.backlog;
-        this.issueProvider.createNewIssue(this.issueProvider.issue)
-          .subscribe(data => {
-            this.utils.presentToast(`Se creó el issue con éxito`);
+        this.storage.get("projectId")
+          .then(idProject =>{
+            this.issueProvider.issue.backlog = this.backlog;
+            this.issueProvider.issue.idProject = idProject;
+            this.issueProvider.createNewIssue(this.issueProvider.issue)
+              .subscribe(data => {
+                this.utils.presentToast(`Se creó el issue con éxito`);
+                this.navCtrl.pop();
+              });
           });
       }
-      this.navCtrl.pop();
+      
     }
   }
 
