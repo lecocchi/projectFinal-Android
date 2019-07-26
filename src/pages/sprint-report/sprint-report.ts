@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, PopoverController } from 'ionic-angular';
 import {SprintProvider} from "../../providers/sprint/sprint";
 import {IssuePage} from "../issue/issue";
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-sprint-report',
@@ -13,7 +14,8 @@ export class SprintReportPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public sprintProvider: SprintProvider,
     public loadingCtrl:LoadingController, 
-    public popoverCtrl: PopoverController) {
+    public popoverCtrl: PopoverController,
+    public storage: Storage) {
   }
 
   ionViewDidLoad() {
@@ -24,11 +26,14 @@ export class SprintReportPage {
       });
     loading.present();
 
-    this.sprintProvider.sprintReports()
-    .subscribe( reports =>{
-      this.sprintReports = reports;
-      loading.dismiss();
-    });
+    this.storage.get("projectId")
+      .then(idProject => {
+        this.sprintProvider.sprintReportsByProject(idProject)
+        .subscribe( reports =>{
+          this.sprintReports = reports;
+          loading.dismiss();
+        });
+      });
   }
 
   openDetail(issue:any){

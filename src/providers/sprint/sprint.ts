@@ -27,12 +27,12 @@ export class SprintProvider {
     return this.http.post(URL_BASE + "/sprint/finish", sprint);
   }
 
-  velocityChart(){
-    return this.http.get(URL_BASE + "/sprint/velocity")
+  velocityChart(idProject:number){
+    return this.http.get(URL_BASE + "/sprint/velocity/projects/" + idProject);
   }
 
-  sprintReports(){
-    return this.http.get(URL_BASE + "/sprint/sprint-report");
+  sprintReportsByProject(idProject:number){
+    return this.http.get(URL_BASE + "/sprint/sprint-report/projects/" + idProject);
   }
 
   sprintActive(idProject:number){
