@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {LoadingController, NavController, PopoverController} from 'ionic-angular';
 import {IssuePage} from "../issue/issue";
-import {IssueProvider} from "../../providers/issue/issue";
+import {IssueProvider, IIssue} from "../../providers/issue/issue";
 import {PopoverPage} from "../popover/popover";
 import { Storage } from '@ionic/storage';
 
@@ -50,29 +50,34 @@ export class BacklogPage {
     this.navCtrl.push(IssuePage, {"issue":null, "update": false, "backlog": true});
   }
 
-  presentPopover(myEvent, id:string) {
-    let popover = this.popoverCtrl.create(PopoverPage, {'id':id});
+  presentPopover(myEvent, issue:IIssue) {
 
-    popover.onDidDismiss(() => {
-      let loading = this.loadingCtrl.create(
-        { spinner: 'ios',
-          content:'Cargando...'
-        });
-      loading.present();
+    this.storage.get("projectId")
+      .then(idProject =>{
+        issue.idProject = idProject;
+        let popover = this.popoverCtrl.create(PopoverPage, {'issue':issue});
 
-      this.storage.get("projectId")
-        .then(idProject => {
-          this.issueProvider.getAllIssueBacklog(idProject)
-            .subscribe(data =>{
-              this.issues = data;
-              loading.dismiss();
+        popover.onDidDismiss(() => {
+          let loading = this.loadingCtrl.create(
+            { spinner: 'ios',
+              content:'Cargando...'
+            });
+          loading.present();
+
+          this.storage.get("projectId")
+            .then(idProject => {
+              this.issueProvider.getAllIssueBacklog(idProject)
+                .subscribe(data =>{
+                  this.issues = data;
+                  loading.dismiss();
+                });
             });
         });
-    });
 
-    popover.present({
-      ev: myEvent
-    });
+        popover.present({
+          ev: myEvent
+        });
+      });
   }
 
 }

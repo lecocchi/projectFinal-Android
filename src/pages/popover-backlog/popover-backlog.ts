@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
 import { IssueProvider, IIssue } from '../../providers/issue/issue';
 import { UtilsProvider } from '../../providers/utils/utils';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -14,17 +15,32 @@ export class PopoverBacklogPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public issueProvider: IssueProvider,
     public viewCtrl: ViewController,
-    public utils: UtilsProvider) {
+    public utils: UtilsProvider,
+    public storage:Storage,
+    public loadingCtrl:LoadingController) {
   }
 
   sendToBacklog() {
-    this.issue = this.viewCtrl.getNavParams().get("issue");
-    this.issueProvider.addIssueInBacklog(this.issue)
-      .subscribe( (i:IIssue) =>{
-        this.utils.presentToast(`Se envió el issue SID-${i.id} al Backlog`);
-      });
 
-    this.viewCtrl.dismiss();
+    let loading = this.loadingCtrl.create(
+      { spinner: 'ios',
+        content:'Procesando...'
+      });
+    loading.present();
+
+    this.issue = this.viewCtrl.getNavParams().get("issue");
+
+    this.storage.get("projectId")
+      .then((idProject)=>{
+        this.issue.idProject = idProject;
+        this.issueProvider.addIssueInBacklog(this.issue)
+          .subscribe( (i:IIssue) =>{
+            this.viewCtrl.dismiss();
+            loading.dismiss();
+            this.utils.presentToast(`Se envió el issue SID-${i.id} al Backlog`);
+            
+          });
+      })
   }
 
   delete() {

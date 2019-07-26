@@ -67,7 +67,7 @@ export class LoginPage {
 
         let loading = this.loadingCtrl.create(
               { spinner: 'ios',
-                content:'Cargando...'
+                content:'Procesando...'
               });
             loading.present();
 
@@ -128,7 +128,7 @@ export class LoginPage {
             this.utilProvider.presentPrompt(err.error.title, err.error.message);
           })
       }).catch(err => {
-          this.utilProvider.presentPrompt("ERROR", err);
+          this.utilProvider.presentPrompt("ERROR", "Por este momento no es posible loguearse por redes sociales. Disculpe las molestias.");
         });
     }else{
       this.doGoogleLogin();

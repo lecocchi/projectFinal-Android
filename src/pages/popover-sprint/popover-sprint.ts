@@ -67,5 +67,4 @@ export class PopoverSprintPage {
           this.utils.presentPrompt('Error', 'Se produjo un error al intentar obtener los issues abiertos para el sprint');
         });
   }
-
 }

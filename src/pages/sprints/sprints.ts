@@ -53,11 +53,8 @@ export class SprintsPage {
     this.navCtrl.push(this.sprintPage, {'sprint': null, 'readonly': false, 'create': true});
   }
 
-  openSprint(id:string){
-    this.sprintProvider.getSprintById(id)
-      .subscribe( s =>{
-        this.navCtrl.push(this.sprintPage, {'sprint': s, 'readonly': true, 'create':false});
-      });
+  openSprint(sprint:any){
+    this.navCtrl.push(this.sprintPage, {'sprint': sprint, 'readonly': true, 'create':false});
   }
 
   presentPopover(myEvent, sprint:any) {
