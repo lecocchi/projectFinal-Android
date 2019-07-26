@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, NavController, NavParams } from 'ionic-angular';
+import { AlertController, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { StateProvider } from "../../providers/state/state";
 import { PrioritiesProvider } from "../../providers/priority/priority";
 import { VersionsProvider } from "../../providers/versions/versions";
@@ -29,11 +29,19 @@ export class DetallePage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public stateProvider: StateProvider, public priorityProvider: PrioritiesProvider,
               public versionProvider: VersionsProvider, public alertCtrl: AlertController,
-              public issueProvider: IssueProvider) {
+              public issueProvider: IssueProvider,
+              public loadingCtrl:LoadingController) {
+
 
     this.update = this.navParams.data;
 
     if (this.update) {
+
+      let loading = this.loadingCtrl.create(
+        { spinner: 'ios',
+          content:'Cargando...'
+        });
+      loading.present();
 
       this.issueProvider.issueToUpdate = this.issueProvider.issue;
       this.title = this.issueProvider.issue.title;
@@ -45,6 +53,8 @@ export class DetallePage {
 
       this.issueInactive = this.issueProvider.issue.state === 'FINALIZADO' ? true : false;
       this.disabledState = this.issueInactive || this.issueProvider.issue.backlog;
+
+      loading.dismiss();
 
     } else {
       this.issueInactive = false;
@@ -62,6 +72,7 @@ export class DetallePage {
           })
         })
       });
+    
 
     //PRIORITY
     this.priorityProvider.getAllPriority()
@@ -75,6 +86,7 @@ export class DetallePage {
           });
         })
       });
+    
 
     //VERSION
     this.versionProvider.getAllVersion()
@@ -92,27 +104,45 @@ export class DetallePage {
 
 
   onChangePriority($event){
-    this.issueProvider.issueToUpdate.priority = $event;
+    if(this.update)
+      this.issueProvider.issueToUpdate.priority = $event;
+    else
+      this.issueProvider.issue.priority = $event;
   }
 
-  onChangeState($event){
-    this.issueProvider.issueToUpdate.state = $event;
+  onChangeState($event){    
+    if(this.update)
+      this.issueProvider.issueToUpdate.state = $event;
+    else
+      this.issueProvider.issue.state = $event;
   }
 
   onChangeVersion($event){
-    this.issueProvider.issueToUpdate.version = $event;
+    if(this.update)
+      this.issueProvider.issueToUpdate.version = $event;
+    else
+      this.issueProvider.issue.version = $event;
   }
 
   changeTitle($event){
-    this.issueProvider.issue.title = $event.value;
+    if(this.update)
+      this.issueProvider.issue.title = $event.value;
+    else
+      this.issueProvider.issue.title = $event.value;
   }
 
   changeDescription($event){
-    this.issueProvider.issue.description = $event.value;
+    if(this.update)
+      this.issueProvider.issue.description = $event.value;
+    else
+      this.issueProvider.issue.description = $event.value;
   }
 
   onChangeEstimated($event){
-    this.issueProvider.issue.estimated = $event;
+    if(this.update)
+      this.issueProvider.issue.estimated = $event;
+    else
+      this.issueProvider.issue.estimated = $event;
   }
 
 

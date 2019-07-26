@@ -42,12 +42,20 @@ export class PopoverPage {
   }
 
   delete() {
-    this.issueProvider.deleteIssue(this.viewCtrl.getNavParams().get("id"))
+
+    let loading = this.loadingCtrl.create(
+      { spinner: 'ios',
+        content:'Procesando...'
+      });
+    loading.present();
+
+    this.issue = this.viewCtrl.getNavParams().get("issue");
+    this.issueProvider.deleteIssue(this.issue.id)
     .subscribe( (i:IIssue) =>{
+      loading.dismiss();
+      this.viewCtrl.dismiss();
       this.utils.presentToast(`Se eliminó el issue SID-${i.id}`);
     });
-
-    this.viewCtrl.dismiss();
   }
 
 }

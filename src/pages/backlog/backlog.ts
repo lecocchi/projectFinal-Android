@@ -41,7 +41,7 @@ export class BacklogPage {
       });
   }
 
-  openDetail(issue:any){
+  openDetail(issue:IIssue){
     this.navCtrl.push(IssuePage,{"issue":issue, "update":true});
   }
 
