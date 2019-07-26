@@ -10,8 +10,8 @@ export class DailyProvider {
 
   constructor(public http: HttpClient) {  }
 
-  getAllDailies(): any{
-    return this.http.get(URL_BASE + "/daily/");
+  getAllDailiesByProject(idProject:number): any{
+    return this.http.get(URL_BASE + "/daily/projects/" + idProject);
   }
 
   createDaily(): any{
@@ -24,8 +24,8 @@ export class DailyProvider {
     return this.http.post(URL_BASE + "/daily/", this.daily);
   }
 
-  isThereDailyToday():any{
-    return this.http.get(URL_BASE + "/daily/today");
+  isThereDailyToday(idProject:number):any{
+    return this.http.get(URL_BASE + "/daily/today/projects/" + idProject);
   }
 
   sendMail(dailyId:string){
