@@ -61,8 +61,8 @@ export class BacklogPage {
       loading.present();
 
       this.storage.get("projectId")
-        .then(id => {
-          this.issueProvider.getAllIssueBacklog(id)
+        .then(idProject => {
+          this.issueProvider.getAllIssueBacklog(idProject)
             .subscribe(data =>{
               this.issues = data;
               loading.dismiss();

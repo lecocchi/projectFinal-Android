@@ -32,9 +32,9 @@ export class IssueProvider {
     return this.http.put(URL_BASE+"/issue/" + id, issue);
   }
 
-  addIssueInActiveSprint(id:number){
+  addIssueInActiveSprintByProject(idIssue:string, idProject:number){
     // @ts-ignore
-    return this.http.post(URL_BASE + "/issue/sprint/" + id);
+    return this.http.post(URL_BASE + "/issue/sprint/" + idIssue + "/projects/" + idProject);
   }
 
   addIssueInBacklog(issue:IIssue){

@@ -35,14 +35,18 @@ export class SprintsPage {
 
     loading.present();
 
+    this.storage.get("projectId")
+      .then((id)=>{
+        this.sprintProvider.getAllSprintsByProject(id)
+          .subscribe( s =>{
+            this.sprints = s;
+            this.sprints.reverse();
+            this.sprintProvider.sprints = s;
+            loading.dismiss();
+          });
+      })
 
-    this.sprintProvider.getAllSprints()
-      .subscribe( s =>{
-        this.sprints = s;
-        this.sprints.reverse();
-        this.sprintProvider.sprints = s;
-        loading.dismiss();
-      });
+
   }
 
   createSprint(){
@@ -66,13 +70,17 @@ export class SprintsPage {
         });
       loading.present();
 
-      this.sprintProvider.getAllSprints()
-      .subscribe( s =>{
-        this.sprints = s;
-        this.sprints.reverse();
-        this.sprintProvider.sprints = s;
-        loading.dismiss();
-      });
+
+      this.storage.get("projectId")
+        .then((idProject)=>{
+          this.sprintProvider.getAllSprintsByProject(idProject)
+          .subscribe( s =>{
+            this.sprints = s;
+            this.sprints.reverse();
+            this.sprintProvider.sprints = s;
+            loading.dismiss();
+          });
+        })
     });
 
     popover.present({

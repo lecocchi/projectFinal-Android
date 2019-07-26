@@ -11,8 +11,8 @@ export class SprintProvider {
 
   constructor(public http: HttpClient) { }
 
-  getAllSprints(){
-    return this.http.get(URL_BASE + "/sprint/");
+  getAllSprintsByProject(idProject:number){
+    return this.http.get(URL_BASE + "/sprint/projects/" + idProject);
   }
 
   createSprint(sprint:any){
