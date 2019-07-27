@@ -1,12 +1,12 @@
 <ion-header>
 
   <ion-navbar color="primary" hideBackButton="true">
-    <ion-title>Proyectos Activos</ion-title>
+    <ion-title>Tus proyectos</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding class="content">
-  <button ion-button block *ngFor="let project of projects" class="cursor" (click)="selectProject(project)">{{project.name}}</button>
-</ion-content>
+  <button ion-button block outline round *ngFor="let project of projects" class="cursor" (click)="selectProject(project)">{{project.name}}</button>
+</ion-content> 

@@ -49,8 +49,8 @@ export class IssueProvider {
     return this.http.get(URL_BASE + "/issue/issues/" + id);
   }
 
-  getAllIssueOpenInActiveSprint(){
-    return this.http.get(URL_BASE + "/issue/open/");
+  getAllIssueOpenInActiveSprint(idProject:number){
+    return this.http.get(URL_BASE + "/issue/open/projects/" + idProject);
   }
 
 }

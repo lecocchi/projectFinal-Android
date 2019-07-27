@@ -34,7 +34,6 @@ export class VelocityPage {
       .then(idProject =>{
         this.sprintProvider.velocityChart(idProject)
           .subscribe(v => {
-            console.log(v);
             this.velocities = v;
             loading.dismiss();
           });
@@ -43,12 +42,17 @@ export class VelocityPage {
 
   goToPage(){}
 
-  openSprint(id:string){
+  openSprint(idSprint:string){
 
-    var idSprint = id.split(" ");
+    let loading = this.loadingCtrl.create(
+      { spinner: 'ios',
+        content:'Procesando...'
+      });
+    loading.present();
 
-    this.sprintProvider.getSprintById(idSprint[1])
+    this.sprintProvider.getSprintById(idSprint)
       .subscribe( s =>{
+        loading.dismiss();
         this.navCtrl.push(this.sprintPage, {'sprint': s, 'readonly': true, 'create':false});
       });
   }

@@ -5,6 +5,7 @@ import { UtilsProvider } from "../../providers/utils/utils";
 import { IssuePage } from "../issue/issue";
 import { IssueProvider, IIssue } from '../../providers/issue/issue';
 import { PopoverBacklogPage } from '../popover-backlog/popover-backlog';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-sprint',
@@ -27,7 +28,8 @@ export class SprintPage {
     public alertCtrl: AlertController,
     public popoverCtrl: PopoverController,
     public issueProvider: IssueProvider,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController,
+    public storage: Storage) {
 
     this.sprint = this.navParams.get('sprint');
     this.readonly = this.navParams.get('readonly');
@@ -82,23 +84,36 @@ export class SprintPage {
       this.utilsProvider.presentPrompt("Error", "Falta ingresar la fecha 'HASTA' del sprint");
     } else {
 
+      let loading = this.loadingCtrl.create(
+      { spinner: 'ios',
+        content:'Cargando...'
+      });
+      loading.present();
+
       let fromDate: string[] = this.from.toString().split("-");
       let toDate: string[] = this.to.toString().split("-");
 
-      let sprint = {
-        "name": this.name,
-        "description": this.description,
-        "date_from": new Date(fromDate[1] + "/" + fromDate[2] + "/" + fromDate[0]).getTime(),
-        "date_to": new Date(toDate[1] + "/" + toDate[2] + "/" + toDate[0]).getTime(),
-      }
+      this.storage.get("projectId")
+        .then(idProject =>{
+          let sprint = {
+            "name": this.name,
+            "description": this.description,
+            "date_from": new Date(fromDate[1] + "/" + fromDate[2] + "/" + fromDate[0]).getTime(),
+            "date_to": new Date(toDate[1] + "/" + toDate[2] + "/" + toDate[0]).getTime(),
+            "id_project": idProject
+          }
 
-      this.sprintProvider.createSprint(sprint)
-        .subscribe((s: Sprint) => {
-          this.utilsProvider.presentToast("Se ha generado con éxito " + s.name);
-          this.cancel();
-        },
-        (err)=>{
-          this.utilsProvider.presentPrompt(err.error.title, err.error.message);
+          this.sprintProvider.createSprint(sprint)
+            .subscribe((s: Sprint) => {
+              loading.dismiss();
+              this.utilsProvider.presentToast("Se ha generado con éxito " + s.name);
+              this.cancel();
+            },
+            (err)=>{
+              loading.dismiss();
+              this.utilsProvider.presentPrompt(err.error.title, err.error.message);
+            }
+          );
         });
     }
   }
