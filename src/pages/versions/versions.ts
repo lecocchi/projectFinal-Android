@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {VersionsProvider} from "../../providers/versions/versions";
 import {VersionDescriptionPage} from "../version-description/version-description";
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-versions',
@@ -14,21 +15,32 @@ export class VersionsPage {
 
   versionDescriptionPage:any = VersionDescriptionPage;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public version: VersionsProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public version: VersionsProvider,
+              public storage:Storage) {
   }
 
   ionViewDidLoad() {
-    this.version.getAllVersion()
-      .subscribe( (data) => {
-        this.versions = data;
-      })
+    this.storage.get("projectId")
+      .then(idProject =>{
+        this.version.getAllVersion(idProject)
+          .subscribe( (data) => {
+            this.versions = data;
+          }
+        )
+      }
+    )
   }
 
   ionViewDidEnter(){
-    this.version.getAllVersion()
-      .subscribe( (data) => {
-        this.versions = data;
-      })
+    this.storage.get("projectId")
+      .then(idProject =>{
+        this.version.getAllVersion(idProject)
+          .subscribe( (data) => {
+            this.versions = data;
+          }
+        )
+      }
+    )
   }
 
 

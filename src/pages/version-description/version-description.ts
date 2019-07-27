@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {VersionsProvider} from "../../providers/versions/versions";
 import {UtilsProvider} from "../../providers/utils/utils";
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-version-description',
@@ -17,7 +18,8 @@ export class VersionDescriptionPage {
   readonly:boolean = false;
   update:boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public versionProvider: VersionsProvider, public utils:UtilsProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public versionProvider: VersionsProvider, public utils:UtilsProvider,
+              public storage:Storage) {
 
     this.update = this.navParams.get('update')
 
@@ -38,24 +40,29 @@ export class VersionDescriptionPage {
     }else if (this.utils.isEmpty(this.description)){
       this.utils.presentToast('La descripción no puede estar vacía');
     }else {
-      if (this.update){
-        this.versionProvider.updateVersion(this.id, this.name, this.description)
-          .subscribe(
-            (data) => {
-              this.navCtrl.pop();
-              this.utils.presentToast(`Se modificó la versión ${this.name} con éxito`);
-            }
-          );
 
-      } else {
-        this.versionProvider.createNewVersion(this.name, this.description)
-          .subscribe(
-            (data) => {
-              this.navCtrl.pop();
-              this.utils.presentToast(`Se creó la versión ${this.name} con éxito`);
-            }
-          );
-      }
+
+      this.storage.get("projectId")
+        .then(idProject => {
+          if (this.update){
+            this.versionProvider.updateVersion(this.id, this.name, this.description, idProject)
+              .subscribe(
+                (data) => {
+                  this.navCtrl.pop();
+                  this.utils.presentToast(`Se modificó la versión ${this.name} con éxito`);
+                }
+              );
+
+          } else {
+            this.versionProvider.createNewVersion(this.name, this.description, idProject)
+              .subscribe(
+                (data) => {
+                  this.navCtrl.pop();
+                  this.utils.presentToast(`Se creó la versión ${this.name} con éxito`);
+                }
+              );
+          }
+        });
     }
   }
 }

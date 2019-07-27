@@ -4,6 +4,7 @@ import { StateProvider } from "../../providers/state/state";
 import { PrioritiesProvider } from "../../providers/priority/priority";
 import { VersionsProvider } from "../../providers/versions/versions";
 import { IssueProvider } from "../../providers/issue/issue";
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -30,7 +31,8 @@ export class DetallePage {
               public stateProvider: StateProvider, public priorityProvider: PrioritiesProvider,
               public versionProvider: VersionsProvider, public alertCtrl: AlertController,
               public issueProvider: IssueProvider,
-              public loadingCtrl:LoadingController) {
+              public loadingCtrl:LoadingController,
+              public storage:Storage) {
 
 
     this.update = this.navParams.data;
@@ -89,16 +91,19 @@ export class DetallePage {
     
 
     //VERSION
-    this.versionProvider.getAllVersion()
-      .subscribe((v: any) => {
-        this.versions.push({
-          value: 'Sin versión'
-        });
-        v.forEach(ve => {
-          this.versions.push({
-            value: ve.name
+    this.storage.get("projectId")
+      .then(idProject =>{
+        this.versionProvider.getAllVersion(idProject)
+          .subscribe((v: any) => {
+            this.versions.push({
+              value: 'Sin versión'
+            });
+            v.forEach(ve => {
+              this.versions.push({
+                value: ve.name
+              });
+            })
           });
-        })
       });
   }
 
