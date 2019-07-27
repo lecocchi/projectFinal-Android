@@ -16,7 +16,8 @@ export class PopoverPage {
               public utils: UtilsProvider,
               public storage:Storage,
               public loadingCtrl:LoadingController, 
-              public popoverCtrl: PopoverController) {
+              public popoverCtrl: PopoverController,
+              public utilProvider: UtilsProvider) {
   }
 
   sendToSprint() {
@@ -37,12 +38,18 @@ export class PopoverPage {
             loading.dismiss();
             this.viewCtrl.dismiss();
             this.utils.presentToast(`Se envió el issue SID-${i.id} al sprint`);
-          });       
-      })
+          },
+          (err) => {
+            loading.dismiss();
+            this.utilProvider.presentPrompt(err.error.title, err.error.message);
+            this.viewCtrl.dismiss();
+          }
+        );       
+      }
+    );
   }
 
   delete() {
-
     let loading = this.loadingCtrl.create(
       { spinner: 'ios',
         content:'Procesando...'
@@ -55,7 +62,13 @@ export class PopoverPage {
       loading.dismiss();
       this.viewCtrl.dismiss();
       this.utils.presentToast(`Se eliminó el issue SID-${i.id}`);
-    });
+    },
+      (err) => {
+        loading.dismiss();
+        this.viewCtrl.dismiss();
+        this.utilProvider.presentPrompt(err.error.title, err.error.message);
+      }
+    );
   }
 
 }

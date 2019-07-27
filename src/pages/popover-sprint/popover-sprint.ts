@@ -51,7 +51,8 @@ export class PopoverSprintPage {
                         },
                           (err) => {
                             this.utilProvider.presentPrompt(err.error.title, err.error.message);
-                          });
+                          }
+                        );
                     }
                   },
                   {
