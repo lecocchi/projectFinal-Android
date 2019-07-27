@@ -18,7 +18,6 @@ export class DashboardProjectPage {
               public platform:Platform,
               public alertCtrl: AlertController) {
 
-    this.registerBackButton();
   }
 
   ionViewWillEnter() {
@@ -39,28 +38,5 @@ export class DashboardProjectPage {
     }
 
     this.navCtrl.push(this.rootPage, {"rol": this.user.rol, "firstName": this.user.firstName, "lastName": this.user.lastName, "project": projectToSend});
-  }
-
-
-  registerBackButton(){
-    this.platform.registerBackButtonAction(()=>{
-
-    if (this.navCtrl.getActive().id == 'n4-1'){
-      this.alertCtrl.create({
-        title: 'Salir',
-        subTitle:'¿Desea  salir de la app?',
-        buttons:[{
-          text:'Si',
-          handler: data=>{
-            this.platform.exitApp();
-          }
-        },{
-          text:'No'
-        }]
-      }).present();
-      }else{
-        this.navCtrl.pop();
-      }
-    })
   }
 }

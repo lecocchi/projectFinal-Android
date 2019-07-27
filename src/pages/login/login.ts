@@ -74,11 +74,7 @@ export class LoginPage {
 
         this.userProvider.getProjectsByUserId(u.id)
           .subscribe((p:any)=>{
-            if(p.length > 1)
-              this.navCtrl.push(DashboardProjectPage, {"p":p, "user": u});
-            else
-              this.navCtrl.push(this.rootPage, {"rol": u.rol, "firstName": u.firstName, "lastName": u.lastName, "project":p});
-
+            this.navCtrl.push(DashboardProjectPage, {"p":p, "user": u});
             loading.dismiss();
           })
       },
@@ -93,12 +89,8 @@ export class LoginPage {
   loginGP(){
 
     if(this.platform.is('cordova')){
-
-      this.utilProvider.presentPrompt("LOGIN ANDROID", "EMPEZANDO A LOGUEARSE EN ADNROID");
       
       this.gp.login({}).then(res =>{
-
-        this.utilProvider.presentPrompt("RESPUESTA LOGIN GOOGLE", res);
 
         let userLoginGooglePlus = {
           "email":res.email

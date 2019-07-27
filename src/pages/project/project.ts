@@ -38,26 +38,30 @@ export class ProjectPage {
 
     this.userProvider.getUserByProject(this.project.id)
           .subscribe((users: any) => {
+            console.log(users);
 
-        for (let user of users) {
-          let personToShow: any = {
-            "firstName": user.firstName,
-            "lastName": user.lastName,
-            "userName": user.userName,
-            "avatar": user.avatar,
-            "yesterday": "",
-            "today": "",
-            "checked": false
-          }
-          this.members.push(personToShow);
-        }
+            for (let user of users) {
+              let personToShow: any = {
+                "firstName": user.firstName,
+                "lastName": user.lastName,
+                "userName": user.userName,
+                "avatar": user.avatar,
+                "yesterday": "",
+                "today": "",
+                "checked": false
+              }
+              this.members.push(personToShow);
+            }
 
-          if(!this.isCreate){
-            this.name = this.project.name;
-            this.description = this.project.description;
-          }
+              if(!this.isCreate){
+                this.name = this.project.name;
+                this.description = this.project.description;
+              }
 
-          loading.dismiss();
+              loading.dismiss();
+      },
+      (err)=>{
+        loading.dismiss();
       });
   }
 
