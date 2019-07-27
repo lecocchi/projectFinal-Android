@@ -3,6 +3,7 @@ import { NavController, NavParams,LoadingController, PopoverController} from 'io
 import {SprintProvider} from "../../providers/sprint/sprint";
 import {SprintPage} from "../sprint/sprint";
 import { Storage } from '@ionic/storage';
+import { UtilsProvider } from '../../providers/utils/utils';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class VelocityPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public sprintProvider: SprintProvider,
     public loadingCtrl:LoadingController, 
     public popoverCtrl: PopoverController,
-    public storage: Storage) {
+    public storage: Storage,
+    public utilsProvider: UtilsProvider) {
 
   }
 
@@ -55,6 +57,10 @@ export class VelocityPage {
         loading.dismiss();
         this.navCtrl.push(this.sprintPage, {'sprint': s, 'readonly': true, 'create':false});
       });
+  }
+
+  help(){
+    this.utilsProvider.presentPrompt("","Los story points son una unidad de medida para expresar un estimado del esfuerzo total que será requerido para implementar completamente una porción de trabajo.");
   }
 
 }

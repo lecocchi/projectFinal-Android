@@ -11,7 +11,7 @@
     <table>
         <tr>
           <th>Sprint</th>
-          <th>Story Points</th>
+          <th>Story Points <ion-icon ios="ios-help-circle" md="md-help-circle" class="cursor icono" (click)="help()"></ion-icon></th>
         </tr>
         <tr *ngFor="let velocity of velocities" (click)="openSprint(velocity.id_sprint)" class="cursor">
           <td>{{velocity.sprint}}</td>
