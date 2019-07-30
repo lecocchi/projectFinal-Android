@@ -60,7 +60,7 @@ export class VelocityPage {
   }
 
   help(){
-    this.utilsProvider.presentPrompt("","Los story points son una unidad de medida para expresar un estimado del esfuerzo total que será requerido para implementar completamente una porción de trabajo.");
+    this.utilsProvider.presentPrompt("","Los story points son una unidad de medida de tiempo para expresar un estimado del esfuerzo total que será requerido para implementar completamente una porción de trabajo. La unidad de los story points son las horas, o sea, 1 story point = 1 hora");
   }
 
 }

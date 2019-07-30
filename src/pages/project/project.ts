@@ -29,40 +29,42 @@ export class ProjectPage {
     this.project = this.navParams.get("project");
     this.isCreate = this.navParams.get("isCreate");
 
-    let loading = this.loadingCtrl.create(
-      { spinner: 'ios',
-        content:'Cargando...'
-      });
-    loading.present();
+    console.log(this.isCreate);
 
+    if(!this.isCreate){
 
-    this.userProvider.getUserByProject(this.project.id)
-          .subscribe((users: any) => {
-            console.log(users);
+      let loading = this.loadingCtrl.create(
+        { spinner: 'ios',
+          content:'Cargando...'
+        });
+      loading.present();
 
-            for (let user of users) {
-              let personToShow: any = {
-                "firstName": user.firstName,
-                "lastName": user.lastName,
-                "userName": user.userName,
-                "avatar": user.avatar,
-                "yesterday": "",
-                "today": "",
-                "checked": false
-              }
-              this.members.push(personToShow);
-            }
-
-              if(!this.isCreate){
-                this.name = this.project.name;
-                this.description = this.project.description;
+      this.userProvider.getUserByProject(this.project.id)
+            .subscribe((users: any) => {
+              for (let user of users) {
+                let personToShow: any = {
+                  "firstName": user.firstName,
+                  "lastName": user.lastName,
+                  "userName": user.userName,
+                  "avatar": user.avatar,
+                  "yesterday": "",
+                  "today": "",
+                  "checked": false
+                }
+                this.members.push(personToShow);
               }
 
-              loading.dismiss();
-      },
-      (err)=>{
-        loading.dismiss();
-      });
+                if(!this.isCreate){
+                  this.name = this.project.name;
+                  this.description = this.project.description;
+                }
+
+                loading.dismiss();
+        },
+        (err)=>{
+          loading.dismiss();
+        });
+      }
   }
 
   cancel(){
