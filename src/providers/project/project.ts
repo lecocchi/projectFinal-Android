@@ -19,4 +19,8 @@ export class ProjectProvider {
     return this.http.patch(URL_BASE + "/projects", project);
   }
 
+  updateUsersInProject(users:any){
+    return this.http.patch(URL_BASE + "/projects/users" , users);
+  }
+
 }

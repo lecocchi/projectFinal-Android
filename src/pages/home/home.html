@@ -1,16 +1,19 @@
-<ion-header (click)="changeProject()">
+<ion-header>
+  
   <ion-navbar color='primary' hideBackButton="true" #content>
-    <ion-title class="cursor">
-      Proyecto: {{ projectName }}
-    </ion-title>
-    <span class="user-active">{{ firstName }} {{ lastName }} ( {{ rolName }} )</span>
+    <div class="barra">
+      <ion-title class="cursor" (click)="changeProject()">
+        Proyecto: {{ projectName }}
+      </ion-title>
+      <span class="user-active">{{ firstName }} {{ lastName }} ( {{ rolName }} )</span>
+    </div>
+    <div class="close-session cursor"><img src="assets/imgs/close.png" style="width: 40px" (click)="closeSession()"></div>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="background">
 
   <div class="option-group">
-
     <div class="content cursor" (click)="goToPage(projectsPage)" *ngIf="rol == 3">
       <div class="avatar1 config"><img src="assets/icon/project.png" alt="PR" srcset=""></div>
       <div class="avatar1-text">

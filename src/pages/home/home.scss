@@ -41,8 +41,11 @@ page-home {
     text-align: center;
   }
 
-  ion-navbar{
-    text-align: center;
+  .toolbar-content-md{
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
   }
 
   .avatar1{
@@ -126,4 +129,9 @@ page-home {
 
 img{
   width: 75px;
+}
+
+.close-session{
+  display: block !important;
+  align-items: center;
 }

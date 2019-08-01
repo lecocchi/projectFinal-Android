@@ -27,18 +27,22 @@
     <ion-input type="text" [(ngModel)]="description" ></ion-input>
   </ion-item>
 
-<h4 class="members" *ngIf="!isCreate">Integrantes</h4>
-  <ion-list>
-    <ion-item *ngFor="let member of members">
-      <ion-avatar item-start>
-        <avatar>{{member.firstName.substring(0,1) | uppercase}}</avatar>
-      </ion-avatar>
-      <div class="issue-summary full-name">
-        {{ member.firstName }} {{ member.lastName}}
-      </div>
-      <p class="user-name">{{ member.userName}}</p>
-    </ion-item>
+  <h4 class="members">Integrantes</h4>
+    <ion-list>
+      <ion-item *ngFor="let member of members">
+        <ion-avatar item-start>
+          <avatar>{{member.firstName.substring(0,1) | uppercase}}</avatar>
+        </ion-avatar>
+        <div class="issue-summary full-name">
+          {{ member.firstName }} {{ member.lastName}}
+        </div>
+        <p class="user-name">{{ member.userName}}</p>
+      </ion-item>
 
-  </ion-list>
+    </ion-list>
+
+    <ion-fab bottom right (click)="addUsers()">
+      <button ion-fab><ion-icon name="person-add"></ion-icon></button>
+    </ion-fab>
 
   </ion-content>

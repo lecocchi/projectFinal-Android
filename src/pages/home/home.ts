@@ -14,6 +14,7 @@ import { AboutPage } from '../about/about';
 import { ProjectsPage } from '../projects/projects';
 import { Storage } from '@ionic/storage';
 import { UserProvider } from '../../providers/user/user';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-home',
@@ -186,5 +187,9 @@ export class HomePage {
         }
       });
     alert.present();
+  }
+
+  closeSession(){
+    this.navCtrl.push(LoginPage);
   }
 }

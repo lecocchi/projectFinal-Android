@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, PopoverController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, PopoverController, AlertController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 import { ProjectProvider } from '../../providers/project/project';
 import { UtilsProvider } from '../../providers/utils/utils';
@@ -15,21 +15,21 @@ export class ProjectPage {
   name:string = '';
   description:string = '';
   isCreate:boolean;
+  usersToAdd:any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public userProvider: UserProvider,
               public loadingCtrl:LoadingController, 
               public popoverCtrl: PopoverController,
               public projectProvider: ProjectProvider,
-              public utilsProvider:UtilsProvider) {
+              public utilsProvider:UtilsProvider,
+              public alertCtrl: AlertController) {
   }
 
   ionViewWillEnter() {
 
     this.project = this.navParams.get("project");
     this.isCreate = this.navParams.get("isCreate");
-
-    console.log(this.isCreate);
 
     if(!this.isCreate){
 
@@ -41,6 +41,8 @@ export class ProjectPage {
 
       this.userProvider.getUserByProject(this.project.id)
             .subscribe((users: any) => {
+              this.usersToAdd = users;
+
               for (let user of users) {
                 let personToShow: any = {
                   "firstName": user.firstName,
@@ -86,6 +88,19 @@ export class ProjectPage {
 
         this.projectProvider.createProject(project)
           .subscribe((p:any)=>{
+            
+            var projectUsers = {
+              "project_id": p.id,
+              "users_id":this.usersToAdd
+            }
+
+            this.projectProvider.updateUsersInProject(projectUsers)
+              .subscribe(p1 =>{
+                this.navCtrl.pop();
+                this.utilsProvider.presentToast(`Se modificó el proyecto ${p.name} con éxito`);
+              });
+
+
             this.navCtrl.pop();
             this.utilsProvider.presentToast(`Se creó el project ${p.name} con éxito`);
           });
@@ -99,12 +114,94 @@ export class ProjectPage {
         }
         this.projectProvider.updateProject(projectUpdate)
           .subscribe((p:any)=>{
-            this.navCtrl.pop();
-            this.utilsProvider.presentToast(`Se modificó el project ${p.name} con éxito`);
+
+            var projectUsers = {
+              "project_id":this.project.id,
+              "users_id":this.usersToAdd
+            }
+
+            this.projectProvider.updateUsersInProject(projectUsers)
+              .subscribe(p1 =>{
+                this.navCtrl.pop();
+                this.utilsProvider.presentToast(`Se modificó el proyecto ${p.name} con éxito`);
+              });
           });
       }
     }
 
 
+  }
+
+  addUsers(){
+
+    let loading = this.loadingCtrl.create(
+      { spinner: 'ios',
+        content:'Cargando...'
+      });
+    loading.present();
+
+    this.userProvider.getAllUser()
+      .subscribe((u:any) =>{
+
+        if(this.isCreate){
+          loading.dismiss();
+          let alert = this.alertCtrl.create();
+          alert.setTitle('Usuarios');
+
+          u.forEach(p => {
+            alert.addInput({
+            type: 'checkbox',
+            label: p.firstName + " " + p.lastName,
+            value: p.id,
+            checked: false
+            });
+          });
+          
+          alert.addButton({
+            text: 'Cancelar',
+            cssClass: 'btn-alert-cancel'});
+
+            alert.addButton({
+              text: 'Aceptar',
+              cssClass: 'btn-alert-ok',
+              handler: (data:any) => {
+                this.usersToAdd = data;
+              }
+            });
+          alert.present();
+          
+        }else{
+          this.userProvider.getUserByProject(this.project.id)
+            .subscribe((up:any)=>{
+
+              loading.dismiss();
+
+              let alert = this.alertCtrl.create();
+              alert.setTitle('Usuarios');
+
+              u.forEach(p => {
+                alert.addInput({
+                type: 'checkbox',
+                label: p.firstName + " " + p.lastName,
+                value: p.id,
+                checked: up.some(pr => p.id === pr.id)
+                });
+              });
+              
+              alert.addButton({
+                text: 'Cancelar',
+                cssClass: 'btn-alert-cancel'});
+
+                alert.addButton({
+                  text: 'Aceptar',
+                  cssClass: 'btn-alert-ok',
+                  handler: (data:any) => {
+                    this.usersToAdd = data;
+                  }
+                });
+              alert.present();
+            });
+          }
+      });
   }
 }
