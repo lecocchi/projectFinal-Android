@@ -23,4 +23,8 @@ export class ProjectProvider {
     return this.http.patch(URL_BASE + "/projects/users" , users);
   }
 
+  deleteProject(id:string){
+    return this.http.delete(URL_BASE + "/projects/" + id);
+  }
+
 }

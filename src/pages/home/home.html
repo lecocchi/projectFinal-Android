@@ -14,10 +14,11 @@
 <ion-content class="background">
 
   <div class="option-group">
-    <div class="content cursor" (click)="goToPage(projectsPage)" *ngIf="rol == 3">
-      <div class="avatar1 config"><img src="assets/icon/project.png" alt="PR" srcset=""></div>
+
+    <div class="content cursor" (click)="goToPage(homeAdmin)" *ngIf="rol == 3">
+      <div class="avatar1 backlog"><img src="assets/icon/setting.png" alt="AJ" srcset=""></div>
       <div class="avatar1-text">
-        Proyectos
+        Ajustes
       </div>
     </div>
 
@@ -60,13 +61,6 @@
       <div class="avatar1 config"><img src="assets/icon/version.png" alt="VE" srcset=""></div>
       <div class="avatar1-text">
         Versiones
-      </div>
-    </div>
-
-    <div class="content cursor" (click)="goToPage(usersPage)" *ngIf="rol == 3">
-      <div class="avatar1 config"><img src="assets/icon/users.png" alt="US" srcset=""></div>
-      <div class="avatar1-text">
-        Usuarios
       </div>
     </div>
 

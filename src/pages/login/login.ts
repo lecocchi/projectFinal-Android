@@ -4,9 +4,7 @@ import { HomePage } from "../home/home";
 import { UserProvider } from '../../providers/user/user';
 import { UtilsProvider } from '../../providers/utils/utils';
 import { Storage } from '@ionic/storage';
-import { GooglePlus } from '@ionic-native/google-plus';
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
 import { DashboardProjectPage } from '../dashboard-project/dashboard-project';
 
 @Component({
@@ -27,7 +25,6 @@ export class LoginPage {
               public utilProvider: UtilsProvider,
               private storage: Storage,
               public platform:Platform,
-              private gp: GooglePlus,
               public afAuth: AngularFireAuth, 
               public loadingCtrl:LoadingController, 
               public popoverCtrl: PopoverController) {
@@ -63,20 +60,9 @@ export class LoginPage {
         this.storage.set("rol", u.rol);
         this.storage.set("userName", u.userName);
         this.storage.set("isNetwork", u.isNetwork);
+      
+        this.navCtrl.push(DashboardProjectPage);
 
-
-        let loading = this.loadingCtrl.create(
-              { spinner: 'ios',
-                content:'Procesando...'
-              });
-            loading.present();
-
-
-        this.userProvider.getProjectsByUserId(u.id)
-          .subscribe((p:any)=>{
-            this.navCtrl.push(DashboardProjectPage, {"p":p, "user": u});
-            loading.dismiss();
-          })
       },
       (err) => {
         if (err.statusText === "Unknown Error")
@@ -86,6 +72,7 @@ export class LoginPage {
       })
   }
 
+/*
   loginGP(){
 
     if(this.platform.is('cordova')){
@@ -204,5 +191,6 @@ export class LoginPage {
       })
     })
   }
+  */
 
 }

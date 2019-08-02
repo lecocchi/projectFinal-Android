@@ -12,7 +12,12 @@
           <ion-icon name="close" class="cancel"></ion-icon>
         </button>
       </ion-buttons>
-    </ion-navbar>
+      <ion-buttons end *ngIf="!isCreate">
+        <button ion-button icon-only (click)="deleteProject()">
+          <ion-icon name="md-trash" class="delete"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>      
   </ion-header>
   
   <ion-content padding>

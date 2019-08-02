@@ -15,6 +15,7 @@ import { ProjectsPage } from '../projects/projects';
 import { Storage } from '@ionic/storage';
 import { UserProvider } from '../../providers/user/user';
 import { LoginPage } from '../login/login';
+import { HomeAdminPage } from '../home-admin/home-admin';
 
 @Component({
   selector: 'page-home',
@@ -34,7 +35,8 @@ export class HomePage {
   perfilPage:any = PerfilPage;
   versionPage:any = VersionsPage;
   aboutPage:any = AboutPage;
-  projectsPage:any = ProjectsPage
+  projectsPage:any = ProjectsPage;
+  homeAdmin:any = HomeAdminPage; 
   rol:number;
   firstName: string;
   lastName: string;
@@ -115,48 +117,48 @@ export class HomePage {
     alert.present()
   }
 
-    ionViewWillEnter() { }
+  ionViewWillEnter() { }
 
-    goToPage(page){
-      this.navCtrl.push(page);
-    }
+  goToPage(page){
+    this.navCtrl.push(page);
+  }
 
-    changeProject(){
+  changeProject(){
 
-      let loading = this.loadingCtrl.create(
-        { spinner: 'ios',
-          content:'Cargando...'
-        });
-      loading.present();
+    let loading = this.loadingCtrl.create(
+      { spinner: 'ios',
+        content:'Cargando...'
+      });
+    loading.present();
 
-      this.storage.get("id")
-        .then((i)=>{
-          this.userProvider.getProjectsByUserId(i)
-            .subscribe((p:any)=>{
-              this.storage.get("projectId")
-                .then((i)=>{
-                  this.projectId = i;
+    this.storage.get("id")
+      .then((i)=>{
+        this.userProvider.getProjectsByUserId(i)
+          .subscribe((p:any)=>{
+            this.storage.get("projectId")
+              .then((i)=>{
+                this.projectId = i;
 
-                  if(p.length > 1)
-                    this.showRadio(p);
-                  else{
-                    const alert = this.alertCtrl.create({
-                    title: 'Proyectos',
-                    subTitle: 'Usted solamente esta asociado a un solo proyecto.\n Para mayor información comuniquese con un administrador.',
-                    buttons: [{
-                      text:'Aceptar',
-                      cssClass: 'btn-alert-ok',
-                      }]
-                    });
-                    alert.present()
-                  }
-                  loading.dismiss();
-                })
-            });
-        });
-    }
+                if(p.length > 1)
+                  this.showRadio(p);
+                else{
+                  const alert = this.alertCtrl.create({
+                  title: 'Proyectos',
+                  subTitle: 'Usted solamente esta asociado a un solo proyecto.\n Para mayor información comuniquese con un administrador.',
+                  buttons: [{
+                    text:'Aceptar',
+                    cssClass: 'btn-alert-ok',
+                    }]
+                  });
+                  alert.present()
+                }
+                loading.dismiss();
+              })
+          });
+      });
+  }
 
-    showRadio(projects:any) {
+  showRadio(projects:any) {
       let alert = this.alertCtrl.create();
       alert.setTitle('Proyectos');
 

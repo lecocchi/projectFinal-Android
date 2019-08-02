@@ -1,7 +1,11 @@
 <ion-header>
-
-  <ion-navbar color="primary" hideBackButton="true">
-    <ion-title>Tus proyectos</ion-title>
+    <ion-navbar color='primary' hideBackButton="true" #content>
+    <div class="barra">
+      <ion-title class="cursor" (click)="changeProject()">
+        Tus Proyectos
+      </ion-title>
+    </div>
+    <div class="close-session cursor"><img src="assets/imgs/close.png" style="width: 40px" (click)="closeSession()"></div>
   </ion-navbar>
 
 </ion-header>
@@ -9,4 +13,9 @@
 
 <ion-content padding class="content">
   <button ion-button block outline round *ngFor="let project of projects" class="cursor" (click)="selectProject(project)">{{project.name}}</button>
+
+  <!-- this fab is placed at top right -->
+  <ion-fab bottom right (click)="setting()" *ngIf="rol == 3">
+    <button ion-fab><ion-icon name="settings"></ion-icon></button>
+  </ion-fab>
 </ion-content> 

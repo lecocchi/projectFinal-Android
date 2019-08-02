@@ -14,6 +14,7 @@ export class SprintsPage {
   sprints:any = [];
   sprintPage:any = SprintPage;
   role:string;
+  projectName:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public sprintProvider:SprintProvider,
@@ -35,18 +36,22 @@ export class SprintsPage {
 
     loading.present();
 
-    this.storage.get("projectId")
-      .then((id)=>{
-        this.sprintProvider.getAllSprintsByProject(id)
-          .subscribe( s =>{
-            this.sprints = s;
-            this.sprints.reverse();
-            this.sprintProvider.sprints = s;
-            loading.dismiss();
-          });
-      })
 
+    this.storage.get("projectName")
+      .then( p =>{
+        this.projectName = p;
 
+        this.storage.get("projectId")
+          .then((id)=>{
+            this.sprintProvider.getAllSprintsByProject(id)
+              .subscribe( s =>{
+                this.sprints = s;
+                this.sprints.reverse();
+                this.sprintProvider.sprints = s;
+                loading.dismiss();
+              });
+          })
+      });
   }
 
   createSprint(){

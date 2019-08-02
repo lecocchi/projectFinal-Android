@@ -14,6 +14,7 @@ export class BacklogPage {
   issues:any = [];
   avatar:string = 'https://picsum.photos/300/300?image=0';
   issuePage:any;
+  projectName:string;
 
   constructor(public navCtrl: NavController, 
     public issueProvider: IssueProvider, 
@@ -31,12 +32,19 @@ export class BacklogPage {
       });
     loading.present();
 
-    this.storage.get("projectId")
-      .then((projectId:any)=>{
-        this.issueProvider.getAllIssueBacklog(projectId)
-          .subscribe(data =>{
-            this.issues = data;
-            loading.dismiss();
+
+
+    this.storage.get("projectName")
+      .then( p=>{
+        this.projectName = p;
+
+        this.storage.get("projectId")
+          .then((projectId:any)=>{
+            this.issueProvider.getAllIssueBacklog(projectId)
+              .subscribe(data =>{
+                this.issues = data;
+                loading.dismiss();
+              });
           });
       });
   }

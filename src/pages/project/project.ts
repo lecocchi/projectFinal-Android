@@ -3,6 +3,8 @@ import { NavController, NavParams, LoadingController, PopoverController, AlertCo
 import { UserProvider } from '../../providers/user/user';
 import { ProjectProvider } from '../../providers/project/project';
 import { UtilsProvider } from '../../providers/utils/utils';
+import { Storage } from '@ionic/storage';
+import { DashboardProjectPage } from '../dashboard-project/dashboard-project';
 
 @Component({
   selector: 'page-project',
@@ -23,7 +25,9 @@ export class ProjectPage {
               public popoverCtrl: PopoverController,
               public projectProvider: ProjectProvider,
               public utilsProvider:UtilsProvider,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController,
+              public utilProvider: UtilsProvider,
+              public storage: Storage) {
   }
 
   ionViewWillEnter() {
@@ -96,13 +100,9 @@ export class ProjectPage {
 
             this.projectProvider.updateUsersInProject(projectUsers)
               .subscribe(p1 =>{
-                this.navCtrl.pop();
-                this.utilsProvider.presentToast(`Se modificó el proyecto ${p.name} con éxito`);
+                this.navCtrl.push(DashboardProjectPage);
+                this.utilsProvider.presentToast(`Se creó el proyecto con éxito`);
               });
-
-
-            this.navCtrl.pop();
-            this.utilsProvider.presentToast(`Se creó el project ${p.name} con éxito`);
           });
 
       }else{
@@ -122,8 +122,8 @@ export class ProjectPage {
 
             this.projectProvider.updateUsersInProject(projectUsers)
               .subscribe(p1 =>{
-                this.navCtrl.pop();
-                this.utilsProvider.presentToast(`Se modificó el proyecto ${p.name} con éxito`);
+                this.navCtrl.push(DashboardProjectPage);
+                this.utilsProvider.presentToast(`Se modificó el proyecto con éxito`);
               });
           });
       }
@@ -203,5 +203,38 @@ export class ProjectPage {
             });
           }
       });
+  }
+
+  deleteProject(){
+
+    const confirm = this.alertCtrl.create({
+      title: 'Eliminar Proyecto',
+      message: '¿Desea eliminar el proyecto?',
+      buttons: [
+        {
+          text: 'No',
+          cssClass: 'btn-alert-cancel'
+        },
+        {
+          text: 'Si',
+          cssClass: 'btn-alert-ok',
+          handler: () => {
+            this.projectProvider.deleteProject(this.project.id)
+              .subscribe(()=>{
+                this.storage.get("projectId")
+                  .then(id=>{
+                    this.navCtrl.push(DashboardProjectPage);
+                    this.utilsProvider.presentToast(`Se elimino el proyecto con éxito`);
+                  })
+              },
+              (err)=>{
+                this.utilProvider.presentPrompt(err.error.title, err.error.message);
+              }
+            );
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 }

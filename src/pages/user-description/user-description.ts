@@ -114,7 +114,7 @@ export class UserDescriptionPage {
       "rol": this.role,
       "password": this.password,
       "enabled": this.isEnabled,
-      "isNetwork": this.isNetwork
+      "isNetwork": false
     }
 
     let loading = this.loadingCtrl.create(
