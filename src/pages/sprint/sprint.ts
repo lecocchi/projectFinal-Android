@@ -187,7 +187,7 @@ export class SprintPage {
   }
 
   presentPopover(myEvent, issue: IIssue) {
-    let popover = this.popoverCtrl.create(PopoverBacklogPage, { 'issue': issue });
+    let popover = this.popoverCtrl.create(PopoverBacklogPage, { 'issue': issue, "sprint": this.sprint });
 
     popover.onDidDismiss(() => {
       let loading = this.loadingCtrl.create(
