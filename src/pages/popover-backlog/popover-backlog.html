@@ -1,5 +1,5 @@
 <ion-list>
-  <ion-list-header>Enviar a </ion-list-header>
+  <ion-list-header *ngIf="sprints.length > 0">Enviar a </ion-list-header>
   <button ion-item *ngFor="let sprint of sprints" (click)="sendToSprint(sprint)">{{ sprint.name }} <span
       *ngIf="sprint.isActive" style="color: green; font-weight: bold;">(Activo)</span></button>
   <button ion-item (click)="sendToBacklog()" style="color:chocolate; font-weight: bold;">Backlog</button>

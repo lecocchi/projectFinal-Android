@@ -15,6 +15,7 @@ import { ProjectsPage } from '../projects/projects';
 import { Storage } from '@ionic/storage';
 import { UserProvider } from '../../providers/user/user';
 import { HomeAdminPage } from '../home-admin/home-admin';
+import { SearchPage } from '../search/search';
 
 @Component({
   selector: 'page-home',
@@ -36,6 +37,7 @@ export class HomePage {
   aboutPage: any = AboutPage;
   projectsPage: any = ProjectsPage;
   homeAdmin: any = HomeAdminPage;
+  searchPage: any = SearchPage;
   rol: number;
   firstName: string;
   lastName: string;

@@ -52,6 +52,10 @@ export class IssueProvider {
     return this.http.get(URL_BASE + "/issue/open/projects/" + idProject);
   }
 
+  getAllIssuesByProject(idProject: number) {
+    return this.http.get(URL_BASE + '/issue/projects/' + idProject);
+  }
+
 }
 
 export interface IIssue {
