@@ -32,26 +32,25 @@ export class SprintPage {
     public loadingCtrl: LoadingController,
     public storage: Storage) {
 
-    this.sprint = this.navParams.get('sprint');
-    this.readonly = this.navParams.get('readonly');
     this.create = this.navParams.get('create');
 
     if (this.create) {
 
     } else {
+      this.sprint = this.navParams.get('sprint');
+      this.readonly = !this.sprint.isActive && !this.sprint.isCreate;
+
       this.issueProvider.getIssueBySprintId(this.sprint.id)
         .subscribe(i => {
           this.issues = i;
+
+          this.name = this.sprint.name;
+          this.description = this.sprint.description;
+          this.from = new Date(this.sprint.dateFrom).toISOString();
+          this.to = new Date(this.sprint.dateTo).toISOString();
+
         });
     }
-
-    if (this.readonly) {
-      this.name = this.sprint.name;
-      this.description = this.sprint.description;
-      this.from = new Date(this.sprint.dateFrom).toISOString();
-      this.to = new Date(this.sprint.dateTo).toISOString();
-    }
-
   }
 
   ionViewDidEnter() {
@@ -98,7 +97,9 @@ export class SprintPage {
             "description": this.description,
             "date_from": new Date(fromDate[1] + "/" + fromDate[2] + "/" + fromDate[0]).getTime(),
             "date_to": new Date(toDate[1] + "/" + toDate[2] + "/" + toDate[0]).getTime(),
-            "id_project": idProject
+            "id_project": idProject,
+            "is_active": false,
+            "is_create": true
           }
 
           this.sprintProvider.createSprint(sprint)
@@ -116,7 +117,7 @@ export class SprintPage {
     }
   }
 
-  private validateDateFrom(date: Date) {
+  public validateDateFrom(date: Date) {
 
     if (date != null) {
       let isValid = true;
@@ -144,7 +145,7 @@ export class SprintPage {
     }
   }
 
-  private validateDateTo(date: Date) {
+  public validateDateTo(date: Date) {
 
     if (date != null) {
 
@@ -182,8 +183,7 @@ export class SprintPage {
   }
 
   createNewIssue() {
-    this.issueProvider.issue.reporter = 'Leandro Sebastian Cocchi';
-    this.navCtrl.push(IssuePage, { "issue": null, "update": false, "backlog": false });
+    this.navCtrl.push(IssuePage, { "issue": null, "update": false, "backlog": false, "sprint": this.sprint });
   }
 
   presentPopover(myEvent, issue: IIssue) {
@@ -209,7 +209,7 @@ export class SprintPage {
     });
   }
 
-  private getClassByState(state: string) {
+  public getClassByState(state: string) {
     switch (state) {
       case 'CREADO':
         return 'created';
@@ -239,4 +239,6 @@ interface Sprint {
   dateTo: number;
   description: string;
   enabled: boolean;
+  isActive: boolean;
+  isCreate: boolean;
 }

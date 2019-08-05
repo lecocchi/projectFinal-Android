@@ -9,10 +9,11 @@
 
 <ion-content>
   <ion-list ion-item *ngFor="let sprint of sprints" class="cursor">
-    <div  (click)="openSprint(sprint)">
-      <h3 class="sprint-name">{{ sprint.name }} 
-        <span *ngIf="sprint.isActive" class="activo">(Activo)</span>
-        <span *ngIf="!sprint.isActive" class="inactivo">(Finalizado)</span>
+    <div (click)="openSprint(sprint)">
+      <h3 class="sprint-name">{{ sprint.name }}
+        <span *ngIf="sprint.isCreate && !sprint.isActive" class="created">(Creado)</span>
+        <span *ngIf="sprint.isActive && !sprint.isCreate" class="activo">(Activo)</span>
+        <span *ngIf="!sprint.isActive && !sprint.isCreate" class="inactivo">(Finalizado)</span>
       </h3>
       <div>
         <span class="sprint-range-from">Desde: <span
@@ -21,7 +22,8 @@
             class="sprint-range-from-label">{{ sprint.dateTo | formatDateMillisecond}}</span></span>
       </div>
     </div>
-    <button icon-only  (click)="presentPopover($event, sprint)"item-end class="more" *ngIf="sprint.isActive">
+    <button icon-only (click)="presentPopover($event, sprint)" item-end class="more"
+      *ngIf="sprint.isActive || sprint.isCreate">
       <ion-icon name="more"></ion-icon>
     </button>
   </ion-list>

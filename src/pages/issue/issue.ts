@@ -26,6 +26,7 @@ export class IssuePage {
   firstName: string;
   lastName: string;
   version: string;
+  sprint: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -44,6 +45,9 @@ export class IssuePage {
       this.issueInactive = (this.issueProvider.issue.state === 'FINALIZADO') ? true : false;
     } else {
       this.cleanIssue();
+
+      this.sprint = this.navParams.get("sprint");
+
       this.issueProvider.issue.id = null;
       this.issueInactive = false;
       this.issueProvider.issue.backlog = this.backlog;
@@ -88,12 +92,20 @@ export class IssuePage {
           .then(idProject => {
             this.issueProvider.issue.backlog = this.backlog;
             this.issueProvider.issue.idProject = idProject;
+
+            if (!this.backlog)
+              this.issueProvider.issue.sprint = this.sprint.id;
+
             this.issueProvider.createNewIssue(this.issueProvider.issue)
               .subscribe(data => {
                 loading.dismiss();
                 this.utils.presentToast(`Se creó el issue con éxito`);
                 this.navCtrl.pop();
-              });
+              },
+                (err) => {
+                  loading.dismiss();
+                  this.utilProvider.presentPrompt("Error", "No se pudo crear el issue");
+                });
           });
       }
 

@@ -1,5 +1,5 @@
 <ion-list>
   <ion-list-header>Menu</ion-list-header>
-  <button ion-item (click)="finish()">Finalizar Sprint</button>
+  <button ion-item (click)="finish()" *ngIf="isActive">Finalizar Sprint</button>
+  <button ion-item (click)="activated()" *ngIf="isCreate">Activar Sprint</button>
 </ion-list>
-

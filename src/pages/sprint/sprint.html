@@ -3,8 +3,9 @@
     <ion-title>
       {{name}}
 
-      <span *ngIf="sprint != null && sprint.isActive" class="activo">(Activo)</span>
-      <span *ngIf="sprint != null && !sprint.isActive" class="inactivo">(Finalizado)</span>
+      <span *ngIf="sprint != null && sprint.isActive && !sprint.isCreate" class="activo">(Activo)</span>
+      <span *ngIf="sprint != null && sprint.isCreate && !sprint.isActive" class="create">(Creado)</span>
+      <span *ngIf="sprint != null && !sprint.isActive && !sprint.isCreate" class="inactivo">(Finalizado)</span>
 
       <div class="sprint-range" *ngIf='!create'>
         <span class="sprint-range-from-label">Del: {{ sprint.dateFrom | formatDateMillisecond}}</span>
@@ -14,7 +15,7 @@
         Crear Sprint
       </div>
     </ion-title>
-    <ion-buttons end *ngIf="!readonly">
+    <ion-buttons end *ngIf="create">
       <button ion-button icon-only (click)="createSprint()">
         <ion-icon name="checkmark" class="accept"></ion-icon>
       </button>
@@ -49,7 +50,7 @@
     </ion-list>
 
     <!-- this fab is placed at top right -->
-    <ion-fab bottom right (click)="createNewIssue()" *ngIf="sprint.isActive">
+    <ion-fab bottom right (click)="createNewIssue()" *ngIf="sprint.isActive || sprint.isCreate">
       <button ion-fab>
         <ion-icon name="add"></ion-icon>
       </button>

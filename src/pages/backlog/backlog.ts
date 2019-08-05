@@ -90,7 +90,7 @@ export class BacklogPage {
       });
   }
 
-  private getClassByState(state: string) {
+  public getClassByState(state: string) {
     switch (state) {
       case 'CREADO':
         return 'created';

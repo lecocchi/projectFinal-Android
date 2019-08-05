@@ -38,13 +38,13 @@
     <ion-input type="text" [(ngModel)]="role" [disabled]=true></ion-input>
   </ion-item>
 
-  <ion-item>
+  <!-- <ion-item>
     <ion-label floating>Email</ion-label>
     <ion-input type="text" [(ngModel)]="email" [disabled]=true></ion-input>
-  </ion-item>
+  </ion-item> -->
 
   <button ion-button class="changePassword" (click)="changePassword()" *ngIf="!isNetwork">
     Cambiar contraseña
   </button>
-    
+
 </ion-content>

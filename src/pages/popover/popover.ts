@@ -3,6 +3,7 @@ import { NavController, NavParams, ViewController, PopoverController, LoadingCon
 import { IssueProvider, IIssue } from "../../providers/issue/issue";
 import { UtilsProvider } from "../../providers/utils/utils";
 import { Storage } from '@ionic/storage';
+import { SprintProvider } from '../../providers/sprint/sprint';
 
 @Component({
   selector: 'page-popover',
@@ -10,6 +11,7 @@ import { Storage } from '@ionic/storage';
 })
 export class PopoverPage {
   issue: IIssue;
+  sprints: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public viewCtrl: ViewController, public issueProvider: IssueProvider,
@@ -17,10 +19,16 @@ export class PopoverPage {
     public storage: Storage,
     public loadingCtrl: LoadingController,
     public popoverCtrl: PopoverController,
-    public utilProvider: UtilsProvider) {
+    public utilProvider: UtilsProvider,
+    public sprintProvider: SprintProvider) {
+
+    this.storage.get("projectId")
+      .then((id: any) => {
+        this.getSprintsActivedAndCreated(id);
+      })
   }
 
-  sendToSprint() {
+  sendToSprint(sprint: any) {
 
     let loading = this.loadingCtrl.create(
       {
@@ -34,11 +42,12 @@ export class PopoverPage {
     this.storage.get("projectId")
       .then((idProject) => {
         this.issue.idProject = idProject;
-        this.issueProvider.sendIssueToActiveSprint(this.issue)
+        this.issue.sprint = sprint.id;
+        this.issueProvider.sendIssueToSprint(this.issue)
           .subscribe((i: IIssue) => {
             loading.dismiss();
             this.viewCtrl.dismiss();
-            this.utils.presentToast(`Se envió el issue al sprint`);
+            this.utils.presentToast(`Se envió el issue al ${sprint.name}`);
           },
             (err) => {
               loading.dismiss();
@@ -71,6 +80,25 @@ export class PopoverPage {
           this.utilProvider.presentPrompt(err.error.title, err.error.message);
         }
       );
+  }
+
+  getSprintsActivedAndCreated(idProject: any) {
+
+    let loading = this.loadingCtrl.create(
+      {
+        spinner: 'ios',
+        content: 'Procesando...'
+      });
+    loading.present();
+
+    this.sprintProvider.getSprintsActivedAndCreated(idProject)
+      .subscribe((s: any) => {
+        this.sprints = s;
+        loading.dismiss();
+      }, (err) => {
+        loading.dismiss();
+        this.utilProvider.presentPrompt("Error", "Error al intentar obtener los sprint disponibles");
+      });
   }
 
 }

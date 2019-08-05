@@ -11,6 +11,9 @@ import { Storage } from '@ionic/storage';
 })
 export class PopoverSprintPage {
   issues = [];
+  sprint: any;
+  isActive: boolean;
+  isCreate: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public viewCtrl: ViewController, public sprintProvider: SprintProvider,
@@ -21,6 +24,15 @@ export class PopoverSprintPage {
     public storage: Storage,
     public loadingCtrl: LoadingController) {
   }
+
+
+  ionViewWillEnter() {
+    this.sprint = this.navParams.get("sprint");
+    this.isActive = this.sprint.isActive;
+    this.isCreate = this.sprint.isCreate;
+
+  }
+
 
   finish() {
     let loading = this.loadingCtrl.create(
@@ -36,11 +48,11 @@ export class PopoverSprintPage {
           .subscribe((is: any) => {
             this.issues = is;
 
-            let create = this.issues.some((i: any) => {
+            let canFinished = this.issues.some((i: any) => {
               return (i.state === 'BLOQUEADO' || i.state === 'EN PROGRESO')
             })
 
-            if (create) {
+            if (canFinished) {
               loading.dismiss();
               let alert = this.alertCtrl.create({
                 title: 'Finalizar Sprint',
@@ -111,5 +123,28 @@ export class PopoverSprintPage {
             }
           );
       });
+  }
+
+  activated() {
+
+    let loading = this.loadingCtrl.create(
+      {
+        spinner: 'ios',
+        content: 'Procesando...'
+      });
+    loading.present();
+
+    this.sprintProvider.activedSprint(this.sprint)
+      .subscribe((s: any) => {
+        loading.dismiss();
+        this.viewCtrl.dismiss();
+        this.utilProvider.presentToast("Se activó el sprint de forma exitosa");
+      },
+        (err) => {
+          loading.dismiss();
+          this.viewCtrl.dismiss();
+          this.utilProvider.presentPrompt(err.error.title, err.error.message);
+        });
+
   }
 }

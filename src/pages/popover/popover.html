@@ -1,6 +1,7 @@
 <ion-list>
-  <ion-list-header>Menu</ion-list-header>
-  <button ion-item (click)="sendToSprint()">Enviar a Sprint</button>
-  <button ion-item (click)="delete()">Eliminar Issue</button>
+  <ion-list-header>Enviar a</ion-list-header>
+  <button ion-item *ngFor="let sprint of sprints" (click)="sendToSprint(sprint)">{{ sprint.name }} <span
+      *ngIf="sprint.isActive" style="color: green; font-weight: bold;">(Activo)</span></button>
+  <button ion-item (click)="delete()" style="color: red; font-weight: bold;">Eliminar Issue <ion-icon name="trash">
+    </ion-icon></button>
 </ion-list>
-

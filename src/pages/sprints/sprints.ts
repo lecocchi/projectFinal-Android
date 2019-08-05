@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {LoadingController, NavController, NavParams, PopoverController} from 'ionic-angular';
-import {SprintProvider} from "../../providers/sprint/sprint";
-import {SprintPage} from "../sprint/sprint";
+import { LoadingController, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { SprintProvider } from "../../providers/sprint/sprint";
+import { SprintPage } from "../sprint/sprint";
 import { PopoverSprintPage } from '../popover-sprint/popover-sprint';
 import { Storage } from '@ionic/storage';
 
@@ -11,18 +11,18 @@ import { Storage } from '@ionic/storage';
 })
 export class SprintsPage {
 
-  sprints:any = [];
-  sprintPage:any = SprintPage;
-  role:string;
-  projectName:string;
+  sprints: any = [];
+  sprintPage: any = SprintPage;
+  role: string;
+  projectName: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public sprintProvider:SprintProvider,
-              public loadingCtrl: LoadingController,
-              public popoverCtrl: PopoverController,
-              public storage:Storage) {
+    public sprintProvider: SprintProvider,
+    public loadingCtrl: LoadingController,
+    public popoverCtrl: PopoverController,
+    public storage: Storage) {
 
-    this.storage.get("rol").then((r) =>{
+    this.storage.get("rol").then((r) => {
       this.role = r;
     });
   }
@@ -38,13 +38,13 @@ export class SprintsPage {
 
 
     this.storage.get("projectName")
-      .then( p =>{
+      .then(p => {
         this.projectName = p;
 
         this.storage.get("projectId")
-          .then((id)=>{
+          .then((id) => {
             this.sprintProvider.getAllSprintsByProject(id)
-              .subscribe( s =>{
+              .subscribe(s => {
                 this.sprints = s;
                 this.sprints.reverse();
                 this.sprintProvider.sprints = s;
@@ -54,34 +54,36 @@ export class SprintsPage {
       });
   }
 
-  createSprint(){
-    this.navCtrl.push(this.sprintPage, {'sprint': null, 'readonly': false, 'create': true});
+  createSprint() {
+    this.navCtrl.push(this.sprintPage, { 'sprint': null, 'readonly': false, 'create': true });
   }
 
-  openSprint(sprint:any){
-    this.navCtrl.push(this.sprintPage, {'sprint': sprint, 'readonly': true, 'create':false});
+  openSprint(sprint: any) {
+    this.navCtrl.push(this.sprintPage, { 'sprint': sprint, 'readonly': true, 'create': false });
   }
 
-  presentPopover(myEvent, sprint:any) {
-    let popover = this.popoverCtrl.create(PopoverSprintPage, {'sprint':sprint});
+  presentPopover(myEvent, sprint: any) {
+
+    let popover = this.popoverCtrl.create(PopoverSprintPage, { 'sprint': sprint });
 
     popover.onDidDismiss(() => {
       let loading = this.loadingCtrl.create(
-        { spinner: 'ios',
-          content:'Cargando...'
+        {
+          spinner: 'ios',
+          content: 'Cargando...'
         });
       loading.present();
 
 
       this.storage.get("projectId")
-        .then((idProject)=>{
+        .then((idProject) => {
           this.sprintProvider.getAllSprintsByProject(idProject)
-          .subscribe( s =>{
-            this.sprints = s;
-            this.sprints.reverse();
-            this.sprintProvider.sprints = s;
-            loading.dismiss();
-          });
+            .subscribe(s => {
+              this.sprints = s;
+              this.sprints.reverse();
+              this.sprintProvider.sprints = s;
+              loading.dismiss();
+            });
         })
     });
 
