@@ -25,27 +25,30 @@ export class UserDescriptionPage {
   isEnabled: boolean;
   isNetwork: boolean;
   classEnabled: string;
-  projects:any = [];
-  projects_id:any = [];
+  projects: any = [];
+  projects_id: any = [];
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public userProvider: UserProvider,
     public utilProvider: UtilsProvider,
-    public storage:Storage,
-    public loadingCtrl:LoadingController,
+    public storage: Storage,
+    public loadingCtrl: LoadingController,
     public alertCtrl: AlertController) {
 
     this.mode = this.navParams.get('mode');
     this.role = "1";
 
-    if (this.mode === 'create'){
+    if (this.mode === 'create') {
       this.firstName = "";
+      this.lastName = "";
+      this.userName = "";
+      this.password = "";
       this.fullName = 'Nuevo Usuario';
       this.isEnabled = true;
       this.enabledText = 'Habilitado';
       this.isNetwork = false;
-    }else{
+    } else {
       this.id = this.navParams.get('id');
       this.firstName = this.navParams.get('firstName');
       this.lastName = this.navParams.get('lastName');
@@ -59,13 +62,14 @@ export class UserDescriptionPage {
       this.password = this.navParams.get('password');
 
       let loading = this.loadingCtrl.create(
-        { spinner: 'ios',
-          content:'Cargando...'
+        {
+          spinner: 'ios',
+          content: 'Cargando...'
         });
       loading.present();
 
       userProvider.getProjectsByUserId(this.id)
-        .subscribe((p)=>{
+        .subscribe((p) => {
           this.projects = p;
           loading.dismiss();
         });
@@ -104,72 +108,91 @@ export class UserDescriptionPage {
 
   createUser() {
 
-    let user = {
-      "id": this.id,
-      "firstName": this.firstName,
-      "lastName": this.lastName,
-      "dni": this.dni,
-      "email": this.email,
-      "userName": this.userName,
-      "rol": this.role,
-      "password": this.password,
-      "enabled": this.isEnabled,
-      "isNetwork": false
+    if (this.firstName == '') {
+      this.utilProvider.presentPrompt('Error', 'El campo Nombre no puede estar vacío');
+    } else if (this.lastName == '') {
+      this.utilProvider.presentPrompt('Error', 'El campo Apellido no puede estar vacío');
+    } else if (this.userName == '') {
+      this.utilProvider.presentPrompt('Error', 'El campo Usuario no puede estar vacío');
+    } else if (this.password == '') {
+      this.utilProvider.presentPrompt('Error', 'El campo Password no puede estar vacío');
+    } else {
+      let user = {
+        "id": this.id,
+        "firstName": this.firstName,
+        "lastName": this.lastName,
+        "dni": this.dni,
+        "email": 'nothing',
+        "userName": this.userName,
+        "rol": this.role,
+        "password": this.password,
+        "enabled": this.isEnabled,
+        "isNetwork": false
+      }
+
+      let loading = this.loadingCtrl.create(
+        {
+          spinner: 'ios',
+          content: 'Cargando...'
+        });
+      loading.present();
+
+      if (this.mode === 'create') {
+        this.userProvider.createUser(user)
+          .subscribe((u: any) => {
+
+            let user_projects = {
+              "user_id": u.id,
+              "projects_id": this.projects.map((p) => p.id)
+            }
+
+            this.userProvider.addProjectsByUser(user_projects)
+              .subscribe(() => {
+                loading.dismiss();
+                this.utilProvider.presentToast("Se creó el usuario con éxito");
+                this.navCtrl.pop();
+              })
+          },
+            (err) => {
+              loading.dismiss();
+              this.utilProvider.presentPrompt(err.error.title, err.error.message);
+            });
+      } else {
+        this.userProvider.updateUser(user)
+          .subscribe((u: any) => {
+
+            let user_projects = {
+              "user_id": this.id,
+              "projects_id": this.projects.map((p) => p.id)
+            }
+
+            this.userProvider.addProjectsByUser(user_projects)
+              .subscribe(() => {
+                loading.dismiss();
+                this.utilProvider.presentToast("Se modificó el usuario con éxito");
+                this.navCtrl.pop();
+              })
+          },
+            (err) => {
+              loading.dismiss();
+              this.utilProvider.presentPrompt(err.error.title, err.error.message);
+            });
+      }
     }
 
-    let loading = this.loadingCtrl.create(
-    { spinner: 'ios',
-      content:'Cargando...'
-    });
-    loading.present();
-
-    if (this.mode === 'create'){
-      this.userProvider.createUser(user)
-      .subscribe((u: any) => {
-
-        let user_projects = {
-          "user_id": u.id,
-          "projects_id":this.projects.map((p) => p.id)
-        }
-
-        this.userProvider.addProjectsByUser(user_projects)
-          .subscribe(()=>{
-            loading.dismiss();
-            this.utilProvider.presentToast("Se creó el usuario " + u.firstName + " " + u.lastName);
-            this.navCtrl.pop();})},
-      (err) => {
-        this.utilProvider.presentPrompt(err.error.title, err.error.message);
-      });
-    }else{
-      this.userProvider.updateUser(user)
-      .subscribe((u:any) =>{
-
-        let user_projects = {
-          "user_id": this.id,
-          "projects_id":this.projects.map((p) => p.id)
-        }
-
-        this.userProvider.addProjectsByUser(user_projects)
-          .subscribe(()=>{
-            loading.dismiss();
-            this.utilProvider.presentToast("Se modificó el usuario " + user.firstName + " " + user.lastName);
-            this.navCtrl.pop();})},
-      (err) =>{
-        this.utilProvider.presentPrompt(err.error.title, err.error.message);
-      });
-    }
   }
 
-  updateProjects(){ 
+  updateProjects() {
     let loading = this.loadingCtrl.create(
-      { spinner: 'ios',
-        content:'Cargando...'
+      {
+        spinner: 'ios',
+        content: 'Cargando...'
       });
     loading.present();
 
     this.userProvider.getAllProjects()
-      .subscribe((p:any)=>{
-      
+      .subscribe((p: any) => {
+
         let alert = this.alertCtrl.create();
         alert.setTitle('Proyectos');
 
@@ -179,20 +202,22 @@ export class UserDescriptionPage {
             label: project.name,
             value: project.id,
             checked: this.projects.some(pr => project.id === pr.id)
-          });});
+          });
+        });
 
         alert.addButton({
           text: 'Cancelar',
           cssClass: 'btn-alert-cancel',
-          });
+        });
         alert.addButton({
           text: 'Aceptar',
           cssClass: 'btn-alert-ok',
           handler: data => {
 
             let loading = this.loadingCtrl.create(
-              { spinner: 'ios',
-                content:'Cargando...'
+              {
+                spinner: 'ios',
+                content: 'Cargando...'
               });
             loading.present();
 
@@ -201,9 +226,12 @@ export class UserDescriptionPage {
             };
 
             this.userProvider.getProjectsByProjectId(idsProject)
-              .subscribe((p:any)=>{
+              .subscribe((p: any) => {
                 this.projects = p;
-                loading.dismiss();})}});
+                loading.dismiss();
+              })
+          }
+        });
 
         loading.dismiss();
         alert.present();

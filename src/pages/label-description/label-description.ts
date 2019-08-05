@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams, ToastController} from 'ionic-angular';
-import {UtilsProvider} from "../../providers/utils/utils";
-import {LabelProvider} from "../../providers/label/label";
+import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { UtilsProvider } from "../../providers/utils/utils";
+import { LabelProvider } from "../../providers/label/label";
 
 /**
  * Generated class for the LabelDescriptionPage page.
@@ -16,20 +16,20 @@ import {LabelProvider} from "../../providers/label/label";
 })
 export class LabelDescriptionPage {
 
-  title:string = 'Crear una nueva etiqueta';
-  label:any;
-  id:number;
-  name:string;
-  description:string;
-  readonly:boolean = false;
-  update:boolean;
+  title: string = 'Crear una nueva etiqueta';
+  label: any;
+  id: number;
+  name: string;
+  description: string;
+  readonly: boolean = false;
+  update: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public labelProvider: LabelProvider,
-              public toastCtrl: ToastController, public utils:UtilsProvider) {
+    public toastCtrl: ToastController, public utils: UtilsProvider) {
 
     this.update = this.navParams.get('update')
 
-    if( this.update == true){
+    if (this.update == true) {
       this.label = this.navParams.get('version');
       this.id = this.label.id;
       this.name = this.label.name;
@@ -39,19 +39,19 @@ export class LabelDescriptionPage {
     }
   }
 
-  accept(){
+  accept() {
 
-    if (this.utils.isEmpty(this.name)){
+    if (this.utils.isEmpty(this.name)) {
       this.presentToast('El nombre no puede estar vacío');
-    }else if (this.utils.isEmpty(this.description)){
+    } else if (this.utils.isEmpty(this.description)) {
       this.presentToast('La descripción no puede estar vacía');
-    }else {
-      if (this.update){
+    } else {
+      if (this.update) {
         this.labelProvider.updateLabel(this.id, this.name, this.description)
           .subscribe(
             (data) => {
               this.navCtrl.pop();
-              this.presentToast(`Se modificó la etiqueta ${this.name} con éxito`);
+              this.presentToast(`Se modificó la etiqueta con éxito`);
             }
           );
 
@@ -60,7 +60,7 @@ export class LabelDescriptionPage {
           .subscribe(
             (data) => {
               this.navCtrl.pop();
-              this.presentToast(`Se creó la etiqueta ${this.name} con éxito`);
+              this.presentToast(`Se creó la etiqueta con éxito`);
             }
           );
       }
@@ -68,7 +68,7 @@ export class LabelDescriptionPage {
   }
 
 
-  presentToast(message:string) {
+  presentToast(message: string) {
     let toast = this.toastCtrl.create({
       message: message,
       duration: 3000

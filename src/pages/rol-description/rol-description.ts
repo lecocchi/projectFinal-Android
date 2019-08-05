@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams, ToastController} from 'ionic-angular';
-import {UtilsProvider} from "../../providers/utils/utils";
-import {RolProvider} from "../../providers/rol/rol";
+import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { UtilsProvider } from "../../providers/utils/utils";
+import { RolProvider } from "../../providers/rol/rol";
 
 /**
  * Generated class for the LabelDescriptionPage page.
@@ -16,20 +16,20 @@ import {RolProvider} from "../../providers/rol/rol";
 })
 export class RolDescriptionPage {
 
-  title:string = 'Crear una nuevo rol';
-  rol:any;
-  id:number;
-  name:string;
-  description:string;
-  readonly:boolean = false;
-  update:boolean;
+  title: string = 'Crear una nuevo rol';
+  rol: any;
+  id: number;
+  name: string;
+  description: string;
+  readonly: boolean = false;
+  update: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public rolProvider: RolProvider,
-              public toastCtrl: ToastController, public utils:UtilsProvider) {
+    public toastCtrl: ToastController, public utils: UtilsProvider) {
 
     this.update = this.navParams.get('update')
 
-    if( this.update == true){
+    if (this.update == true) {
       this.rol = this.navParams.get('rol');
       this.id = this.rol.id;
       this.name = this.rol.name;
@@ -39,19 +39,19 @@ export class RolDescriptionPage {
     }
   }
 
-  accept(){
+  accept() {
 
-    if (this.utils.isEmpty(this.name)){
+    if (this.utils.isEmpty(this.name)) {
       this.presentToast('El nombre no puede estar vacío');
-    }else if (this.utils.isEmpty(this.description)){
+    } else if (this.utils.isEmpty(this.description)) {
       this.presentToast('La descripción no puede estar vacía');
-    }else {
-      if (this.update){
+    } else {
+      if (this.update) {
         this.rolProvider.updateRol(this.id, this.name, this.description)
           .subscribe(
             (data) => {
               this.navCtrl.pop();
-              this.presentToast(`Se modificó el rol ${this.name} con éxito`);
+              this.presentToast(`Se modificó el rol con éxito`);
             }
           );
 
@@ -60,7 +60,7 @@ export class RolDescriptionPage {
           .subscribe(
             (data) => {
               this.navCtrl.pop();
-              this.presentToast(`Se creó el rol ${this.name} con éxito`);
+              this.presentToast(`Se creó el rol con éxito`);
             }
           );
       }
@@ -68,7 +68,7 @@ export class RolDescriptionPage {
   }
 
 
-  presentToast(message:string) {
+  presentToast(message: string) {
     let toast = this.toastCtrl.create({
       message: message,
       duration: 3000

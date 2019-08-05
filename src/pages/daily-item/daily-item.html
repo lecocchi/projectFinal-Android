@@ -1,50 +1,52 @@
 <ion-header>
 
-    <ion-navbar color='primary'>
-      <ion-title>Daily    
-        <span class="sprint">(Sprint {{sprint}})</span>
-      </ion-title>
-      <div class="daily-date">{{dailyCreated | formatDate}}</div>
-      <ion-buttons end>
-        <button ion-button icon-only (click)="createDaily()" *ngIf="dailyActive">
-          <ion-icon name="checkmark" class="accept"></ion-icon>
-        </button>
-      </ion-buttons>
+  <ion-navbar color='primary'>
+    <ion-title>Daily
+      <span class="sprint">({{sprint}})</span>
+    </ion-title>
+    <div class="daily-date">{{dailyCreated | formatDate}}</div>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="createDaily()" *ngIf="dailyActive">
+        <ion-icon name="checkmark" class="accept"></ion-icon>
+      </button>
+    </ion-buttons>
 
-      <ion-buttons end>
-        <button ion-button icon-only (click)="cancel()">
-          <ion-icon name="close" class="cancel"></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-navbar>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="cancel()">
+        <ion-icon name="close" class="cancel"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
-    <ion-list>
-        <ion-item *ngFor="let member of members, let i = index" (click)='push(member)' class="items cursor">
+  <ion-list>
+    <ion-item *ngFor="let member of members, let i = index" (click)='push(member)' class="items cursor">
 
-            <ion-avatar item-start >
-              <avatar>{{member.firstName.substring(0,1) | uppercase }}</avatar>
-            </ion-avatar>
+      <ion-avatar item-start>
+        <avatar>{{member.firstName.substring(0,1) | uppercase }}</avatar>
+      </ion-avatar>
 
-            <div class="name">{{member.firstName}} {{member.lastName}}  </div>
+      <div class="name">{{member.firstName}} {{member.lastName}} </div>
 
-            <div class="content">
-                <div class="day">
-                    <span class="active" *ngIf="member.yesterday.length > 0">Ayer</span>
-                    <span class="inactive" *ngIf="member.yesterday.length == 0">Ayer</span>
-                </div>
-                <div class="day">
-                    <span class="active" *ngIf="member.today.length > 0">Hoy</span>
-                    <span class="inactive" *ngIf="member.today.length == 0">Hoy</span>
-                </div>
-            </div>
-        </ion-item>
-    </ion-list>
+      <div class="content">
+        <div class="day">
+          <span class="active" *ngIf="member.yesterday.length > 0">Ayer</span>
+          <span class="inactive" *ngIf="member.yesterday.length == 0">Ayer</span>
+        </div>
+        <div class="day">
+          <span class="active" *ngIf="member.today.length > 0">Hoy</span>
+          <span class="inactive" *ngIf="member.today.length == 0">Hoy</span>
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
 
 
-    <ion-fab bottom right (click)="pushFilter()" *ngIf="dailyActive">
-      <button ion-fab><ion-icon name="person-add"></ion-icon></button>
-    </ion-fab>
+  <ion-fab bottom right (click)="pushFilter()" *ngIf="dailyActive">
+    <button ion-fab>
+      <ion-icon name="person-add"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

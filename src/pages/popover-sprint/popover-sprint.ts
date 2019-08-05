@@ -18,14 +18,15 @@ export class PopoverSprintPage {
     public utilProvider: UtilsProvider,
     public alertCtrl: AlertController,
     public issueProvider: IssueProvider,
-    public storage:Storage,
-    public loadingCtrl:LoadingController) {
+    public storage: Storage,
+    public loadingCtrl: LoadingController) {
   }
 
   finish() {
     let loading = this.loadingCtrl.create(
-      { spinner: 'ios',
-        content:'Procesando...'
+      {
+        spinner: 'ios',
+        content: 'Procesando...'
       });
     loading.present();
 
@@ -34,48 +35,74 @@ export class PopoverSprintPage {
         this.issueProvider.getAllIssueOpenInActiveSprint(idProject)
           .subscribe((is: any) => {
             this.issues = is;
-            
-            if (this.issues.length > 0) {
+
+            let create = this.issues.some((i: any) => {
+              return (i.state === 'BLOQUEADO' || i.state === 'EN PROGRESO')
+            })
+
+            if (create) {
+              loading.dismiss();
               let alert = this.alertCtrl.create({
                 title: 'Finalizar Sprint',
-                subTitle: 'Existen issues abiertos que se van a enviar al backlog.\n¿Desea cerrar el sprint?',
+                subTitle: "Para poder finalizar el sprint es necesario que no existan issues con estado 'EN PROGRESO' o 'BLOQUEADO'.",
                 buttons: [
                   {
                     text: 'Aceptar',
-                    handler: () => {
-                      this.sprintProvider.finishSprint(this.viewCtrl.getNavParams().get("sprint"))
-                        .subscribe((i: any) => {
-                          loading.dismiss();
-                          this.utils.presentToast(`Se finalizó el Sprint ${i.id}`);
-                          this.viewCtrl.dismiss();
-                        },
-                          (err) => {
-                            this.utilProvider.presentPrompt(err.error.title, err.error.message);
-                          }
-                        );
-                    }
-                  },
-                  {
-                    text: 'Cancelar',
-                    role: 'Cancel',
+                    cssClass: 'btn-alert-ok',
                     handler: () => {
                       this.viewCtrl.dismiss();
                     }
-                  }
+                  },
                 ]
               });
               alert.present();
-            }else{
-              this.sprintProvider.finishSprint(this.viewCtrl.getNavParams().get("sprint"))
-                .subscribe((i: any) => {
+            } else {
+              if (this.issues.length > 0) {
+                let alert = this.alertCtrl.create({
+                  title: 'Finalizar Sprint',
+                  subTitle: "Existen issues con estado 'CREADO' que se van a enviar al backlog.\n¿Desea cerrar el sprint?",
+                  buttons: [
+                    {
+                      text: 'Aceptar',
+                      cssClass: 'btn-alert-ok',
+                      handler: () => {
+                        this.sprintProvider.finishSprint(this.viewCtrl.getNavParams().get("sprint"))
+                          .subscribe((i: any) => {
+                            loading.dismiss();
+                            this.utils.presentToast(`Se finalizó el Sprint`);
+                            this.viewCtrl.dismiss();
+                          },
+                            (err) => {
+                              loading.dismiss();
+                              this.utilProvider.presentPrompt(err.error.title, err.error.message);
+                            }
+                          );
+                      }
+                    },
+                    {
+                      text: 'Cancelar',
+                      cssClass: 'btn-alert-cancel',
+                      role: 'Cancel',
+                      handler: () => {
+                        this.viewCtrl.dismiss();
+                        loading.dismiss();
+                      }
+                    }
+                  ]
+                });
+                alert.present();
+              } else {
+                this.sprintProvider.finishSprint(this.viewCtrl.getNavParams().get("sprint"))
+                  .subscribe((i: any) => {
                     loading.dismiss();
-                    this.utils.presentToast(`Se finalizó el Sprint ${i.id}`);
+                    this.utils.presentToast(`Se finalizó el Sprint`);
                     this.viewCtrl.dismiss();
                   },
-                  (err) => {
-                    loading.dismiss();
-                    this.utilProvider.presentPrompt(err.error.title, err.error.message);
-                  });
+                    (err) => {
+                      loading.dismiss();
+                      this.utilProvider.presentPrompt(err.error.title, err.error.message);
+                    });
+              }
             }
           },
             (err) => {

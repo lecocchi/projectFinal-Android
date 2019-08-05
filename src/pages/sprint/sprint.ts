@@ -20,6 +20,7 @@ export class SprintPage {
   create: boolean;
   sprint: Sprint;
   issues: any = [];
+  classState: string;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -64,7 +65,7 @@ export class SprintPage {
       loading.present();
 
       this.issueProvider.getIssueBySprintId(this.sprint.id)
-        .subscribe(data => {
+        .subscribe((data: any) => {
           this.issues = data;
           loading.dismiss();
         });
@@ -74,10 +75,6 @@ export class SprintPage {
 
   createSprint() {
 
-    // if (this.name == undefined || this.name == null) {
-    //   this.utilsProvider.presentToast("Falta ingresar el 'NOMBRE' del sprint")
-    // } else 
-    
     if (this.from == undefined || this.from == null) {
       this.utilsProvider.presentPrompt("Error", "Falta ingresar la fecha 'DESDE' del sprint");
     } else if (this.to == undefined || this.to == null) {
@@ -85,16 +82,17 @@ export class SprintPage {
     } else {
 
       let loading = this.loadingCtrl.create(
-      { spinner: 'ios',
-        content:'Cargando...'
-      });
+        {
+          spinner: 'ios',
+          content: 'Cargando...'
+        });
       loading.present();
 
       let fromDate: string[] = this.from.toString().split("-");
       let toDate: string[] = this.to.toString().split("-");
 
       this.storage.get("projectId")
-        .then(idProject =>{
+        .then(idProject => {
           let sprint = {
             "name": this.name,
             "description": this.description,
@@ -106,19 +104,19 @@ export class SprintPage {
           this.sprintProvider.createSprint(sprint)
             .subscribe((s: Sprint) => {
               loading.dismiss();
-              this.utilsProvider.presentToast("Se ha generado con éxito " + s.name);
+              this.utilsProvider.presentToast("Se ha generado con éxito el Sprint");
               this.cancel();
             },
-            (err)=>{
-              loading.dismiss();
-              this.utilsProvider.presentPrompt(err.error.title, err.error.message);
-            }
-          );
+              (err) => {
+                loading.dismiss();
+                this.utilsProvider.presentPrompt(err.error.title, err.error.message);
+              }
+            );
         });
     }
   }
 
-  validateDateFrom(date: Date) {
+  private validateDateFrom(date: Date) {
 
     if (date != null) {
       let isValid = true;
@@ -146,7 +144,7 @@ export class SprintPage {
     }
   }
 
-  validateDateTo(date: Date) {
+  private validateDateTo(date: Date) {
 
     if (date != null) {
 
@@ -210,7 +208,28 @@ export class SprintPage {
       ev: myEvent
     });
   }
+
+  private getClassByState(state: string) {
+    switch (state) {
+      case 'CREADO':
+        return 'created';
+
+      case 'EN PROGRESO':
+        return 'progress';
+
+      case 'BLOQUEADO':
+        return 'blocked';
+
+      case 'FINALIZADO':
+        return 'finished';
+
+      default:
+        break;
+    }
+  }
 }
+
+
 
 interface Sprint {
   id: number;

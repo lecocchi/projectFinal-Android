@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {NavController, NavParams, ToastController} from 'ionic-angular';
-import {UtilsProvider} from "../../providers/utils/utils";
-import {PrioritiesProvider} from "../../providers/priority/priority";
+import { Component } from '@angular/core';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { UtilsProvider } from "../../providers/utils/utils";
+import { PrioritiesProvider } from "../../providers/priority/priority";
 
 @Component({
   selector: 'page-priority-description',
@@ -9,20 +9,20 @@ import {PrioritiesProvider} from "../../providers/priority/priority";
 })
 export class PriorityDescriptionPage {
 
-  title:string = 'Crear una nueva prioridad';
-  priority:any;
-  id:number;
-  name:string;
-  description:string;
-  readonly:boolean = false;
-  update:boolean;
+  title: string = 'Crear una nueva prioridad';
+  priority: any;
+  id: number;
+  name: string;
+  description: string;
+  readonly: boolean = false;
+  update: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public priorityProvider: PrioritiesProvider,
-              public toastCtrl: ToastController, public utils:UtilsProvider) {
+    public toastCtrl: ToastController, public utils: UtilsProvider) {
 
     this.update = this.navParams.get('update')
 
-    if( this.update == true){
+    if (this.update == true) {
       this.priority = this.navParams.get('priority');
       this.id = this.priority.id;
       this.name = this.priority.name;
@@ -32,19 +32,19 @@ export class PriorityDescriptionPage {
     }
   }
 
-  accept(){
+  accept() {
 
-    if (this.utils.isEmpty(this.name)){
+    if (this.utils.isEmpty(this.name)) {
       this.presentToast('El nombre no puede estar vacío');
-    }else if (this.utils.isEmpty(this.description)){
+    } else if (this.utils.isEmpty(this.description)) {
       this.presentToast('La descripción no puede estar vacía');
-    }else {
-      if (this.update){
+    } else {
+      if (this.update) {
         this.priorityProvider.updatePriority(this.id, this.name, this.description)
           .subscribe(
             (data) => {
               this.navCtrl.pop();
-              this.presentToast(`Se modificó la prioridad ${this.name} con éxito`);
+              this.presentToast(`Se modificó la prioridad con éxito`);
             }
           );
 
@@ -53,7 +53,7 @@ export class PriorityDescriptionPage {
           .subscribe(
             (data) => {
               this.navCtrl.pop();
-              this.presentToast(`Se creó la prioridad ${this.name} con éxito`);
+              this.presentToast(`Se creó la prioridad con éxito`);
             }
           );
       }
@@ -61,7 +61,7 @@ export class PriorityDescriptionPage {
   }
 
 
-  presentToast(message:string) {
+  presentToast(message: string) {
     let toast = this.toastCtrl.create({
       message: message,
       duration: 3000

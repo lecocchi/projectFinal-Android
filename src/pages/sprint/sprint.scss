@@ -67,6 +67,26 @@ page-sprint {
     cursor: pointer;
   }
 
+  .created, .progress, .blocked, .finished{
+    font-size: 13px;
+  }
+
+  .created{
+    color: #8a8a29;
+  }
+
+  .progress{
+    color: green;
+  }
+
+  .blocked{
+    color: #e2960a;
+  }
+
+  .finished{
+    color: red;
+  }
+
   @media screen and (min-width: 600px) and (max-width: 1000px){
     .scroll-content,
     .fixed-content,

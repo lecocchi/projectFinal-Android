@@ -9,19 +9,22 @@
   <ion-list>
     <ion-item *ngFor="let daily of dailies" (click)="openDetail(daily)" class="cursor">
       <ion-avatar item-start>
-        <avatar *ngIf="daily.created_at != undefined">{{ daily.created_at.dayOfWeek.substring(0,1) | uppercase }}</avatar>
+        <avatar *ngIf="daily.created_at != undefined">{{ daily.created_at.dayOfWeek.substring(0,1) | uppercase }}
+        </avatar>
       </ion-avatar>
       <h2 class="date">{{daily.created_at | formatDate}}</h2>
-      <h3 class="sprint">Sprint {{ daily.sprint }}</h3>
+      <h3 class="sprint">{{ daily.sprint }}</h3>
 
-      <button  icon-only (click)="sendMail(daily.id)" item-end class="send">
-          <ion-icon name="send" *ngIf="false"></ion-icon>
-        </button>
+      <button icon-only (click)="sendMail(daily.id)" item-end class="send">
+        <ion-icon name="send" *ngIf="false"></ion-icon>
+      </button>
     </ion-item>
   </ion-list>
 
   <!-- this fab is placed at top right -->
   <ion-fab bottom right (click)="createNewDaily()">
-    <button ion-fab><ion-icon name="add"></ion-icon></button>
+    <button ion-fab>
+      <ion-icon name="add"></ion-icon>
+    </button>
   </ion-fab>
 </ion-content>

@@ -23,20 +23,21 @@ export class IssuePage {
   issueInactive: boolean;
   update: boolean;
   backlog: boolean;
-  firstName:string;
-  lastName:string;
-  version:string;
+  firstName: string;
+  lastName: string;
+  version: string;
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams,
-              public issueProvider: IssueProvider, 
-              public utils: UtilsProvider,
-              public storage: Storage,
-              public loadingCtrl:LoadingController) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public issueProvider: IssueProvider,
+    public utils: UtilsProvider,
+    public storage: Storage,
+    public loadingCtrl: LoadingController,
+    public utilProvider: UtilsProvider) {
 
     this.update = this.navParams.get('update');
     this.backlog = this.navParams.get("backlog");
-    
+
     if (this.update) {
       this.issueProvider.issue = this.navParams.get('issue');
       this.titleNavBar = 'SID-' + this.issueProvider.issue.id;
@@ -46,9 +47,9 @@ export class IssuePage {
       this.issueProvider.issue.id = null;
       this.issueInactive = false;
       this.issueProvider.issue.backlog = this.backlog;
-      this.storage.get('firstName').then((f)=>{
+      this.storage.get('firstName').then((f) => {
         this.firstName = f;
-        this.storage.get('lastName').then((l)=>{
+        this.storage.get('lastName').then((l) => {
           this.lastName = l;
           this.issueProvider.issue.reporter = this.firstName + ' ' + this.lastName;
         });
@@ -58,31 +59,33 @@ export class IssuePage {
 
   accept() {
     if (this.issueProvider.issue.title == undefined) {
-      this.utils.presentToast(`El título no puede estar vacío`);
+      this.utilProvider.presentPrompt("ERROR", "El título no puede estar vacío");
     } else {
 
       if (this.update) {
         let loading = this.loadingCtrl.create(
-          { spinner: 'ios',
-            content:'Procesando...'
+          {
+            spinner: 'ios',
+            content: 'Procesando...'
           });
         loading.present();
 
         this.issueProvider.updateIssue(this.issueProvider.issueToUpdate, this.issueProvider.issue.id)
           .subscribe(data => {
             loading.dismiss();
-            this.utils.presentToast(`Se modificó el issue SID- ${this.issueProvider.issue.id} con éxito`);
+            this.utils.presentToast(`Se modificó el issue con éxito`);
             this.navCtrl.pop();
           });
       } else {
         let loading = this.loadingCtrl.create(
-          { spinner: 'ios',
-            content:'Procesando...'
+          {
+            spinner: 'ios',
+            content: 'Procesando...'
           });
         loading.present();
 
         this.storage.get("projectId")
-          .then(idProject =>{
+          .then(idProject => {
             this.issueProvider.issue.backlog = this.backlog;
             this.issueProvider.issue.idProject = idProject;
             this.issueProvider.createNewIssue(this.issueProvider.issue)
@@ -93,7 +96,7 @@ export class IssuePage {
               });
           });
       }
-      
+
     }
   }
 
@@ -101,7 +104,7 @@ export class IssuePage {
     this.navCtrl.pop();
   }
 
-  cleanIssue(){
+  cleanIssue() {
     this.issueProvider.issue.id = null;
     this.issueProvider.issue.label = null;
     this.issueProvider.issue.plannedEnd = null;
