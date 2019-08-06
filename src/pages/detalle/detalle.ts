@@ -5,6 +5,7 @@ import { PrioritiesProvider } from "../../providers/priority/priority";
 import { VersionsProvider } from "../../providers/versions/versions";
 import { IssueProvider } from "../../providers/issue/issue";
 import { Storage } from '@ionic/storage';
+import { SprintProvider } from '../../providers/sprint/sprint';
 
 
 @Component({
@@ -23,16 +24,17 @@ export class DetallePage {
   title: string = "";
   description: string;
   disabledState: boolean;
-  estimated:number;
-  estimatedList:any = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89];
+  estimated: number;
+  estimatedList: any = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89];
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public stateProvider: StateProvider, public priorityProvider: PrioritiesProvider,
-              public versionProvider: VersionsProvider, public alertCtrl: AlertController,
-              public issueProvider: IssueProvider,
-              public loadingCtrl:LoadingController,
-              public storage:Storage) {
+    public stateProvider: StateProvider, public priorityProvider: PrioritiesProvider,
+    public versionProvider: VersionsProvider, public alertCtrl: AlertController,
+    public issueProvider: IssueProvider,
+    public loadingCtrl: LoadingController,
+    public storage: Storage,
+    public sprintProvider: SprintProvider) {
 
 
     this.update = this.navParams.data;
@@ -40,8 +42,9 @@ export class DetallePage {
     if (this.update) {
 
       let loading = this.loadingCtrl.create(
-        { spinner: 'ios',
-          content:'Cargando...'
+        {
+          spinner: 'ios',
+          content: 'Cargando...'
         });
       loading.present();
 
@@ -54,7 +57,7 @@ export class DetallePage {
       this.estimated = this.issueProvider.issue.estimated;
 
       this.issueInactive = this.issueProvider.issue.state === 'FINALIZADO' ? true : false;
-      this.disabledState = this.issueInactive || this.issueProvider.issue.backlog;
+      this.disabledState = this.issueInactive || this.issueProvider.issue.backlog || (this.sprintProvider.sprintType === 'CREATE');
 
       loading.dismiss();
 
@@ -62,7 +65,7 @@ export class DetallePage {
       this.issueInactive = false;
       this.state = 'CREADO';
       this.issueProvider.issue.state = this.state;
-      this.disabledState = this.issueProvider.issue.backlog;
+      this.disabledState = this.issueProvider.issue.backlog || (this.sprintProvider.sprintType === 'CREATE');
     }
 
     //STATES
@@ -74,7 +77,7 @@ export class DetallePage {
           })
         })
       });
-    
+
 
     //PRIORITY
     this.priorityProvider.getAllPriority()
@@ -88,11 +91,11 @@ export class DetallePage {
           });
         })
       });
-    
+
 
     //VERSION
     this.storage.get("projectId")
-      .then(idProject =>{
+      .then(idProject => {
         this.versionProvider.getAllVersion(idProject)
           .subscribe((v: any) => {
             this.versions.push({
@@ -108,43 +111,43 @@ export class DetallePage {
   }
 
 
-  onChangePriority($event){
-    if(this.update)
+  onChangePriority($event) {
+    if (this.update)
       this.issueProvider.issueToUpdate.priority = $event;
     else
       this.issueProvider.issue.priority = $event;
   }
 
-  onChangeState($event){    
-    if(this.update)
+  onChangeState($event) {
+    if (this.update)
       this.issueProvider.issueToUpdate.state = $event;
     else
       this.issueProvider.issue.state = $event;
   }
 
-  onChangeVersion($event){
-    if(this.update)
+  onChangeVersion($event) {
+    if (this.update)
       this.issueProvider.issueToUpdate.version = $event;
     else
       this.issueProvider.issue.version = $event;
   }
 
-  changeTitle($event){
-    if(this.update)
+  changeTitle($event) {
+    if (this.update)
       this.issueProvider.issue.title = $event.value;
     else
       this.issueProvider.issue.title = $event.value;
   }
 
-  changeDescription($event){
-    if(this.update)
+  changeDescription($event) {
+    if (this.update)
       this.issueProvider.issue.description = $event.value;
     else
       this.issueProvider.issue.description = $event.value;
   }
 
-  onChangeEstimated($event){
-    if(this.update)
+  onChangeEstimated($event) {
+    if (this.update)
       this.issueProvider.issue.estimated = $event;
     else
       this.issueProvider.issue.estimated = $event;

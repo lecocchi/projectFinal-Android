@@ -2,4 +2,6 @@
   <ion-list-header>Menu</ion-list-header>
   <button ion-item (click)="finish()" *ngIf="isActive">Finalizar Sprint</button>
   <button ion-item (click)="activated()" *ngIf="isCreate">Activar Sprint</button>
+  <button ion-item (click)="delete()" style="color: red; font-weight: bold;" *ngIf="isCreate">Eliminar Sprint <ion-icon
+      name="trash"></ion-icon></button>
 </ion-list>

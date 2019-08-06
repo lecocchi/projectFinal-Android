@@ -7,6 +7,7 @@ import { FechasPage } from "../fechas/fechas";
 import { ComentariosPage } from "../comentarios/comentarios";
 import { UtilsProvider } from "../../providers/utils/utils";
 import { Storage } from '@ionic/storage';
+import { SprintProvider } from '../../providers/sprint/sprint';
 
 
 @Component({
@@ -34,7 +35,8 @@ export class IssuePage {
     public utils: UtilsProvider,
     public storage: Storage,
     public loadingCtrl: LoadingController,
-    public utilProvider: UtilsProvider) {
+    public utilProvider: UtilsProvider,
+    public sprintProvider: SprintProvider) {
 
     this.update = this.navParams.get('update');
     this.backlog = this.navParams.get("backlog");

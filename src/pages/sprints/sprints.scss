@@ -75,6 +75,10 @@ page-sprints {
       padding-left: 15%;
       padding-right: 15% !important;
     }
+
+    ion-fab[bottom]{
+      margin-right: 50px;
+    }
   }
 
   @media screen and (min-width: 1000px){
@@ -90,6 +94,16 @@ page-sprints {
     ion-navbar.toolbar{
       padding-left: 25%;
       padding-right: 25% !important;
+    }
+
+    ion-fab[bottom]{
+      margin-right: 50px;
+    }
+  }
+
+  @media screen and (max-width: 599px){
+    ion-fab[bottom]{
+      margin-right: 30px;
     }
   }
 }

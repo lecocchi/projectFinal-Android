@@ -21,6 +21,14 @@ export class SprintPage {
   sprint: Sprint;
   issues: any = [];
   classState: string;
+  isCreate: boolean;
+
+  dayFrom: number;
+  monthFrom: number;
+  yearFrom: number;
+  dayTo: number;
+  monthTo: number;
+  yearTo: number;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -32,12 +40,15 @@ export class SprintPage {
     public loadingCtrl: LoadingController,
     public storage: Storage) {
 
+    this.sprint = this.navParams.get('sprint');
     this.create = this.navParams.get('create');
 
     if (this.create) {
 
     } else {
-      this.sprint = this.navParams.get('sprint');
+
+      this.isCreate = this.sprint.isCreate;
+
       this.readonly = !this.sprint.isActive && !this.sprint.isCreate;
 
       this.issueProvider.getIssueBySprintId(this.sprint.id)
@@ -48,6 +59,14 @@ export class SprintPage {
           this.description = this.sprint.description;
           this.from = new Date(this.sprint.dateFrom).toISOString();
           this.to = new Date(this.sprint.dateTo).toISOString();
+
+          this.dayFrom = new Date(this.sprint.dateFrom).getDate();
+          this.monthFrom = new Date(this.sprint.dateFrom).getUTCMonth() + 1;
+          this.yearFrom = new Date(this.sprint.dateFrom).getFullYear();
+
+          this.dayTo = new Date(this.sprint.dateTo).getDate();
+          this.monthTo = new Date(this.sprint.dateTo).getUTCMonth() + 1;
+          this.yearTo = new Date(this.sprint.dateTo).getFullYear();
 
         });
     }
@@ -87,16 +106,13 @@ export class SprintPage {
         });
       loading.present();
 
-      let fromDate: string[] = this.from.toString().split("-");
-      let toDate: string[] = this.to.toString().split("-");
-
       this.storage.get("projectId")
         .then(idProject => {
           let sprint = {
             "name": this.name,
             "description": this.description,
-            "date_from": new Date(fromDate[1] + "/" + fromDate[2] + "/" + fromDate[0]).getTime(),
-            "date_to": new Date(toDate[1] + "/" + toDate[2] + "/" + toDate[0]).getTime(),
+            "date_from": new Date(this.monthFrom + "/" + this.dayFrom + "/" + this.yearFrom).getTime(),
+            "date_to": new Date(this.monthTo + "/" + this.dayTo + "/" + this.yearTo).getTime(),
             "id_project": idProject,
             "is_active": false,
             "is_create": true
@@ -226,6 +242,18 @@ export class SprintPage {
       default:
         break;
     }
+  }
+
+  changeDateFrom($event) {
+    this.dayFrom = $event.day;
+    this.monthFrom = $event.month;
+    this.yearFrom = $event.year;
+  }
+
+  changeDateTo($event) {
+    this.dayTo = $event.day;
+    this.monthTo = $event.month;
+    this.yearTo = $event.year;
   }
 }
 

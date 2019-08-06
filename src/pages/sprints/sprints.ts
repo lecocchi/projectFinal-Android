@@ -55,10 +55,19 @@ export class SprintsPage {
   }
 
   createSprint() {
+    this.sprintProvider.sprintType = 'CREATE';
     this.navCtrl.push(this.sprintPage, { 'sprint': null, 'readonly': false, 'create': true });
   }
 
   openSprint(sprint: any) {
+    if (sprint.isCreate) {
+      this.sprintProvider.sprintType = 'CREATE';
+    } else if (sprint.isActive) {
+      this.sprintProvider.sprintType = 'ACTIVE';
+    } else if (!sprint.isActive && !sprint.isCreate) {
+      this.sprintProvider.sprintType = 'FINISH';
+    }
+
     this.navCtrl.push(this.sprintPage, { 'sprint': sprint, 'readonly': true, 'create': false });
   }
 

@@ -145,6 +145,46 @@ export class PopoverSprintPage {
           this.viewCtrl.dismiss();
           this.utilProvider.presentPrompt(err.error.title, err.error.message);
         });
+  }
 
+  delete() {
+    let alert = this.alertCtrl.create({
+      title: 'Eliminar Sprint',
+      subTitle: "Los issue se van a enviar la backlog, ¿Desea eliminar el Sprint?",
+      buttons: [
+        {
+          text: 'Aceptar',
+          cssClass: 'btn-alert-ok',
+          handler: () => {
+            let loading = this.loadingCtrl.create(
+              {
+                spinner: 'ios',
+                content: 'Procesando...'
+              });
+            loading.present();
+
+            this.sprintProvider.deleteSprint(this.sprint.id, this.sprint.idProject)
+              .subscribe((i: any) => {
+                loading.dismiss();
+                this.utils.presentToast(`Se Eliminó el Sprint con exito`);
+                this.viewCtrl.dismiss();
+              },
+                (err) => {
+                  loading.dismiss();
+                  this.utilProvider.presentPrompt(err.error.title, err.error.message);
+                });
+          }
+        },
+        {
+          text: 'Cancelar',
+          cssClass: 'btn-alert-cancel',
+          role: 'Cancel',
+          handler: () => {
+            this.viewCtrl.dismiss();
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 }

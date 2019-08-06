@@ -15,7 +15,7 @@
         Crear Sprint
       </div>
     </ion-title>
-    <ion-buttons end *ngIf="create">
+    <ion-buttons end *ngIf="create || isCreate">
       <button ion-button icon-only (click)="createSprint()">
         <ion-icon name="checkmark" class="accept"></ion-icon>
       </button>
@@ -32,6 +32,22 @@
 
 
 <ion-content padding>
+
+  <div *ngIf="create || isCreate">
+
+    <ion-item>
+      <ion-label>Desde</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" placeholder="" [(ngModel)]="from" (ionChange)="changeDateFrom($event)">
+      </ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Hasta</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" placeholder="" [(ngModel)]="to" (ionChange)="changeDateTo($event)">
+      </ion-datetime>
+    </ion-item>
+  </div>
+
   <div *ngIf="!create">
     <ion-list>
       <ion-item *ngFor="let issue of issues, let i = index" class="cursor">
@@ -56,18 +72,4 @@
       </button>
     </ion-fab>
   </div>
-
-  <div *ngIf="create">
-
-    <ion-item>
-      <ion-label>Desde</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" placeholder="" [(ngModel)]="from"></ion-datetime>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Hasta</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" placeholder="" [(ngModel)]="to"></ion-datetime>
-    </ion-item>
-  </div>
-
 </ion-content>

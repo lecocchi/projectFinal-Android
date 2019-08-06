@@ -8,6 +8,7 @@ import 'rxjs/add/operator/catch';
 export class SprintProvider {
 
   public sprints: any = [];
+  public sprintType: string;
 
   constructor(public http: HttpClient) { }
 
@@ -25,6 +26,10 @@ export class SprintProvider {
 
   finishSprint(sprint: any) {
     return this.http.post(URL_BASE + "/sprint/finish", sprint);
+  }
+
+  deleteSprint(idSprint: number, idProject: number) {
+    return this.http.delete(URL_BASE + "/sprint/" + idSprint + "/projects/" + idProject);
   }
 
   velocityChart(idProject: number) {

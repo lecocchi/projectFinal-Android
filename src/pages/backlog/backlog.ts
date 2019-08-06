@@ -4,6 +4,7 @@ import { IssuePage } from "../issue/issue";
 import { IssueProvider, IIssue } from "../../providers/issue/issue";
 import { PopoverPage } from "../popover/popover";
 import { Storage } from '@ionic/storage';
+import { SprintProvider } from '../../providers/sprint/sprint';
 
 @Component({
   selector: 'page-backlog',
@@ -21,12 +22,16 @@ export class BacklogPage {
     public issueProvider: IssueProvider,
     public loadingCtrl: LoadingController,
     public popoverCtrl: PopoverController,
-    public storage: Storage) {
+    public storage: Storage,
+    public sprintProvider: SprintProvider) {
     this.issuePage = IssuePage;
   }
 
 
   ionViewDidEnter() {
+
+    this.sprintProvider.sprintType = "BACKLOG";
+
     let loading = this.loadingCtrl.create(
       {
         spinner: 'ios',

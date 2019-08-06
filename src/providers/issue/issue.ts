@@ -56,6 +56,10 @@ export class IssueProvider {
     return this.http.get(URL_BASE + '/issue/projects/' + idProject);
   }
 
+  getStatusSprint(nameSprint: string, idProject: number) {
+    return this.http.get(URL_BASE + "/issue/sprints/ " + nameSprint + "/status/projects/" + idProject);
+  }
+
 }
 
 export interface IIssue {
