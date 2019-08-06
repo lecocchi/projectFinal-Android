@@ -52,4 +52,7 @@ export class SprintProvider {
     return this.http.get(URL_BASE + '/sprint/availables/projects/' + idProject);
   }
 
+  getSprintByNameAndProject(sprintName: string, idProject: number) {
+    return this.http.get(URL_BASE + '/sprint/' + sprintName + '/projects/' + idProject);
+  }
 }

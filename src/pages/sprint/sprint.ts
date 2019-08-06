@@ -93,10 +93,15 @@ export class SprintPage {
 
   createSprint() {
 
+    let dateFrom = new Date(this.monthFrom + "/" + this.dayFrom + "/" + this.yearFrom).getTime();
+    let dateTo = new Date(this.monthTo + "/" + this.dayTo + "/" + this.yearTo).getTime();
+
     if (this.from == undefined || this.from == null) {
       this.utilsProvider.presentPrompt("Error", "Falta ingresar la fecha 'DESDE' del sprint");
     } else if (this.to == undefined || this.to == null) {
       this.utilsProvider.presentPrompt("Error", "Falta ingresar la fecha 'HASTA' del sprint");
+    } else if (dateFrom > dateTo) {
+      this.utilsProvider.presentPrompt("Error", "La fecha 'Desde' debe ser menor a la fecha 'Hasta'");
     } else {
 
       let loading = this.loadingCtrl.create(
@@ -108,11 +113,12 @@ export class SprintPage {
 
       this.storage.get("projectId")
         .then(idProject => {
+
           let sprint = {
             "name": this.name,
             "description": this.description,
-            "date_from": new Date(this.monthFrom + "/" + this.dayFrom + "/" + this.yearFrom).getTime(),
-            "date_to": new Date(this.monthTo + "/" + this.dayTo + "/" + this.yearTo).getTime(),
+            "date_from": dateFrom,
+            "date_to": dateTo,
             "id_project": idProject,
             "is_active": false,
             "is_create": true
@@ -130,6 +136,7 @@ export class SprintPage {
               }
             );
         });
+
     }
   }
 

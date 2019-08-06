@@ -13,7 +13,10 @@
         </avatar>
       </ion-avatar>
       <h2 class="date">{{daily.created_at | formatDate}}</h2>
-      <h3 class="sprint">{{ daily.sprint }}</h3>
+      <h3 class="sprint">{{ daily.sprint }}
+        (<span class="sprint-range-from-label">{{ dateFrom | formatDateMillisecond}}</span> -
+        <span class="sprint-range-from-label">{{ dateTo | formatDateMillisecond}}</span>)
+      </h3>
 
       <button icon-only (click)="sendMail(daily.id)" item-end class="send">
         <ion-icon name="send" *ngIf="false"></ion-icon>

@@ -18,12 +18,14 @@ export class DailyPage {
   firstName: String;
   lastName: String;
   userName: String;
+  dateTo: any;
+  dateFrom: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public dailyProvider: DailyProvider, public utils: UtilsProvider,
     public loadingCtrl: LoadingController,
     public sprintProvider: SprintProvider,
-    private storage: Storage, ) { }
+    private storage: Storage) { }
 
   ionViewWillEnter() {
 
@@ -39,12 +41,25 @@ export class DailyPage {
       .then(idProject => {
         this.dailyProvider.getAllDailiesByProject(idProject)
           .subscribe((data: any) => {
+            loading.dismiss();
             this.dailies = data.reverse();
             this.dailies.forEach(d => {
               d.created_at.dayOfWeek = this.utils.getDayInSpanish(d.created_at.dayOfWeek);
-            });
 
-            loading.dismiss();
+              this.sprintProvider.getSprintByNameAndProject(d.sprint, idProject)
+                .subscribe((s: any) => {
+                  this.dateFrom = s.dateFrom;
+                  this.dateTo = s.dateTo;
+                },
+                  (err) => {
+                    loading.dismiss();
+                    this.utils.presentPrompt("Error", "Error al obtener las dailies")
+                  })
+            }),
+              (err) => {
+                loading.dismiss();
+                this.utils.presentPrompt("Error", "Error al obtener las dailies")
+              };
           });
       })
   }
