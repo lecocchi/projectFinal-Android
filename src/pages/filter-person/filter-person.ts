@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { UserProvider } from "../../providers/user/user";
 import { DailyProvider } from "../../providers/daily/daily";
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-filter-person',
@@ -13,37 +14,43 @@ export class FilterPersonPage {
   personToSearch: string;
   personsToShow: any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider, public dailyProvider: DailyProvider) { }
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public userProvider: UserProvider, public dailyProvider: DailyProvider,
+    public storage: Storage) { }
 
 
   ionViewWillEnter() {
     this.personsToShow = [];
-    this.userProvider.getAllUser()
-      .subscribe((users: any) => {
+    this.storage.get("projectId")
+      .then((id: any) => {
 
-        for (let user of users) {
-          let personToShow: any = {
-            "firstName": user.firstName,
-            "lastName": user.lastName,
-            "userName": user.userName,
-            "avatar": user.avatar,
-            "yesterday": "",
-            "today": "",
-            "checked": false
-          }
-          this.personsToShow.push(personToShow);
-        }
+        this.userProvider.getUserByProject(id)
+          .subscribe((users: any) => {
 
-        this.persons = this.personsToShow;
+            for (let user of users) {
+              let personToShow: any = {
+                "firstName": user.firstName,
+                "lastName": user.lastName,
+                "userName": user.userName,
+                "avatar": user.avatar,
+                "yesterday": "",
+                "today": "",
+                "checked": false
+              }
+              this.personsToShow.push(personToShow);
+            }
+
+            this.persons = this.personsToShow;
 
 
-        this.dailyProvider.daily.daily_items
-          .forEach(itemProvider => {
-            this.personsToShow.forEach(itemShow => {
-              if (itemProvider.userName === itemShow.userName)
-                itemShow.checked = true;
-            });
-          })
+            this.dailyProvider.daily.daily_items
+              .forEach(itemProvider => {
+                this.personsToShow.forEach(itemShow => {
+                  if (itemProvider.userName === itemShow.userName)
+                    itemShow.checked = true;
+                });
+              })
+          });
       });
   }
 
