@@ -10,7 +10,7 @@ El video ilustrativo se encuentra [aquí](https://www.youtube.com/watch?v=lCBi61
 ### Features ###
   **Agregar Features** 
   * Ya que es un proyecto open source la forma de aportar diferentes feature es mediante las siguientes formas:
-    * Creando issues que se irán analizando y solucionandolos. 
+    * Creando issues que se irán analizando y desarrollando. 
     * Haciendo un fork y tratarlos de forma local y luego hacer un merge con la aplicación mediante pull request 
     
 ### Recursos ###
