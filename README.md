@@ -21,7 +21,7 @@ El video ilustrativo se encuentra [aquí](https://www.youtube.com/watch?v=lCBi61
 ### Requisitos ###
 * nodejs v10.16.1
 * npm 6.9.0
-* ionic v3.9.2
+* ionic v3.9.2 (npm install -g ionic@3.9.2)
 * cordova v8.1.2
 
 ### Run Application ###
